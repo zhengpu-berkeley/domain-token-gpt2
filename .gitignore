@@ -1,0 +1,70 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Virtual environments
+.venv/
+venv/
+ENV/
+env/
+
+# uv
+.uv/
+uv.lock
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Data files (large, regenerate locally)
+data/raw/*.txt
+data/raw/*.jsonl
+data/processed/**/*.bin
+data/processed/**/*.meta.json
+
+# Training outputs
+outputs/
+*.pt
+*.pth
+checkpoints/
+logs/
+wandb/
+
+# Keep structure files
+!data/raw/.gitkeep
+!data/processed/.gitkeep
+!data/processed/baseline/.gitkeep
+!data/processed/mul_tokens/.gitkeep
+
+# Misc
+*.log
+.coverage
+htmlcov/
+.pytest_cache/
+.mypy_cache/
+

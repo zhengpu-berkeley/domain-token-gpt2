@@ -7,11 +7,11 @@
   "mul_token_ratio": 0.0,
   "unique_tokens": 266,
   "mul_token_histogram": {},
-  "input_path": "/Users/zzp/Desktop/Github/domain-token-gpt2/data/raw/train_baseline.txt",
+  "input_path": "/root/domain-token-gpt2/data/raw/train_baseline.txt",
   "input_chars": 88845,
   "train_tokens": 24192,
   "val_tokens": 2689,
   "val_fraction": 0.1,
-  "train_path": "/Users/zzp/Desktop/Github/domain-token-gpt2/data/processed/baseline/train_00000.npy",
-  "val_path": "/Users/zzp/Desktop/Github/domain-token-gpt2/data/processed/baseline/val_00000.npy"
+  "train_path": "/root/domain-token-gpt2/data/processed/baseline/train_00000.npy",
+  "val_path": "/root/domain-token-gpt2/data/processed/baseline/val_00000.npy"
 }

@@ -53,11 +53,11 @@
     "<MUL_2_9_18>": 36,
     "<MUL_6_6_36>": 8
   },
-  "input_path": "/Users/zzp/Desktop/Github/domain-token-gpt2/data/raw/train_mul_tokens.txt",
+  "input_path": "/root/domain-token-gpt2/data/raw/train_mul_tokens.txt",
   "input_chars": 95678,
   "train_tokens": 21587,
   "val_tokens": 2399,
   "val_fraction": 0.1,
-  "train_path": "/Users/zzp/Desktop/Github/domain-token-gpt2/data/processed/mul_tokens/train_00000.npy",
-  "val_path": "/Users/zzp/Desktop/Github/domain-token-gpt2/data/processed/mul_tokens/val_00000.npy"
+  "train_path": "/root/domain-token-gpt2/data/processed/mul_tokens/train_00000.npy",
+  "val_path": "/root/domain-token-gpt2/data/processed/mul_tokens/val_00000.npy"
 }

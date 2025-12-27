@@ -1,0 +1,38 @@
+# SFT Pilot Configuration
+#
+# Supervised fine-tuning on GSM8K for the pilot experiment.
+# Compute-matched across conditions: same hyperparameters for both.
+#
+# Usage:
+#   python sft/sft_train.py \
+#     --model-path outputs/hf_baseline_pilot \
+#     --output-dir outputs/sft_baseline_pilot \
+#     --condition baseline \
+#     --config sft/configs/sft_pilot.yaml
+
+training:
+  # Sequence length (GSM8K answers can be long with CoT)
+  max_length: 512
+  
+  # Batch size per device
+  batch_size: 4
+  
+  # Gradient accumulation (effective batch = 4 * 4 = 16)
+  gradient_accumulation_steps: 4
+  
+  # Training epochs
+  num_epochs: 3
+  
+  # Learning rate (lower than pretraining for fine-tuning)
+  learning_rate: 2.0e-5
+  
+  # Warmup
+  warmup_ratio: 0.1
+  
+  # Weight decay
+  weight_decay: 0.01
+  
+  # Limit samples for faster pilot (null = use all)
+  max_train_samples: null
+  max_val_samples: 200
+

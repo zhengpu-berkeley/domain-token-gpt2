@@ -44,16 +44,28 @@ uv.lock
 # Data files (large, regenerate locally)
 data/raw/*.txt
 data/raw/*.jsonl
-data/processed/**/*.bin
-data/processed/**/*.meta.json
+data/processed/
+data/fineweb_pilot/
 
-# Training outputs
+# Training outputs (large model files)
 outputs/
 *.pt
 *.pth
+*.safetensors
+*.bin
 checkpoints/
 logs/
 wandb/
+
+# HuggingFace cache
+.cache/
+~/.cache/huggingface/
+
+# Model files
+model.safetensors
+pytorch_model.bin
+optimizer.pt
+scheduler.pt
 
 # Keep structure files
 !data/raw/.gitkeep
@@ -67,4 +79,18 @@ wandb/
 htmlcov/
 .pytest_cache/
 .mypy_cache/
+.ruff_cache/
+
+# Nohup output
+nohup.out
+
+# Temporary files
+*.tmp
+*.temp
+
+# Dataset streaming cache
+datasets_cache/
+
+# Large numpy shards
+*.npy
 

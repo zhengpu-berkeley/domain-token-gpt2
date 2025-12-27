@@ -7,5 +7,5 @@
   "total_samples": 1756,
   "total_chars": 95678,
   "mul_token_count": 1102,
-  "output_path": "/Users/zzp/Desktop/Github/domain-token-gpt2/data/raw/train_mul_tokens.txt"
+  "output_path": "/root/domain-token-gpt2/data/raw/train_mul_tokens.txt"
 }

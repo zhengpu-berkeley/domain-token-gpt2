@@ -1,0 +1,42 @@
+# SFT Full Experiment Configuration
+#
+# Supervised fine-tuning on GSM8K for the 10B token experiment.
+# Compute-matched across conditions: identical hyperparameters for both.
+#
+# Designed for multi-GPU training with larger batch sizes.
+#
+# Usage:
+#   python sft/sft_train.py \
+#     --model-path outputs/hf_baseline_10b \
+#     --output-dir outputs/sft_baseline_10b \
+#     --condition baseline \
+#     --config sft/configs/sft_full.yaml
+
+training:
+  # Sequence length (GSM8K answers can be long with CoT)
+  max_length: 512
+  
+  # Batch size per device (larger for H200)
+  batch_size: 8
+  
+  # Gradient accumulation (effective batch = 8 * 2 = 16 per GPU)
+  gradient_accumulation_steps: 2
+  
+  # Training epochs
+  num_epochs: 3
+  
+  # Learning rate (lower than pretraining for fine-tuning)
+  learning_rate: 2.0e-5
+  
+  # Warmup
+  warmup_ratio: 0.1
+  
+  # Weight decay
+  weight_decay: 0.01
+  
+  # Use all training samples
+  max_train_samples: null
+  
+  # Validation samples
+  max_val_samples: 500
+

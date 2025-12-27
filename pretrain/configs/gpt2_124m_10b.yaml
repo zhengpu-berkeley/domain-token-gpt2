@@ -1,0 +1,66 @@
+# GPT-2 124M Full Experiment Configuration (10B tokens)
+#
+# Designed for 4x H200 GPUs (143GB VRAM each) with DDP.
+# Target: 10B tokens processed (compute-matched between conditions)
+#
+# Compute budget:
+#   total_batch_size * max_steps = 524288 * 19073 ≈ 10B tokens
+#
+# Usage (4-GPU DDP):
+#   torchrun --standalone --nproc_per_node=4 pretrain/train_nanogpt.py \
+#     --config pretrain/configs/gpt2_124m_10b.yaml \
+#     --data-root data/fineweb_10b/baseline \
+#     --output-dir outputs/pretrain_baseline_10b \
+#     --condition baseline
+
+model:
+  # GPT-2 124M architecture (identical across conditions)
+  n_layer: 12
+  n_head: 12
+  n_embd: 768
+  block_size: 1024
+
+training:
+  # Micro batch size per GPU
+  # H200 with 143GB can handle batch_size=32 with 1024 seq_len in bf16
+  batch_size: 32
+  
+  # Total batch size in tokens per optimizer step
+  # 524288 = 2^19 ≈ 0.5M tokens per step
+  # With 4 GPUs: 32 * 1024 * 4 GPUs * 4 grad_accum = 524288
+  total_batch_size: 524288
+  
+  # Number of optimizer steps
+  # 10B tokens / 524288 tokens per step = 19073 steps
+  max_steps: 19073
+  
+  # Warmup steps (~3.75% of total, matches Karpathy's GPT-2 training)
+  warmup_steps: 715
+  
+  # Learning rate schedule (Chinchilla-style)
+  max_lr: 6.0e-4
+  min_lr: 6.0e-5
+  
+  # Regularization
+  weight_decay: 0.1
+  grad_clip: 1.0
+  
+  # Enable torch.compile for H200 (Hopper architecture benefits)
+  compile: true
+
+eval:
+  # Evaluate every N steps (more frequent for longer runs)
+  interval: 500
+  # Number of batches for validation loss
+  val_steps: 20
+
+logging:
+  # Log every N steps
+  interval: 50
+
+checkpoint:
+  # Save checkpoint every N steps (~every 1B tokens)
+  interval: 2000
+  # Always save final checkpoint
+  save_final: true
+

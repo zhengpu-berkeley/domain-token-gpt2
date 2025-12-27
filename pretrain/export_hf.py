@@ -80,6 +80,13 @@ def export_to_hf(
     nanogpt_sd = checkpoint["model"]
     hf_sd = hf_model.state_dict()
     
+    # Strip _orig_mod. prefix if present (from torch.compile)
+    nanogpt_sd_clean = {}
+    for key, value in nanogpt_sd.items():
+        clean_key = key.replace("_orig_mod.", "") if key.startswith("_orig_mod.") else key
+        nanogpt_sd_clean[clean_key] = value
+    nanogpt_sd = nanogpt_sd_clean
+    
     # Weight mapping from nanoGPT -> HuggingFace
     # nanoGPT uses slightly different naming
     mapping = {
@@ -112,16 +119,35 @@ def export_to_hf(
     print("Copying weights...")
     copied = 0
     skipped = []
+
+    # NOTE: HuggingFace GPT-2 uses `Conv1D` modules for attention/MLP projections.
+    # `Conv1D` stores weights with shape (in_features, out_features), while our training
+    # model uses `nn.Linear`, which stores weights as (out_features, in_features).
+    #
+    # For non-square matrices this is caught by the shape-mismatch logic below, but for
+    # square matrices (notably `attn.c_proj.weight`, shape 768x768) the shapes match
+    # and we MUST still transpose. Otherwise the exported HF model will not match the
+    # trained checkpoint and evals will look broken (e.g., near-random HellaSwag).
+    def _needs_conv1d_transpose(hf_param_name: str, tensor: torch.Tensor) -> bool:
+        if tensor.ndim != 2:
+            return False
+        if not hf_param_name.endswith(".weight"):
+            return False
+        return (
+            ".attn.c_attn.weight" in hf_param_name
+            or ".attn.c_proj.weight" in hf_param_name
+            or ".mlp.c_fc.weight" in hf_param_name
+            or ".mlp.c_proj.weight" in hf_param_name
+        )
     
     for nanogpt_key, hf_key in mapping.items():
         if nanogpt_key in nanogpt_sd and hf_key in hf_sd:
             nanogpt_tensor = nanogpt_sd[nanogpt_key]
             hf_tensor = hf_sd[hf_key]
             
-            # HF GPT-2 uses Conv1D for attention/MLP projections, which have transposed weights
-            # But our nanoGPT uses Linear, so shapes should match directly
-            # However, HF GPT2 actually uses Conv1D which stores [out_features, in_features]
-            # while our Linear stores [out_features, in_features] - they should match
+            # Conv1D (HF) vs Linear (ours) weight layout fix
+            if _needs_conv1d_transpose(hf_key, nanogpt_tensor):
+                nanogpt_tensor = nanogpt_tensor.t()
             
             if nanogpt_tensor.shape != hf_tensor.shape:
                 # Try transpose for weight matrices

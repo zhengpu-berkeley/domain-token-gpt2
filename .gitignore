@@ -48,7 +48,18 @@ data/processed/
 data/fineweb_pilot/
 
 # Training outputs (large model files)
-outputs/
+# Ignore everything in outputs/ except eval result directories
+outputs/*
+# Un-ignore eval directories
+!outputs/eval_baseline_10b/
+!outputs/eval_mul_tokens_10b/
+# Ignore everything in eval directories except JSON files
+outputs/eval_baseline_10b/*
+!outputs/eval_baseline_10b/*.json
+outputs/eval_mul_tokens_10b/*
+!outputs/eval_mul_tokens_10b/*.json
+
+# Also ignore these file types globally
 *.pt
 *.pth
 *.safetensors

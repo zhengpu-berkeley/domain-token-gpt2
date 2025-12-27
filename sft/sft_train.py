@@ -33,6 +33,96 @@ from transformers import (
 # Add parent directory for imports
 sys.path.insert(0, str(Path(__file__).parent.parent))
 
+from tokenizer.mul_facts import get_default_mul_tokens
+
+
+def verify_mul_tokens_in_tokenizer(tokenizer, condition: str) -> None:
+    """
+    Verify that mul-tokens are properly recognized in the tokenizer.
+    
+    Args:
+        tokenizer: GPT2TokenizerFast instance
+        condition: "baseline" or "mul_tokens"
+    """
+    EXPECTED_VOCAB_SIZE = 50349
+    MUL_TOKEN_ID_START = 50304
+    MUL_TOKEN_ID_END = 50348
+    
+    print(f"\n{'='*60}")
+    print("Tokenizer Verification:")
+    print(f"  Condition: {condition}")
+    
+    # Check vocab size
+    vocab_size = len(tokenizer)
+    if vocab_size == EXPECTED_VOCAB_SIZE:
+        print(f"  ✅ Vocab size: {vocab_size} (expected: {EXPECTED_VOCAB_SIZE})")
+    else:
+        print(f"  ⚠️  Vocab size: {vocab_size} (expected: {EXPECTED_VOCAB_SIZE})")
+    
+    # Check mul-token support
+    mul_tokens = get_default_mul_tokens()
+    sample_tokens = ["<MUL_1_1_1>", "<MUL_6_9_54>", "<MUL_9_9_81>"]
+    
+    mul_token_checks = []
+    for token_str in sample_tokens:
+        try:
+            token_id = tokenizer.convert_tokens_to_ids(token_str)
+            expected_id = mul_tokens.get_token_id(token_str)
+            
+            # Check if it encodes as a single token
+            encoded = tokenizer.encode(token_str, add_special_tokens=False)
+            is_single_token = len(encoded) == 1 and encoded[0] == token_id
+            
+            mul_token_checks.append({
+                "token": token_str,
+                "token_id": token_id,
+                "expected_id": expected_id,
+                "is_single_token": is_single_token,
+                "pass": token_id == expected_id and is_single_token,
+            })
+        except Exception as e:
+            mul_token_checks.append({
+                "token": token_str,
+                "error": str(e),
+                "pass": False,
+            })
+    
+    # Count mul-tokens in vocab
+    mul_token_count = 0
+    for token_id in range(MUL_TOKEN_ID_START, MUL_TOKEN_ID_END + 1):
+        try:
+            token_str = tokenizer.convert_ids_to_tokens(token_id)
+            if token_str and token_str.startswith("<MUL_"):
+                mul_token_count += 1
+        except:
+            pass
+    
+    # Report results
+    all_pass = all(check.get("pass", False) for check in mul_token_checks)
+    expected_mul_count = 45
+    
+    if all_pass and mul_token_count == expected_mul_count:
+        print(f"  ✅ Mul-tokens verified: {mul_token_count} tokens found (expected: {expected_mul_count})")
+        for check in mul_token_checks:
+            if check.get("pass"):
+                print(f"     {check['token']} -> ID {check['token_id']} (single token)")
+    else:
+        print(f"  ⚠️  Mul-token verification issues:")
+        print(f"     Mul-tokens in vocab: {mul_token_count} (expected: {expected_mul_count})")
+        for check in mul_token_checks:
+            if not check.get("pass"):
+                print(f"     {check['token']}: {check.get('error', 'failed')}")
+    
+    # Check tokenizer metadata
+    # Note: We can't access the model_path here, so we skip metadata check
+    # The diagnostic script handles that
+    
+    if condition == "mul_tokens" and not all_pass:
+        print(f"  ⚠️  WARNING: Mul-tokens condition but tokenizer verification failed!")
+        print(f"     This may indicate the tokenizer was not properly configured.")
+    
+    print(f"{'='*60}\n")
+
 
 def format_gsm8k_example(example: Dict, tokenizer, max_length: int = 512) -> Dict:
     """
@@ -129,6 +219,7 @@ def train_sft(
     condition: str,
     config_path: Optional[Path] = None,
     seed: int = 42,
+    debug_tokenizer: bool = False,
 ):
     """
     Main SFT training function.
@@ -167,6 +258,10 @@ def train_sft(
     
     print(f"  Model parameters: {model.num_parameters():,}")
     print(f"  Vocab size: {len(tokenizer)}")
+    
+    # Verify tokenizer (especially mul-tokens for mul_tokens condition)
+    if debug_tokenizer or condition == "mul_tokens":
+        verify_mul_tokens_in_tokenizer(tokenizer, condition)
     
     # Prepare dataset
     train_dataset, val_dataset = prepare_gsm8k_dataset(
@@ -306,6 +401,11 @@ def main():
         default=42,
         help="Random seed",
     )
+    parser.add_argument(
+        "--debug-tokenizer",
+        action="store_true",
+        help="Enable detailed tokenizer verification logging",
+    )
     
     args = parser.parse_args()
     
@@ -315,6 +415,7 @@ def main():
         condition=args.condition,
         config_path=args.config,
         seed=args.seed,
+        debug_tokenizer=args.debug_tokenizer,
     )
 
 

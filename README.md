@@ -5,6 +5,11 @@ Testing whether domain-specific tokenization (multiplication-fact tokens) yields
 ## Quick Start
 
 ```bash
+# Install uv
+curl -sSf https://astral.sh/uv/install.sh | sh
+```
+
+```bash
 # Install dependencies with uv
 uv sync
 
@@ -49,7 +54,10 @@ domain-token-gpt2/
 │   ├── test_tokenizer.py
 │   └── test_inject_mul.py
 └── scripts/
-    └── run_smoke.sh         # One-command smoke test
+    ├── run_10b.sh                 # Full 10B-token end-to-end run (data→pretrain→SFT→eval)
+    ├── eval_checkpoints.py        # Evaluate pretrain checkpoints on HellaSwag
+    ├── plot_checkpoint_curve.py   # Plot per-condition HellaSwag learning curve
+    └── visualize_pretrain_losses.py  # Plot pretrain loss curves
 ```
 
 ## Experimental Conditions

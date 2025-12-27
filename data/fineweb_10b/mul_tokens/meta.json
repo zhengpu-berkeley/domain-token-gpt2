@@ -1,0 +1,26 @@
+{
+  "condition": "mul_tokens",
+  "vocab_size": 50349,
+  "total_tokens": 1166666208,
+  "train_tokens": 1066666208,
+  "val_tokens": 100000000,
+  "total_documents": 1130755,
+  "num_shards": 12,
+  "shard_size": 100000000,
+  "target_tokens": 10000000000,
+  "mul_tokens": 12788,
+  "mul_token_ratio": 1.0961147166439571e-05,
+  "include_synthetic": true,
+  "streaming": true,
+  "seed": 42,
+  "tokenizer_metadata": {
+    "vocab_size": 50349,
+    "base_vocab_size": 50304,
+    "enable_mul_tokens": true,
+    "mul_token_id_start": 50304,
+    "mul_token_id_end": 50348,
+    "num_mul_tokens": 45,
+    "mul_range_min": 1,
+    "mul_range_max": 9
+  }
+}

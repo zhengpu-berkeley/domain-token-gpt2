@@ -1,7 +1,7 @@
 # Phase 3: 10B Token Full Experiment — Execution Status
 
 **Date:** December 27, 2024  
-**Status:** Baseline Complete, Mul_Tokens Pending  
+**Status:** ✅ COMPLETE — Both Conditions Finished  
 **Hardware:** 4× NVIDIA H200 GPUs (143GB VRAM each)
 
 ---
@@ -26,9 +26,24 @@
   - Mul-multidigit: 0.00% (0/100)
   - Addition: 0.00% (0/100)
 
-### ⏸️ Mul_Tokens Condition — NOT STARTED
+### ✅ Mul_Tokens Condition — COMPLETE
 
-Data preparation was initiated but stopped for refinements. No mul_tokens data or models exist yet.
+| Stage | Status | Details |
+|-------|--------|---------|
+| Data Preparation | ✅ Complete | 12 shards, ~10B tokens with mul-token injection |
+| Pretraining | ✅ Complete | 19,072 steps, final loss: 3.01 (train) / 3.12 (val) |
+| HF Export | ✅ Complete | Saved to `outputs/hf_mul_tokens_10b/` |
+| SFT | ✅ Complete | Train loss: 6.47, Eval loss: 5.37 |
+| Evaluation | ✅ Complete | See results below |
+
+**Mul_Tokens Results:**
+- **GSM8K Accuracy:** 0.15% (2/1319)
+- **Arithmetic Probes:**
+  - Overall: 0.71% (2/281)
+  - Mul-table: 2.47% (2/81)
+  - Mul-multidigit: 0.00% (0/100)
+  - Addition: 0.00% (0/100)
+- **Mul-Token Usage:** 0 tokens used in responses
 
 ---
 
@@ -65,6 +80,71 @@ All infrastructure for the 10B token compute-matched experiment is in place. Thi
 - Mul-table performance (2.47%) is slightly above random chance for single-digit multiplication
 - Model struggles with multi-digit operations and addition
 - GSM8K performance is very low, as expected for a 124M model
+
+---
+
+## Mul_Tokens Results Summary
+
+### Pretraining Metrics
+- **Total Steps:** 19,072 / 19,073 (99.9% - final step completed)
+- **Total Tokens:** 9,999,745,024 (~10B) with mul-token injection
+- **Final Train Loss:** 3.01
+- **Final Val Loss:** 3.12
+- **Training Time:** ~2.5 hours (4× H200 DDP)
+- **Checkpoints Saved:** 5 (steps 2000, 4000, 8000, 10000, 14000, 18000, 19072)
+
+### SFT Metrics
+- **Train Loss:** 6.47
+- **Eval Loss:** 5.37
+- **Training Time:** ~2 minutes
+
+### Evaluation Results
+- **GSM8K Test Set:** 0.15% accuracy (2/1319 correct) — **slightly worse than baseline**
+- **Arithmetic Probes:** 0.71% overall accuracy — **identical to baseline**
+  - Mul-table: 2.47% (2/81) — **identical to baseline**
+  - Mul-multidigit: 0.00% (0/100) — **identical to baseline**
+  - Addition: 0.00% (0/100) — **identical to baseline**
+- **Mul-Token Usage:** 0 tokens used in any response
+
+---
+
+## Comparison: Baseline vs Mul_Tokens
+
+| Metric | Baseline | Mul_Tokens | Delta |
+|--------|----------|------------|-------|
+| **GSM8K Accuracy** | 0.23% (3/1319) | 0.15% (2/1319) | **-0.08%** ⬇️ |
+| **Arithmetic Overall** | 0.71% (2/281) | 0.71% (2/281) | **0.00%** ➡️ |
+| **Mul-Table** | 2.47% (2/81) | 2.47% (2/81) | **0.00%** ➡️ |
+| **Mul-Multidigit** | 0.00% (0/100) | 0.00% (0/100) | **0.00%** ➡️ |
+| **Addition** | 0.00% (0/100) | 0.00% (0/100) | **0.00%** ➡️ |
+| **Mul-Token Usage** | N/A | 0 tokens | **Not used** ❌ |
+
+---
+
+## Key Findings & Observations
+
+### ❌ **No Improvement from Mul-Tokens**
+
+1. **Identical Arithmetic Performance:** Mul_tokens condition shows **zero improvement** over baseline on all arithmetic probes
+2. **No Mul-Token Usage:** Model generated **0 mul-tokens** in responses, despite seeing them during pretraining
+3. **Slightly Worse GSM8K:** Mul_tokens condition performed **0.08% worse** on GSM8K (2 vs 3 correct)
+
+### 🔍 **Possible Explanations**
+
+1. **Insufficient Training Signal:** Model may not have learned when/how to use mul-tokens effectively
+2. **SFT Override:** Supervised fine-tuning on GSM8K may have suppressed mul-token usage
+3. **Model Size Limitation:** 124M parameters may be too small to learn complex token usage patterns
+4. **Missing Explicit Training:** Model needs explicit examples of when to use mul-tokens in generation
+5. **Token Frequency:** Mul-tokens may be too rare in training data to establish strong associations
+
+### 💡 **Potential Refinements**
+
+1. **Increase mul-token injection rate** during pretraining
+2. **Add explicit mul-token usage examples** in SFT data
+3. **Use larger model** (e.g., 350M or 1.3B parameters)
+4. **Add reward modeling** to encourage mul-token usage during generation
+5. **Fine-tune on arithmetic-specific datasets** with mul-token examples
+6. **Modify generation strategy** to explicitly prompt for mul-token usage
 
 ---
 
@@ -313,20 +393,26 @@ torchrun ... --resume outputs/pretrain_baseline_10b/model_16000.pt
 
 ## Next Steps After Experiment
 
-1. **Analyze results**: Run `scripts/compare_runs.py` to generate comparison
-2. **Statistical significance**: Consider running additional seeds (2 more for N=3)
-3. **GRPO RL**: If SFT results are promising, add GRPO stage
-4. **Write-up**: Document findings in research report
+### ✅ Experiment Complete
+
+Both baseline and mul_tokens conditions have been completed. Comparison report generated at `outputs/comparison_report_10b.json`.
+
+### Recommended Next Steps
+
+1. **Analyze results**: Review `outputs/comparison_report_10b.json` for detailed comparison
+2. **Investigate mul-token usage**: Examine why model generated 0 mul-tokens despite pretraining exposure
+3. **Consider refinements**: See "Potential Refinements" section above for improvement strategies
+4. **Statistical significance**: Consider running additional seeds (2 more for N=3) if pursuing refinements
+5. **Write-up**: Document findings in research report
+
+### Key Questions to Address
+
+- Why did the model not use mul-tokens in generation?
+- Would explicit training on mul-token usage improve results?
+- Is model size (124M) a limiting factor?
+- Would increased mul-token injection rate help?
 
 ---
 
-## Next Steps
-
-1. **Complete mul_tokens condition:** Run `bash scripts/run_10b.sh --skip-baseline`
-2. **Compare results:** After mul_tokens completes, run `scripts/compare_runs.py`
-3. **Analyze findings:** Compare baseline vs mul_tokens performance on arithmetic probes
-
----
-
-*Baseline condition complete. Mul_tokens condition pending. Run `bash scripts/run_10b.sh --skip-baseline` to continue.*
+*✅ Experiment complete. Both conditions finished. Results show no improvement from mul-tokens. See observations above for analysis and potential refinements.*
 

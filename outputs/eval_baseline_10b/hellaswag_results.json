@@ -1,0 +1,12 @@
+{
+  "metrics": {
+    "condition": "baseline",
+    "model_path": "outputs/hf_baseline_10b",
+    "accuracy": 0.253734315873332,
+    "accuracy_norm": 0.24576777534355707,
+    "correct": 2548,
+    "correct_norm": 2468,
+    "total": 10042,
+    "eval_time_seconds": 68.64668083190918
+  }
+}

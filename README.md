@@ -5,6 +5,11 @@ Testing whether domain-specific tokenization (multiplication-fact tokens) yields
 ## Quick Start
 
 ```bash
+# Install uv
+curl -sSf https://astral.sh/uv/install.sh | sh
+```
+
+```bash
 # Install dependencies with uv
 uv sync
 

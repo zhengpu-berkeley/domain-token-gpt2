@@ -84,6 +84,14 @@ All evaluation results are tracked in Git:
 
 ---
 
+## Tokenizer Verification & Debugging Tools
+
+To investigate why mul-tokens were not being used during generation (despite being present in the vocabulary), we created comprehensive debugging tools to verify tokenizer recognition throughout the training pipeline. We implemented `scripts/debug_tokenizer.py`, a diagnostic script that verifies vocab size (50349), checks mul-token IDs (50304-50348), tests encoding/decoding of sample mul-tokens, and validates that mul-tokens encode as single tokens rather than multiple tokens. We also added automatic tokenizer verification to the SFT training script (`sft/sft_train.py`), which runs diagnostic checks when loading models, especially for the mul_tokens condition. Additionally, we created `sample/text_completion.py`, a flexible text completion tool that allows intuitive exploration of model outputs with multiple sampling strategies (greedy, temperature, top-k, top-p) and can load any HuggingFace model (pretrained, SFT, or RL fine-tuned).
+
+**Key Observations:** All diagnostic checks pass successfully — both baseline and mul_tokens tokenizers have vocab size 50349, contain all 45 mul-tokens in the expected ID range (50304-50348), and correctly encode mul-tokens as single tokens (e.g., `<MUL_6_9_54>` → ID 50342). The tokenizer verification runs automatically during SFT and confirms mul-tokens are properly recognized. This eliminates tokenizer recognition as the root cause of the null result. The issue is likely that mul-tokens are not being used because: (1) they never appear in the SFT training data (GSM8K solutions don't contain mul-token strings), so the model never learns when to produce them; (2) the pretraining signal for mul-tokens may be too weak (~0.002% of tokens) to establish strong associations; or (3) the model needs explicit training examples showing when and how to use mul-tokens in generation. The debugging tools provide a foundation for future experiments, such as injecting mul-tokens into SFT data or using the text completion script to probe model behavior with forced mul-token prefixes.
+
+---
+
 ## Conclusion
 
 The HellaSwag evaluation confirms that:

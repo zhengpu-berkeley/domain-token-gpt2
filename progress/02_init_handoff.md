@@ -242,18 +242,22 @@ torchrun --standalone --nproc_per_node=8 pretrain/train.py \
 
 ### Step 4: Post-Training (SFT + GRPO)
 
-**Not yet implemented.** Per `research_spec.md`, create:
+✅ **Implemented (SFT).** Current two-stage SFT flow:
 
-1. `sft/sft_train.py` — Fine-tune on GSM8K train with HF Trainer or TRL SFTTrainer
-2. `rl/grpo_train.py` — GRPO with exact-match reward on final answer
-3. Ensure identical hyperparameters across conditions
+1. `sft/sft_tulu.py` — Instruction-tune on Tulu-3 mixture (subset sampling)
+2. `sft/sft_gsm8k.py` — Fine-tune on GSM8K train (math specialization)
+3. Configs:
+   - `sft/configs/tulu.yaml`
+   - `sft/configs/gsm8k.yaml`
+
+⚠️ **GRPO**: `rl/grpo_train.py` exists but should be treated as a separate stage to run after SFT is validated on GSM8K/probes.
 
 ### Step 5: Evaluation
 
-**Not yet implemented.** Per `research_spec.md`, create:
+✅ **Implemented.**
 
 1. `eval/run_gsm8k.py` — Accuracy on GSM8K test (exact match on `#### answer`)
-2. `eval/run_arithmetic_probes.py` — Synthetic multiplication/addition benchmarks
+2. `eval/run_arithmetic_probes.py` — Synthetic arithmetic benchmarks
 
 ---
 
@@ -264,10 +268,11 @@ torchrun --standalone --nproc_per_node=8 pretrain/train.py \
 | `pretrain/train.py` | ✅ Ready | Add DDP support, wandb logging |
 | `pretrain/configs/gpt2_124m.yaml` | ⏳ TODO | Production config |
 | `data/prepare_fineweb.py` | ⏳ TODO | Apply injection to FineWeb |
-| `sft/sft_train.py` | ⏳ TODO | HF Trainer for GSM8K SFT |
+| `sft/sft_tulu.py` | ✅ Ready | HF Trainer for Tulu-3 mixture SFT (subset sampling) |
+| `sft/sft_gsm8k.py` | ✅ Ready | HF Trainer for GSM8K SFT |
 | `rl/grpo_train.py` | ⏳ TODO | TRL GRPOTrainer |
-| `eval/run_gsm8k.py` | ⏳ TODO | lm-evaluation-harness or custom |
-| `eval/run_arithmetic_probes.py` | ⏳ TODO | Synthetic benchmarks |
+| `eval/run_gsm8k.py` | ✅ Ready | Task evaluation (uses `User:` / `Assistant:` prompts) |
+| `eval/run_arithmetic_probes.py` | ✅ Ready | Synthetic probes (uses `User:` / `Assistant:` prompts) |
 
 ---
 

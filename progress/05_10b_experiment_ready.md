@@ -75,7 +75,8 @@ Post-training must be re-run using the fixed exporter. Any previously reported G
 | File | Purpose |
 |------|---------|
 | `pretrain/configs/gpt2_124m_10b.yaml` | 10B token pretraining config for 4× H200 DDP |
-| `sft/configs/sft_full.yaml` | Full experiment SFT configuration |
+| `sft/configs/tulu.yaml` | Tulu-3 SFT configuration (instruction-tuning, sampled subset) |
+| `sft/configs/gsm8k.yaml` | GSM8K SFT configuration (math specialization) |
 | `scripts/run_10b.sh` | Complete automation script for both conditions |
 
 ---
@@ -96,16 +97,14 @@ Post-training must be re-run using the fixed exporter. Any previously reported G
 | Precision | bfloat16 |
 | torch.compile | Enabled |
 
-### SFT (sft_full.yaml)
+### SFT (Two-stage: Tulu → GSM8K)
 
 | Parameter | Value |
 |-----------|-------|
-| Dataset | GSM8K (full training set) |
-| Epochs | 3 |
-| Batch size | 8 per GPU |
-| Gradient accumulation | 2 |
-| Learning rate | 2e-5 |
-| Max length | 512 tokens |
+| Stage 1 | Tulu-3 mixture (subset), 1 epoch, max_len=1024 |
+| Stage 2 | GSM8K (full train), 3 epochs, max_len=512 |
+| Prompt format | `User:` / `Assistant:` (consistent across SFT + eval) |
+| Mul-tokens condition | Inject mul-tokens in Tulu assistant replies + optionally in GSM8K answers (`--inject-mul-tokens`) |
 
 ---
 
@@ -124,7 +123,7 @@ This will:
 1. Prepare FineWeb-Edu data with mul-token injection (~2 hours)
 2. Pretrain GPT-2 124M on mul_tokens data (~4-6 hours)
 3. Export to HuggingFace format (~1 minute)
-4. SFT on GSM8K (~30-60 minutes)
+4. SFT (Tulu → GSM8K) (time depends on subset size)
 5. Evaluate on GSM8K and arithmetic probes (~30 minutes)
 
 ### Options
@@ -169,22 +168,29 @@ uv run python tokenizer/hf_gpt2_with_mul.py \
     --output-dir outputs/hf_baseline_10b \
     --condition baseline
 
-# 4. SFT
-uv run python sft/sft_train.py \
+# 4a. SFT Stage 1: Tulu-3 mixture (instruction-tuning)
+uv run python sft/sft_tulu.py \
     --model-path outputs/hf_baseline_10b \
-    --output-dir outputs/sft_baseline_10b \
+    --output-dir outputs/sft_tulu_baseline \
     --condition baseline \
-    --config sft/configs/sft_full.yaml
+    --config sft/configs/tulu.yaml
+
+# 4b. SFT Stage 2: GSM8K (math specialization)
+uv run python sft/sft_gsm8k.py \
+    --model-path outputs/sft_tulu_baseline \
+    --output-dir outputs/sft_gsm8k_baseline \
+    --condition baseline \
+    --config sft/configs/gsm8k.yaml
 
 # 5. Evaluation
 uv run python eval/run_gsm8k.py \
-    --model-path outputs/sft_baseline_10b \
+    --model-path outputs/sft_gsm8k_baseline \
     --output-dir outputs/eval_baseline_10b \
     --condition baseline \
     --max-samples 1319
 
 uv run python eval/run_arithmetic_probes.py \
-    --model-path outputs/sft_baseline_10b \
+    --model-path outputs/sft_gsm8k_baseline \
     --output-dir outputs/eval_baseline_10b \
     --condition baseline
 ```
@@ -199,7 +205,7 @@ uv run python eval/run_arithmetic_probes.py \
 | Data prep | ~1 hour | 12 shards, ~10B tokens |
 | Pretraining | ~2.5 hours | 19,072 steps on 4× H200 |
 | HF Export | ~1 minute | |
-| SFT | ~2 minutes | 3 epochs, 7,473 samples |
+| SFT (Tulu → GSM8K) | varies | GSM8K is fast (~minutes); Tulu stage depends on subset size (see `sft/configs/tulu.yaml`) |
 | Evaluation | ~23 minutes | 1,319 GSM8K + 281 arithmetic probes |
 | **Total** | **~3.5 hours** | |
 
@@ -209,7 +215,7 @@ uv run python eval/run_arithmetic_probes.py \
 | Data prep | ~2 hours |
 | Pretraining | ~4-6 hours |
 | HF Export | ~1 minute |
-| SFT | ~30-60 minutes |
+| SFT (Tulu → GSM8K) | varies | depends on Tulu subset size; GSM8K typically ~minutes |
 | Evaluation | ~30 minutes |
 | **Total** | **~7-9 hours** |
 

@@ -308,7 +308,7 @@ mul_tokens/
 pretrain/
 train.py                     # nanoGPT-style or HF trainer
 sft/
-sft_train.py
+sft_gsm8k.py
 rl/
 grpo_train.py
 rewards.py

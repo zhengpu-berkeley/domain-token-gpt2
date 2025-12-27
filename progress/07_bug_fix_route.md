@@ -47,7 +47,7 @@ Artifacts live at `outputs/checkpoint_evals/{baseline,mul_tokens}/`.
 
 **Implementation:**
 ```python
-# In sft_train.py preprocessing:
+# In sft_gsm8k.py preprocessing:
 def inject_mul_tokens_in_solution(solution: str) -> str:
     # Use existing MulExpressionInjector on solution text
     return injector.inject(solution)

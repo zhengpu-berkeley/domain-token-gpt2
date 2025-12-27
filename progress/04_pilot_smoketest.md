@@ -51,8 +51,8 @@ Ensures HF tokenizer IDs match our tiktoken-based training tokenizer.
 ### Post-Training (`sft/`, `rl/`)
 | File | Purpose |
 |------|---------|
-| `sft/sft_train.py` | GSM8K supervised fine-tuning with HF Trainer |
-| `sft/configs/sft_pilot.yaml` | SFT configuration |
+| `sft/sft_gsm8k.py` | GSM8K supervised fine-tuning with HF Trainer |
+| `sft/configs/gsm8k.yaml` | GSM8K SFT configuration |
 | `rl/grpo_train.py` | GRPO RL training with TRL |
 | `rl/rewards.py` | Exact-match reward extraction (#### answer format) |
 | `rl/configs/grpo_pilot.yaml` | GRPO configuration |

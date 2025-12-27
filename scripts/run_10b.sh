@@ -151,15 +151,26 @@ if [ "$SKIP_BASELINE" = false ]; then
         --output-dir outputs/hf_baseline_10b \
         --condition baseline
     
-    # Step 4: SFT on GSM8K
+    # Step 4a: SFT Stage 1 - Tulu-3 mixture (instruction-tuning)
     echo ""
-    echo "--- Step 4: Supervised Fine-Tuning on GSM8K (baseline) ---"
+    echo "--- Step 4a: Supervised Fine-Tuning on Tulu-3 mixture (baseline) ---"
     
-    uv run python sft/sft_train.py \
+    uv run python sft/sft_tulu.py \
         --model-path outputs/hf_baseline_10b \
-        --output-dir outputs/sft_baseline_10b \
+        --output-dir outputs/sft_tulu_baseline_10b \
         --condition baseline \
-        --config sft/configs/sft_full.yaml \
+        --config sft/configs/tulu.yaml \
+        --seed $SEED
+
+    # Step 4b: SFT Stage 2 - GSM8K (math specialization)
+    echo ""
+    echo "--- Step 4b: Supervised Fine-Tuning on GSM8K (baseline) ---"
+    
+    uv run python sft/sft_gsm8k.py \
+        --model-path outputs/sft_tulu_baseline_10b \
+        --output-dir outputs/sft_gsm8k_baseline_10b \
+        --condition baseline \
+        --config sft/configs/gsm8k.yaml \
         --seed $SEED
     
     # Step 5: Evaluation
@@ -167,13 +178,13 @@ if [ "$SKIP_BASELINE" = false ]; then
     echo "--- Step 5: Evaluation (baseline) ---"
     
     uv run python eval/run_gsm8k.py \
-        --model-path outputs/sft_baseline_10b \
+        --model-path outputs/sft_gsm8k_baseline_10b \
         --output-dir outputs/eval_baseline_10b \
         --condition baseline \
         --max-samples 1319  # Full GSM8K test set
     
     uv run python eval/run_arithmetic_probes.py \
-        --model-path outputs/sft_baseline_10b \
+        --model-path outputs/sft_gsm8k_baseline_10b \
         --output-dir outputs/eval_baseline_10b \
         --condition baseline \
         --seed $SEED
@@ -243,15 +254,27 @@ if [ "$SKIP_MUL_TOKENS" = false ]; then
         --output-dir outputs/hf_mul_tokens_10b \
         --condition mul_tokens
     
-    # Step 4: SFT on GSM8K
+    # Step 4a: SFT Stage 1 - Tulu-3 mixture (instruction-tuning)
     echo ""
-    echo "--- Step 4: Supervised Fine-Tuning on GSM8K (mul_tokens) ---"
+    echo "--- Step 4a: Supervised Fine-Tuning on Tulu-3 mixture (mul_tokens) ---"
     
-    uv run python sft/sft_train.py \
+    uv run python sft/sft_tulu.py \
         --model-path outputs/hf_mul_tokens_10b \
-        --output-dir outputs/sft_mul_tokens_10b \
+        --output-dir outputs/sft_tulu_mul_tokens_10b \
         --condition mul_tokens \
-        --config sft/configs/sft_full.yaml \
+        --config sft/configs/tulu.yaml \
+        --seed $SEED
+
+    # Step 4b: SFT Stage 2 - GSM8K (math specialization)
+    echo ""
+    echo "--- Step 4b: Supervised Fine-Tuning on GSM8K (mul_tokens) ---"
+    
+    uv run python sft/sft_gsm8k.py \
+        --model-path outputs/sft_tulu_mul_tokens_10b \
+        --output-dir outputs/sft_gsm8k_mul_tokens_10b \
+        --condition mul_tokens \
+        --inject-mul-tokens \
+        --config sft/configs/gsm8k.yaml \
         --seed $SEED
     
     # Step 5: Evaluation
@@ -259,13 +282,13 @@ if [ "$SKIP_MUL_TOKENS" = false ]; then
     echo "--- Step 5: Evaluation (mul_tokens) ---"
     
     uv run python eval/run_gsm8k.py \
-        --model-path outputs/sft_mul_tokens_10b \
+        --model-path outputs/sft_gsm8k_mul_tokens_10b \
         --output-dir outputs/eval_mul_tokens_10b \
         --condition mul_tokens \
         --max-samples 1319  # Full GSM8K test set
     
     uv run python eval/run_arithmetic_probes.py \
-        --model-path outputs/sft_mul_tokens_10b \
+        --model-path outputs/sft_gsm8k_mul_tokens_10b \
         --output-dir outputs/eval_mul_tokens_10b \
         --condition mul_tokens \
         --seed $SEED
@@ -303,8 +326,10 @@ echo ""
 echo "Checkpoints:"
 echo "  - outputs/pretrain_baseline_10b/"
 echo "  - outputs/pretrain_mul_tokens_10b/"
-echo "  - outputs/sft_baseline_10b/"
-echo "  - outputs/sft_mul_tokens_10b/"
+echo "  - outputs/sft_tulu_baseline_10b/"
+echo "  - outputs/sft_tulu_mul_tokens_10b/"
+echo "  - outputs/sft_gsm8k_baseline_10b/"
+echo "  - outputs/sft_gsm8k_mul_tokens_10b/"
 echo ""
 
 # Print summary

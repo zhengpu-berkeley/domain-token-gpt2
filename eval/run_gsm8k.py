@@ -108,8 +108,8 @@ def evaluate_gsm8k(
         question = example["question"].strip()
         answer = example["answer"].strip()
         
-        # Format prompt
-        prompt = f"Question: {question}\nAnswer:"
+        # Format prompt (matches Tulu-3 / GSM8K SFT format)
+        prompt = f"User: {question}\nAssistant:"
         
         # Generate
         response = generate_answer(

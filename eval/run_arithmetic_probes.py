@@ -162,7 +162,8 @@ def evaluate_probes(
     start_time = time.time()
     
     for probe in tqdm(probes, desc="Evaluating probes"):
-        prompt = f"Question: {probe['question']}\nAnswer: The answer is"
+        # Format prompt (matches Tulu-3 / GSM8K SFT format)
+        prompt = f"User: {probe['question']}\nAssistant: The answer is"
         
         response = generate_answer(
             model, tokenizer, prompt,

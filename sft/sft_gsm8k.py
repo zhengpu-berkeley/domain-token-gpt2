@@ -5,12 +5,14 @@ Supervised Fine-Tuning (SFT) on GSM8K for domain-token experiments.
 Trains the pretrained model on GSM8K math problems using HuggingFace Trainer.
 Compute-matched across conditions: same max_seq_len, batch size, optimizer steps.
 
+Uses User:/Assistant: format to match Tulu-3 SFT stage.
+
 Usage:
-    python sft/sft_train.py \
-        --model-path outputs/hf_baseline_pilot \
-        --output-dir outputs/sft_baseline_pilot \
+    python sft/sft_gsm8k.py \
+        --model-path outputs/sft_tulu_baseline \
+        --output-dir outputs/sft_gsm8k_baseline \
         --condition baseline \
-        --config sft/configs/sft_pilot.yaml
+        --config sft/configs/sft_full.yaml
 """
 
 import argparse
@@ -34,6 +36,7 @@ from transformers import (
 sys.path.insert(0, str(Path(__file__).parent.parent))
 
 from tokenizer.mul_facts import get_default_mul_tokens
+from tokenizer.inject_mul import create_injector
 
 
 def verify_mul_tokens_in_tokenizer(tokenizer, condition: str) -> None:
@@ -113,10 +116,6 @@ def verify_mul_tokens_in_tokenizer(tokenizer, condition: str) -> None:
             if not check.get("pass"):
                 print(f"     {check['token']}: {check.get('error', 'failed')}")
     
-    # Check tokenizer metadata
-    # Note: We can't access the model_path here, so we skip metadata check
-    # The diagnostic script handles that
-    
     if condition == "mul_tokens" and not all_pass:
         print(f"  ⚠️  WARNING: Mul-tokens condition but tokenizer verification failed!")
         print(f"     This may indicate the tokenizer was not properly configured.")
@@ -124,18 +123,33 @@ def verify_mul_tokens_in_tokenizer(tokenizer, condition: str) -> None:
     print(f"{'='*60}\n")
 
 
-def format_gsm8k_example(example: Dict, tokenizer, max_length: int = 512) -> Dict:
+def format_gsm8k_example(
+    example: Dict, 
+    tokenizer, 
+    max_length: int = 512,
+    injector=None,
+) -> Dict:
     """
     Format a GSM8K example for training.
     
-    Format: Question: {question}\nAnswer: {answer}
-    Where answer includes chain-of-thought and final #### answer.
+    Format: User: {question}\nAssistant: {answer}
+    This matches the format used in Tulu-3 SFT for consistent transfer learning.
+    
+    Args:
+        example: Dict with "question" and "answer" keys
+        tokenizer: GPT2TokenizerFast instance
+        max_length: Maximum sequence length
+        injector: Optional MulExpressionInjector to inject mul-tokens into answer
     """
     question = example["question"].strip()
     answer = example["answer"].strip()
     
-    # Format as instruction-following
-    text = f"Question: {question}\nAnswer: {answer}{tokenizer.eos_token}"
+    # Optionally inject mul-tokens into the answer
+    if injector is not None:
+        answer = injector.inject(answer)
+    
+    # Format as User/Assistant (matches Tulu-3 format)
+    text = f"User: {question}\nAssistant: {answer}{tokenizer.eos_token}"
     
     # Tokenize with padding to max_length
     encoding = tokenizer(
@@ -164,9 +178,17 @@ def prepare_gsm8k_dataset(
     max_length: int = 512,
     max_train_samples: Optional[int] = None,
     max_val_samples: Optional[int] = None,
+    inject_mul_tokens: bool = False,
 ):
     """
     Load and prepare GSM8K dataset for SFT.
+    
+    Args:
+        tokenizer: GPT2TokenizerFast instance
+        max_length: Maximum sequence length
+        max_train_samples: Limit training samples (None = use all)
+        max_val_samples: Limit validation samples (None = use all)
+        inject_mul_tokens: Whether to inject mul-tokens into answer text
     """
     print("Loading GSM8K dataset...")
     dataset = load_dataset("openai/gsm8k", "main")
@@ -183,12 +205,20 @@ def prepare_gsm8k_dataset(
     print(f"  Train samples: {len(train_dataset)}")
     print(f"  Test samples: {len(test_dataset)}")
     
+    # Set up mul-token injection if enabled
+    injector = None
+    if inject_mul_tokens:
+        injector = create_injector(mode="weak")
+        print("  Mul-token injection: ENABLED")
+    else:
+        print("  Mul-token injection: disabled")
+    
     # Process datasets
     def process_fn(examples):
         processed = {"input_ids": [], "attention_mask": [], "labels": []}
         for i in range(len(examples["question"])):
             example = {"question": examples["question"][i], "answer": examples["answer"][i]}
-            result = format_gsm8k_example(example, tokenizer, max_length)
+            result = format_gsm8k_example(example, tokenizer, max_length, injector=injector)
             processed["input_ids"].append(result["input_ids"])
             processed["attention_mask"].append(result["attention_mask"])
             processed["labels"].append(result["labels"])
@@ -220,9 +250,19 @@ def train_sft(
     config_path: Optional[Path] = None,
     seed: int = 42,
     debug_tokenizer: bool = False,
+    inject_mul_tokens: bool = False,
 ):
     """
     Main SFT training function.
+    
+    Args:
+        model_path: Path to pretrained HuggingFace model
+        output_dir: Output directory for fine-tuned model
+        condition: "baseline" or "mul_tokens"
+        config_path: Optional path to YAML config file
+        seed: Random seed
+        debug_tokenizer: Enable detailed tokenizer verification
+        inject_mul_tokens: Inject mul-tokens into GSM8K answer text
     """
     # Load config
     if config_path is not None and config_path.exists():
@@ -269,6 +309,7 @@ def train_sft(
         max_length=train_cfg["max_length"],
         max_train_samples=train_cfg.get("max_train_samples"),
         max_val_samples=train_cfg.get("max_val_samples"),
+        inject_mul_tokens=inject_mul_tokens,
     )
     
     # Data collator - use default since we already padded
@@ -329,7 +370,7 @@ def train_sft(
     )
     
     # Train
-    print("\nStarting SFT training...")
+    print("\nStarting GSM8K SFT training...")
     train_result = trainer.train()
     
     # Save final model
@@ -358,7 +399,7 @@ def train_sft(
     with open(results_path, "w") as f:
         json.dump(metrics, f, indent=2)
     
-    print(f"\nSFT complete!")
+    print(f"\nGSM8K SFT complete!")
     print(f"  Train loss: {metrics.get('train_loss', 'N/A'):.4f}")
     print(f"  Eval loss: {metrics.get('eval_loss', 'N/A'):.4f}")
     print(f"  Results saved to: {results_path}")
@@ -374,7 +415,7 @@ def main():
         "--model-path",
         type=Path,
         required=True,
-        help="Path to pretrained HuggingFace model",
+        help="Path to pretrained HuggingFace model (typically from Tulu-3 SFT)",
     )
     parser.add_argument(
         "--output-dir",
@@ -406,6 +447,11 @@ def main():
         action="store_true",
         help="Enable detailed tokenizer verification logging",
     )
+    parser.add_argument(
+        "--inject-mul-tokens",
+        action="store_true",
+        help="Inject mul-tokens into GSM8K answer text (for mul_tokens condition)",
+    )
     
     args = parser.parse_args()
     
@@ -416,6 +462,7 @@ def main():
         config_path=args.config,
         seed=args.seed,
         debug_tokenizer=args.debug_tokenizer,
+        inject_mul_tokens=args.inject_mul_tokens,
     )
 
 

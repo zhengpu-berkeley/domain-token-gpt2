@@ -64,13 +64,13 @@ The HellaSwag scores are nearly identical (24.58% vs 24.74%), which is expected 
 
 ```bash
 # Evaluate baseline model
-python3 eval/run_hellaswag.py \
+uv run python eval/run_hellaswag.py \
     --model-path outputs/hf_baseline_10b \
     --output-dir outputs/eval_baseline_10b \
     --condition baseline
 
 # Evaluate mul_tokens model
-python3 eval/run_hellaswag.py \
+uv run python eval/run_hellaswag.py \
     --model-path outputs/hf_mul_tokens_10b \
     --output-dir outputs/eval_mul_tokens_10b \
     --condition mul_tokens

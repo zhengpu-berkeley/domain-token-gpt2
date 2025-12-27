@@ -111,7 +111,7 @@ uv sync
 
 # Verify GPUs are available (should show 4 H200 GPUs!)
 nvidia-smi
-python -c "import torch; print(f'CUDA available: {torch.cuda.is_available()}'); print(f'GPU count: {torch.cuda.device_count()}'); [print(f'  GPU {i}: {torch.cuda.get_device_name(i)}') for i in range(torch.cuda.device_count())]"
+uv run python -c "import torch; print(f'CUDA available: {torch.cuda.is_available()}'); print(f'GPU count: {torch.cuda.device_count()}'); [print(f'  GPU {i}: {torch.cuda.get_device_name(i)}') for i in range(torch.cuda.device_count())]"
 ```
 
 ---
@@ -238,7 +238,7 @@ nvidia-smi dmon -s u
 nvidia-smi
 
 # Check PyTorch CUDA
-python -c "import torch; print(f'CUDA: {torch.cuda.is_available()}, GPUs: {torch.cuda.device_count()}')"
+uv run python -c "import torch; print(f'CUDA: {torch.cuda.is_available()}, GPUs: {torch.cuda.device_count()}')"
 ```
 
 ### Out of Disk Space

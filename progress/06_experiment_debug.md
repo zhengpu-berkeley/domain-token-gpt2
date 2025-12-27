@@ -1,109 +1,59 @@
 # Experiment Debugging & HellaSwag Validation
 
-**Status:** ✅ Complete — HellaSwag evaluation confirms training pipeline is working correctly
+**Status:** ✅ Resolved — HF export bug fixed; checkpoint HellaSwag improves over training
 
 ---
 
-## Initial Problem
+## Executive Summary
 
-I completed the full 10B token experiment comparing baseline vs mul_tokens conditions on a 4× H200 cluster. Both conditions finished training, but the results showed no improvement from mul-tokens:
-- **GSM8K:** 0.23% baseline vs 0.15% mul_tokens
-- **Arithmetic probes:** Identical at 0.71% for both conditions
+We hit a scary mismatch: **training/val loss fell** (≈11 → ≈3), but **HellaSwag accuracy over exported checkpoints** stayed ~25% (near random). This was a *false alarm* caused by a bug in our nanoGPT → HuggingFace export path.
 
-The extremely low baseline performance raised concerns about potential issues with the training pipeline, model export, or evaluation setup rather than the tokenization intervention itself.
+**Root cause:** HuggingFace GPT-2 uses `Conv1D` for projections. Its weight layout differs from `nn.Linear`, and our exporter failed to transpose some weights when the matrix is square (notably `attn.c_proj.weight`). That produced incorrect HF models, which made HellaSwag look flat/random.
 
----
-
-## HellaSwag Evaluation (Completed)
-
-To validate the training pipeline, I created a HellaSwag evaluation script (`eval/run_hellaswag.py`) and evaluated both models on the full HellaSwag validation set (10,042 examples).
-
-### Results
-
-**Baseline Model:**
-- Normalized accuracy: **24.58%** (2468/10042)
-- Unnormalized accuracy: **25.37%** (2548/10042)
-- Evaluation time: 68.6 seconds
-
-**Mul_Tokens Model:**
-- Normalized accuracy: **24.74%** (2484/10042)
-- Unnormalized accuracy: **25.22%** (2533/10042)
-- Evaluation time: 69.8 seconds
-
-### Interpretation
-
-✅ **Training pipeline is working correctly:** Both models achieve reasonable HellaSwag scores (~24-25% normalized accuracy), which is in the expected range for a 124M GPT-2 model (reference GPT-2 124M achieves ~29.55% on the same evaluation style).
-
-✅ **Models have learned general language understanding:** The HellaSwag scores confirm the models are not fundamentally broken and have acquired basic language modeling capabilities.
-
-✅ **GSM8K issue is task-specific:** The extremely low GSM8K scores (0.23% baseline, 0.15% mul_tokens) are not due to a general training failure, but rather:
-- Insufficient training for multi-step mathematical reasoning
-- Model size limitations (124M parameters may be too small for complex math)
-- Task-specific challenges requiring more specialized training
-
-### Minimal Difference Between Conditions
-
-The HellaSwag scores are nearly identical (24.58% vs 24.74%), which is expected since HellaSwag doesn't involve arithmetic. This confirms that:
-- Both models are trained to similar quality levels
-- The mul-token intervention doesn't harm general language understanding
-- The lack of improvement on GSM8K is not due to a training pipeline issue
+After fixing `pretrain/export_hf.py` and re-running checkpoint evaluation, HellaSwag **improves with training** for both conditions.
 
 ---
 
-## Implementation Details
+## Current Source-of-Truth Artifacts
 
-### Created Script
+- **Pretrain checkpoints (raw)**:
+  - `outputs/pretrain_baseline_10b/`
+  - `outputs/pretrain_mul_tokens_10b/`
+- **Checkpoint HellaSwag evals (fixed export)**:
+  - `outputs/checkpoint_evals/baseline/`
+  - `outputs/checkpoint_evals/mul_tokens/`
+  - Includes per-step JSONs (`step_<N>_eval/hellaswag_results.json`) and per-condition PNGs (`hellaswag_learning_curve.png`)
 
-**`eval/run_hellaswag.py`** — HellaSwag evaluation script that:
-- Adapts logic from `third_party/build-nanogpt/hellaswag.py`
-- Uses model's tokenizer (not tiktoken) for compatibility with custom vocab (50349 tokens)
-- Follows same structure as other eval scripts (`eval/run_gsm8k.py`)
-- Saves results in JSON format consistent with other evaluations
+## What Was Wrong (HF Export)
 
-### Usage
+HuggingFace GPT-2 stores projection weights as `Conv1D` matrices shaped **(in_features, out_features)**, while our training model uses `nn.Linear` weights shaped **(out_features, in_features)**.
 
-```bash
-# Evaluate baseline model
-uv run python eval/run_hellaswag.py \
-    --model-path outputs/hf_baseline_10b \
-    --output-dir outputs/eval_baseline_10b \
-    --condition baseline
+Our exporter previously transposed only when shapes mismatched. That misses the case where shapes match but a transpose is still required (e.g., square 768×768). This corrupted HF exports and all HF-based downstream evals.
 
-# Evaluate mul_tokens model
-uv run python eval/run_hellaswag.py \
-    --model-path outputs/hf_mul_tokens_10b \
-    --output-dir outputs/eval_mul_tokens_10b \
-    --condition mul_tokens
-```
+## Validation / Sanity Checks
 
-### Results Files
+✅ **Evaluator correctness**: `eval/run_hellaswag.py` matches Karpathy’s reference on OpenAI `gpt2` (≈0.2955 acc_norm).  
+✅ **Export correctness**: After the fix, logits from raw checkpoints match logits from the exported HF model (numerical noise only).  
+✅ **Learning curve**: HellaSwag accuracy increases over training steps for both conditions.
 
-All evaluation results are tracked in Git:
-- `outputs/eval_baseline_10b/hellaswag_results.json`
-- `outputs/eval_mul_tokens_10b/hellaswag_results.json`
+### Checkpoint HellaSwag (acc_norm)
 
----
+From `outputs/checkpoint_evals/{baseline,mul_tokens}/checkpoint_results.json`:
 
-## Tokenizer Verification & Debugging Tools
+| Step | Tokens (B) | Baseline | Mul_tokens |
+|------|------------|----------|------------|
+| 2000 | 1.05 | 0.2604 | 0.2618 |
+| 10000 | 5.24 | 0.2929 | 0.2932 |
+| 19072 | 10.00 | 0.3034 | 0.3077 |
 
-To investigate why mul-tokens were not being used during generation (despite being present in the vocabulary), we created comprehensive debugging tools to verify tokenizer recognition throughout the training pipeline. We implemented `scripts/debug_tokenizer.py`, a diagnostic script that verifies vocab size (50349), checks mul-token IDs (50304-50348), tests encoding/decoding of sample mul-tokens, and validates that mul-tokens encode as single tokens rather than multiple tokens. We also added automatic tokenizer verification to the SFT training script (`sft/sft_train.py`), which runs diagnostic checks when loading models, especially for the mul_tokens condition. Additionally, we created `sample/text_completion.py`, a flexible text completion tool that allows intuitive exploration of model outputs with multiple sampling strategies (greedy, temperature, top-k, top-p) and can load any HuggingFace model (pretrained, SFT, or RL fine-tuned).
+## Implication for Prior GSM8K / SFT Results
 
-**Key Observations:** All diagnostic checks pass successfully — both baseline and mul_tokens tokenizers have vocab size 50349, contain all 45 mul-tokens in the expected ID range (50304-50348), and correctly encode mul-tokens as single tokens (e.g., `<MUL_6_9_54>` → ID 50342). The tokenizer verification runs automatically during SFT and confirms mul-tokens are properly recognized. This eliminates tokenizer recognition as the root cause of the null result. The issue is likely that mul-tokens are not being used because: (1) they never appear in the SFT training data (GSM8K solutions don't contain mul-token strings), so the model never learns when to produce them; (2) the pretraining signal for mul-tokens may be too weak (~0.002% of tokens) to establish strong associations; or (3) the model needs explicit training examples showing when and how to use mul-tokens in generation. The debugging tools provide a foundation for future experiments, such as injecting mul-tokens into SFT data or using the text completion script to probe model behavior with forced mul-token prefixes.
+Any GSM8K/SFT/“final model” metrics produced **before** the export fix should be treated as **invalid**, because they were derived from incorrect HF exports. Those large HF/SFT artifacts were deleted during disk cleanup and can be regenerated if/when we re-run post-training.
 
 ---
 
-## Conclusion
+## Next Steps (When You Continue)
 
-The HellaSwag evaluation confirms that:
-1. ✅ **Training pipeline is correct** — Models achieve reasonable general language understanding
-2. ✅ **Model export is working** — HuggingFace models load and evaluate correctly
-3. ✅ **Evaluation setup is correct** — Scripts produce consistent, reproducible results
-4. ⚠️ **GSM8K performance is task-specific** — Low scores are due to insufficient training for mathematical reasoning, not a systemic issue
-
-**Next steps:** The low GSM8K performance is expected for a 124M model with 10B tokens. To improve math reasoning, consider:
-- Larger model size (350M+ parameters)
-- More training tokens (50B+)
-- Specialized math training data
-- Explicit instruction tuning on math tasks
-- Reinforcement learning from human feedback (RLHF) with math-focused rewards
+1. If you want **post-training + GSM8K** numbers, re-export final checkpoints using the fixed exporter and re-run SFT/evals.
+2. If you want to iterate on mul-tokens, now you can do so without worrying the pretraining/eval pipeline is broken.
 

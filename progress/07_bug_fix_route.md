@@ -1,20 +1,37 @@
 # Next Iteration Research Options
 
-**Date:** December 27, 2024
-**Context:** 10B token experiment complete with null result — mul-tokens showed no improvement over baseline
+**Date:** December 27, 2024  
+**Last Updated:** December 27, 2024  
+**Context:** 10B-token pretraining complete; post-training (SFT/GSM8K) needs rerun after HF-export bug fix
+
+---
+
+## ✅ RESOLVED: HellaSwag Checkpoint Evaluation Issue
+
+**Status:** ✅ Resolved
+
+**What happened:** We initially saw training/val loss improve, but checkpoint HellaSwag appeared flat (~25% acc_norm).  
+**Root cause:** A bug in nanoGPT → HuggingFace export (`pretrain/export_hf.py`): GPT‑2 `Conv1D` weights must be transposed vs `nn.Linear`, including the square `attn.c_proj.weight`. The exporter missed that, corrupting exported checkpoints and HF-based evals/SFT.
+
+**Fix:** Patched the exporter and re-ran checkpoint evaluation. HellaSwag now improves over training.
+
+**Current checkpoint HellaSwag (acc_norm, step 19072 / ~10B tokens):**
+- Baseline: **0.3034**
+- Mul_tokens: **0.3077**
+
+Artifacts live at `outputs/checkpoint_evals/{baseline,mul_tokens}/`.
+
+---
 
 ---
 
 ## Summary of Current State
 
-| Metric | Baseline | Mul_Tokens | Delta |
-|--------|----------|------------|-------|
-| GSM8K | 0.23% | 0.15% | -0.08% |
-| Mul-table probes | 2.47% | 2.47% | 0% |
-| HellaSwag | 24.58% | 24.74% | +0.16% |
-| Mul-token usage | N/A | **0 tokens** | — |
-
-**Key observation:** The model learned mul-tokens during pretraining but **never used them during generation**. This suggests the intervention was too passive — the model saw mul-tokens but never learned *when* or *why* to produce them.
+| Metric | Baseline | Mul_Tokens | Note |
+|--------|----------|------------|------|
+| **Pretrain HellaSwag acc_norm (step 19072)** | **0.3034** | **0.3077** | From `outputs/checkpoint_evals/*` (post-fix) |
+| GSM8K / arithmetic probes | — | — | Must be re-run after export fix (old numbers are not trusted) |
+| Mul-token usage in generations | — | — | Must be re-run after post-training rerun |
 
 ---
 
@@ -189,6 +206,18 @@ def reward(response: str, target: int) -> float:
 
 **Hypothesis:** We need to understand *why* mul-tokens weren't used before changing the approach.
 
+### F0. Fix HellaSwag Evaluation (URGENT)
+
+**What:** Verify that our HellaSwag evaluation matches Karpathy's implementation exactly.
+
+**Status:** ✅ Done — evaluator verified (matches Karpathy on OpenAI `gpt2`) and export bug fixed; checkpoints re-evaluated and show improving HellaSwag over training.
+
+**Effort:** Low (2-4 hours)
+
+**Priority:** **Completed**
+
+---
+
 ### F1. Probe Mul-Token Embeddings
 
 **What:** Analyze learned embeddings:
@@ -264,20 +293,29 @@ Based on effort/impact tradeoff:
 
 | Priority | Option | Effort | Expected Impact | Rationale |
 |----------|--------|--------|-----------------|-----------|
-| 1 | **F1 + F2** | Low | Diagnostic | Must understand current failure before iterating |
-| 2 | **A1** | Low | Medium | Simplest fix — inject mul-tokens into SFT targets |
-| 3 | **A2** | Low-Medium | Medium-High | Explicit training signal for mul-token usage |
-| 4 | **C1** | Medium | High | RL can discover mul-token utility |
-| 5 | **B1** | Medium | Medium | More pretrain signal, but expensive |
+| **0** | **Re-run post-training + eval (SFT/GSM8K)** | Low | **CRITICAL** | Prior post-training metrics were derived from broken HF exports |
+| 1 | **A1** | Low | Medium | Simplest fix — inject mul-tokens into SFT targets |
+| 2 | **A2** | Low-Medium | Medium-High | Explicit training signal for mul-token usage |
+| 3 | **C1** | Medium | High | RL can discover mul-token utility |
+| 4 | **F1 + F2** | Low | Diagnostic | Understand mul-token (non-)usage mechanisms |
+| 5 | **B1** | Medium | Medium | More pretrain signal (expensive) |
 | 6 | **D1** | High | Unknown | Scale may help, but 3x compute cost |
+
+**Note:** F0 is resolved; it is now safe to proceed with options A–D without retraining pretrain from scratch.
 
 ---
 
 ## Quick Wins to Try First
 
-1. **Run F3** (1 hour): Benchmark OpenAI GPT-2-124M on GSM8K and arithmetic probes to calibrate expectations
-2. **Run F2** (1 day): Test if mul-tokens can be generated with forced prefix
-3. **Implement A1** (1-2 days): Inject mul-tokens into GSM8K SFT data and re-run SFT + eval
+1. **Re-run post-training + eval** (low effort):
+   - Re-export final checkpoints with fixed `pretrain/export_hf.py`
+   - Re-run SFT + GSM8K/arithmetic eval to get trustworthy task metrics
+
+2. **Run F3** (1 hour): Benchmark OpenAI GPT-2-124M on GSM8K and arithmetic probes to calibrate expectations
+
+3. **Run F2** (1 day): Test if mul-tokens can be generated with forced prefix
+
+4. **Implement A1** (1-2 days): Inject mul-tokens into GSM8K SFT data and re-run SFT + eval (only after F0 is resolved)
 
 ---
 
@@ -285,11 +323,21 @@ Based on effort/impact tradeoff:
 
 | Constraint | Recommended Path |
 |------------|------------------|
-| **Minimal compute budget** | F1 → F2 → A1 → A2 |
+| **First Priority (ALL)** | Re-run post-training + eval (trustworthy GSM8K/probes) |
+| **Minimal compute budget** | A1 → F2 → (optional) C1 |
 | **Want publishable result fast** | A2 + C1 (synthetic drills + RL bonus) |
 | **Have compute, want rigor** | B1 + D1 (more tokens + larger model) |
 | **Exploratory research** | G1 (expand to formula tokens) |
 
 ---
 
-*Select options based on your research taste and constraints. I recommend starting with F1/F2 diagnostics to understand the failure mode before committing to expensive retraining.*
+## Files Created for Debugging
+
+- `scripts/eval_checkpoints.py` — Evaluates all checkpoints on HellaSwag
+- `scripts/plot_checkpoint_curve.py` — Visualizes HellaSwag accuracy over training (per condition)
+- `scripts/visualize_pretrain_losses.py` — Visualizes train/val loss curves
+- `eval/run_hellaswag.py` — Karpathy-compatible HellaSwag evaluation using tiktoken
+
+---
+
+*✅ F0 is resolved. The pretraining + checkpoint evaluation pipeline is now validated; remaining work is to re-run post-training/evals with the fixed exporter and then iterate on mul-token usage interventions.*

@@ -73,8 +73,9 @@ domain-token-gpt2/
 │   └── test_inject_mul.py        # 21 injector tests
 │
 ├── scripts/                      # Utility scripts
-│   ├── run_smoke.sh              # Run full smoke test
-│   └── compare_results.py        # Compare baseline vs mul_tokens
+│   ├── run_10b.sh                # Full 10B-token run automation
+│   ├── eval_checkpoints.py       # Checkpoint HellaSwag eval runner
+│   └── plot_checkpoint_curve.py  # Plot checkpoint learning curves
 │
 ├── third_party/                  # Vendored dependencies
 │   └── build-nanogpt/            # Karpathy's nanoGPT (MIT license)
@@ -314,18 +315,12 @@ uv sync
 # Run tests
 uv run pytest tests/ -v
 
-# Full local smoke test
-./scripts/run_smoke.sh
-
 # Prepare data for a condition
 uv run python data/prepare_text.py --condition mul_tokens
 uv run python data/tokenize_to_bin.py --condition mul_tokens
 
 # Train (tiny local)
 uv run python pretrain/train.py --condition mul_tokens
-
-# Compare results
-uv run python scripts/compare_results.py
 ```
 
 ---

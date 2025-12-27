@@ -1,10 +1,17 @@
 # Phase 3: 10B Token Full Experiment — Execution Status
 
 **Date:** December 27, 2024  
-**Status:** ✅ COMPLETE — Both Conditions Finished  
+**Last Updated:** December 27, 2025  
+**Status:** ✅ Pretraining complete; ✅ checkpoint eval complete; ⚠️ post-training/evals need rerun after export fix  
 **Hardware:** 4× NVIDIA H200 GPUs (143GB VRAM each)
 
 ---
+
+## Update (Dec 27, 2025)
+
+- Fixed nanoGPT → HuggingFace export bug (`pretrain/export_hf.py`). Prior HF/SFT/GSM8K eval artifacts derived from broken exports should be treated as **invalid**.
+- Validated learning signal via checkpoint HellaSwag evals in `outputs/checkpoint_evals/{baseline,mul_tokens}/`.
+- Latest checkpoint (step **19072**, ~10B tokens): baseline acc_norm **0.3034**, mul_tokens acc_norm **0.3077**.
 
 ## Current Status
 
@@ -14,17 +21,12 @@
 |-------|--------|---------|
 | Data Preparation | ✅ Complete | 12 shards, ~10B tokens |
 | Pretraining | ✅ Complete | 19,072 steps, final loss: 3.01 (train) / 3.12 (val) |
-| HF Export | ✅ Complete | Saved to `outputs/hf_baseline_10b/` |
-| SFT | ✅ Complete | Train loss: 6.47, Eval loss: 5.37 |
-| Evaluation | ✅ Complete | See results below |
+| Checkpoint HellaSwag Eval | ✅ Complete | Saved to `outputs/checkpoint_evals/baseline/` |
+| HF Export + Post-training (SFT/RL) | ⚠️ Needs rerun | Prior exports were broken; rerun with fixed exporter |
+| Task Eval (GSM8K / probes) | ⚠️ Needs rerun | Prior task metrics were derived from broken exports |
 
-**Baseline Results:**
-- **GSM8K Accuracy:** 0.23% (3/1319)
-- **Arithmetic Probes:**
-  - Overall: 0.71% (2/281)
-  - Mul-table: 2.47% (2/81)
-  - Mul-multidigit: 0.00% (0/100)
-  - Addition: 0.00% (0/100)
+**Baseline (checkpoint HellaSwag, acc_norm):**
+- Step 2000: 0.2604 → Step 19072: **0.3034**
 
 ### ✅ Mul_Tokens Condition — COMPLETE
 
@@ -32,119 +34,39 @@
 |-------|--------|---------|
 | Data Preparation | ✅ Complete | 12 shards, ~10B tokens with mul-token injection |
 | Pretraining | ✅ Complete | 19,072 steps, final loss: 3.01 (train) / 3.12 (val) |
-| HF Export | ✅ Complete | Saved to `outputs/hf_mul_tokens_10b/` |
-| SFT | ✅ Complete | Train loss: 6.47, Eval loss: 5.37 |
-| Evaluation | ✅ Complete | See results below |
+| Checkpoint HellaSwag Eval | ✅ Complete | Saved to `outputs/checkpoint_evals/mul_tokens/` |
+| HF Export + Post-training (SFT/RL) | ⚠️ Needs rerun | Prior exports were broken; rerun with fixed exporter |
+| Task Eval (GSM8K / probes) | ⚠️ Needs rerun | Prior task metrics were derived from broken exports |
 
-**Mul_Tokens Results:**
-- **GSM8K Accuracy:** 0.15% (2/1319)
-- **Arithmetic Probes:**
-  - Overall: 0.71% (2/281)
-  - Mul-table: 2.47% (2/81)
-  - Mul-multidigit: 0.00% (0/100)
-  - Addition: 0.00% (0/100)
-- **Mul-Token Usage:** 0 tokens used in responses
+**Mul_tokens (checkpoint HellaSwag, acc_norm):**
+- Step 2000: 0.2618 → Step 19072: **0.3077**
 
 ---
 
 ## Overview
 
-All infrastructure for the 10B token compute-matched experiment is in place. This document summarizes the setup, execution status, and provides instructions for completing the mul_tokens condition.
+All infrastructure for the 10B token compute-matched experiment is in place. This document summarizes the setup, execution status, and provides instructions for (re)running post-training + task eval with the **fixed** HF exporter.
 
 ---
 
-## Baseline Results Summary
+## Pretraining + Checkpoint Eval Summary (Post-fix)
 
-### Pretraining Metrics
-- **Total Steps:** 19,072 / 19,073 (99.9% - final step completed)
+### Pretraining (both conditions)
+- **Total Steps:** 19,072 / 19,073 (final saved at step 19072)
 - **Total Tokens:** 9,999,745,024 (~10B)
-- **Final Train Loss:** 3.01
-- **Final Val Loss:** 3.12
-- **Training Time:** ~2.5 hours (4× H200 DDP)
-- **Checkpoints Saved:** 5 (steps 2000, 4000, 8000, 10000, 14000, 18000, 19072)
+- **Final losses:** ~3.01 (train) / ~3.12 (val)
+- **Checkpoints saved:** steps 2000, 4000, 6000, 8000, 10000, 12000, 14000, 16000, 18000, 19072
 
-### SFT Metrics
-- **Train Loss:** 6.47
-- **Eval Loss:** 5.37
-- **Training Time:** ~2 minutes
+### Checkpoint HellaSwag (acc_norm)
+- Baseline: 0.2604 → **0.3034** (step 2000 → 19072)
+- Mul_tokens: 0.2618 → **0.3077** (step 2000 → 19072)
 
-### Evaluation Results
-- **GSM8K Test Set:** 0.23% accuracy (3/1319 correct)
-- **Arithmetic Probes:** 0.71% overall accuracy
-  - Mul-table: 2.47% (2/81) — both correct answers were "3" (1×3 and 3×1)
-  - Mul-multidigit: 0.00% (0/100)
-  - Addition: 0.00% (0/100)
+See:
+- `outputs/checkpoint_evals/baseline/`
+- `outputs/checkpoint_evals/mul_tokens/`
 
-**Key Observations:**
-- Model shows minimal arithmetic capability at 124M parameters
-- Mul-table performance (2.47%) is slightly above random chance for single-digit multiplication
-- Model struggles with multi-digit operations and addition
-- GSM8K performance is very low, as expected for a 124M model
-
----
-
-## Mul_Tokens Results Summary
-
-### Pretraining Metrics
-- **Total Steps:** 19,072 / 19,073 (99.9% - final step completed)
-- **Total Tokens:** 9,999,745,024 (~10B) with mul-token injection
-- **Final Train Loss:** 3.01
-- **Final Val Loss:** 3.12
-- **Training Time:** ~2.5 hours (4× H200 DDP)
-- **Checkpoints Saved:** 5 (steps 2000, 4000, 8000, 10000, 14000, 18000, 19072)
-
-### SFT Metrics
-- **Train Loss:** 6.47
-- **Eval Loss:** 5.37
-- **Training Time:** ~2 minutes
-
-### Evaluation Results
-- **GSM8K Test Set:** 0.15% accuracy (2/1319 correct) — **slightly worse than baseline**
-- **Arithmetic Probes:** 0.71% overall accuracy — **identical to baseline**
-  - Mul-table: 2.47% (2/81) — **identical to baseline**
-  - Mul-multidigit: 0.00% (0/100) — **identical to baseline**
-  - Addition: 0.00% (0/100) — **identical to baseline**
-- **Mul-Token Usage:** 0 tokens used in any response
-
----
-
-## Comparison: Baseline vs Mul_Tokens
-
-| Metric | Baseline | Mul_Tokens | Delta |
-|--------|----------|------------|-------|
-| **GSM8K Accuracy** | 0.23% (3/1319) | 0.15% (2/1319) | **-0.08%** ⬇️ |
-| **Arithmetic Overall** | 0.71% (2/281) | 0.71% (2/281) | **0.00%** ➡️ |
-| **Mul-Table** | 2.47% (2/81) | 2.47% (2/81) | **0.00%** ➡️ |
-| **Mul-Multidigit** | 0.00% (0/100) | 0.00% (0/100) | **0.00%** ➡️ |
-| **Addition** | 0.00% (0/100) | 0.00% (0/100) | **0.00%** ➡️ |
-| **Mul-Token Usage** | N/A | 0 tokens | **Not used** ❌ |
-
----
-
-## Key Findings & Observations
-
-### ❌ **No Improvement from Mul-Tokens**
-
-1. **Identical Arithmetic Performance:** Mul_tokens condition shows **zero improvement** over baseline on all arithmetic probes
-2. **No Mul-Token Usage:** Model generated **0 mul-tokens** in responses, despite seeing them during pretraining
-3. **Slightly Worse GSM8K:** Mul_tokens condition performed **0.08% worse** on GSM8K (2 vs 3 correct)
-
-### 🔍 **Possible Explanations**
-
-1. **Insufficient Training Signal:** Model may not have learned when/how to use mul-tokens effectively
-2. **SFT Override:** Supervised fine-tuning on GSM8K may have suppressed mul-token usage
-3. **Model Size Limitation:** 124M parameters may be too small to learn complex token usage patterns
-4. **Missing Explicit Training:** Model needs explicit examples of when to use mul-tokens in generation
-5. **Token Frequency:** Mul-tokens may be too rare in training data to establish strong associations
-
-### 💡 **Potential Refinements**
-
-1. **Increase mul-token injection rate** during pretraining
-2. **Add explicit mul-token usage examples** in SFT data
-3. **Use larger model** (e.g., 350M or 1.3B parameters)
-4. **Add reward modeling** to encourage mul-token usage during generation
-5. **Fine-tune on arithmetic-specific datasets** with mul-token examples
-6. **Modify generation strategy** to explicitly prompt for mul-token usage
+### Post-training + task eval (GSM8K / probes)
+Post-training must be re-run using the fixed exporter. Any previously reported GSM8K/probe numbers derived from pre-fix HF exports are **not trusted**.
 
 ---
 
@@ -239,7 +161,7 @@ torchrun --standalone --nproc_per_node=4 pretrain/train_nanogpt.py \
 
 # 3. Export to HuggingFace
 uv run python pretrain/export_hf.py \
-    --checkpoint outputs/pretrain_baseline_10b/model_19073.pt \
+    --checkpoint outputs/pretrain_baseline_10b/model_19072.pt \
     --output-dir outputs/hf_baseline_10b \
     --condition baseline
 
@@ -318,29 +240,27 @@ outputs/
 │   ├── model_02000.pt
 │   ├── model_04000.pt
 │   ├── ...
-│   ├── model_19073.pt      # Final checkpoint
+│   ├── model_19072.pt      # Final checkpoint
 │   ├── results.json
 │   └── log.txt
 ├── pretrain_mul_tokens_10b/
 │   └── ...
-├── hf_baseline_10b/
-│   ├── config.json
-│   ├── pytorch_model.bin
-│   ├── tokenizer.json
-│   └── ...
-├── hf_mul_tokens_10b/
-│   └── ...
-├── sft_baseline_10b/
-│   ├── pytorch_model.bin
-│   └── sft_results.json
-├── sft_mul_tokens_10b/
-│   └── ...
-├── eval_baseline_10b/
-│   ├── gsm8k_results.json
-│   └── arithmetic_results.json
-├── eval_mul_tokens_10b/
-│   └── ...
-└── comparison_report_10b.json
+├── checkpoint_evals/
+│   ├── baseline/
+│   │   ├── checkpoint_results.json
+│   │   ├── hellaswag_learning_curve.png
+│   │   └── step_*_eval/hellaswag_results.json
+│   └── mul_tokens/
+│       ├── checkpoint_results.json
+│       ├── hellaswag_learning_curve.png
+│       └── step_*_eval/hellaswag_results.json
+├── (optional) hf_baseline_10b/     # regenerated when re-running post-training
+├── (optional) hf_mul_tokens_10b/   # regenerated when re-running post-training
+├── (optional) sft_baseline_10b/    # regenerated when re-running post-training
+├── (optional) sft_mul_tokens_10b/  # regenerated when re-running post-training
+├── (optional) eval_baseline_10b/   # regenerated when re-running task evals
+├── (optional) eval_mul_tokens_10b/ # regenerated when re-running task evals
+└── (legacy) comparison_report_10b.json
 ```
 
 ---
@@ -393,26 +313,29 @@ torchrun ... --resume outputs/pretrain_baseline_10b/model_16000.pt
 
 ## Next Steps After Experiment
 
-### ✅ Experiment Complete
+### ✅ Pretraining + checkpoint eval complete
 
-Both baseline and mul_tokens conditions have been completed. Comparison report generated at `outputs/comparison_report_10b.json`.
+Both baseline and mul_tokens **pretraining** runs are complete, and checkpoint HellaSwag evals are saved in:
+- `outputs/checkpoint_evals/baseline/`
+- `outputs/checkpoint_evals/mul_tokens/`
+
+### ⚠️ Post-training metrics need rerun
+
+HF export + SFT + GSM8K/probe eval should be re-run using the fixed exporter. The prior `outputs/comparison_report_10b.json` is kept as a small legacy artifact, but its task metrics were derived from broken exports and are **not trusted**.
 
 ### Recommended Next Steps
 
-1. **Analyze results**: Review `outputs/comparison_report_10b.json` for detailed comparison
-2. **Investigate mul-token usage**: Examine why model generated 0 mul-tokens despite pretraining exposure
-3. **Consider refinements**: See "Potential Refinements" section above for improvement strategies
-4. **Statistical significance**: Consider running additional seeds (2 more for N=3) if pursuing refinements
-5. **Write-up**: Document findings in research report
+1. **Re-run post-training + eval** (low effort): re-export final checkpoints with fixed `pretrain/export_hf.py`, then rerun SFT + GSM8K/probes.
+2. **Then decide on intervention tweaks**: e.g. SFT injection of mul-tokens (A1/A2 in `progress/07_bug_fix_route.md`).
+3. **If pursuing rigor**: add seeds and/or scale model size.
 
 ### Key Questions to Address
 
-- Why did the model not use mul-tokens in generation?
-- Would explicit training on mul-token usage improve results?
-- Is model size (124M) a limiting factor?
-- Would increased mul-token injection rate help?
+- What happens to GSM8K/probes after re-running post-training with the fixed exporter?
+- Does injecting mul-tokens into SFT targets increase mul-token usage and arithmetic accuracy?
+- Is model size (124M) the limiting factor for arithmetic gains?
 
 ---
 
-*✅ Experiment complete. Both conditions finished. Results show no improvement from mul-tokens. See observations above for analysis and potential refinements.*
+*✅ Pretraining + checkpoint eval are complete and validated. Post-training/task eval needs rerun with the fixed exporter before drawing conclusions about mul-tokens on GSM8K.*
 

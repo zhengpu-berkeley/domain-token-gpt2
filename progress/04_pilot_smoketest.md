@@ -63,7 +63,7 @@ Ensures HF tokenizer IDs match our tiktoken-based training tokenizer.
 | `eval/run_gsm8k.py` | GSM8K test set evaluation |
 | `eval/run_arithmetic_probes.py` | Synthetic arithmetic benchmarks |
 | `scripts/compare_runs.py` | Generate comparison report |
-| `scripts/run_pilot.sh` | Full end-to-end automation script |
+| `scripts/run_10b.sh` | Full end-to-end automation script (10B run) |
 
 ---
 
@@ -203,11 +203,8 @@ The pilot smoketest validates that our infrastructure works end-to-end and provi
 ## Appendix: Quick Commands
 
 ```bash
-# Full pilot (50M tokens)
-bash scripts/run_pilot.sh --small
-
-# Full experiment (200M tokens)
-bash scripts/run_pilot.sh
+# NOTE: The original pilot runner script (`scripts/run_pilot.sh`) was removed during repo cleanup.
+# Use the newer end-to-end runner (`scripts/run_10b.sh`) for full-scale runs, or run individual stages below.
 
 # Individual stages
 uv run python data/prepare_fineweb_pilot.py --condition mul_tokens --out-dir data/fineweb_pilot/mul_tokens --target-tokens 200000000

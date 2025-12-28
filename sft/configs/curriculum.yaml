@@ -1,0 +1,41 @@
+# Curriculum SFT Configuration (Post-Tulu)
+# 3 stages with interleaved final stage
+
+# Global settings
+gradient_accumulation_steps: 4
+weight_decay: 0.01
+warmup_ratio: 0.1
+logging_steps: 50
+save_strategy: "epoch"
+evaluation_strategy: "epoch"
+fp16: true
+dataloader_num_workers: 4
+
+# Per-stage configuration
+stages:
+  arithmetic:
+    data_file: "drills_{condition}.json"  # Filled by script
+    epochs: 2
+    learning_rate: 5.0e-5
+    batch_size: 16
+    max_length: 256
+    description: "Pure arithmetic drills (10K examples)"
+    
+  simple_word:
+    data_file: "problems_{condition}.json"  # Filled by script
+    epochs: 2
+    learning_rate: 3.0e-5
+    batch_size: 8
+    max_length: 384
+    description: "Simple 1-2 step word problems (5K examples)"
+    
+  gsm8k_mixed:
+    # Interleaved GSM8K + GSM-SBS
+    gsm_sbs_path: "data/gsm_sbs"
+    gsm_sbs_upsample: 3      # Upsample GSM-SBS 3x
+    epochs: 3
+    learning_rate: 2.0e-5
+    batch_size: 8
+    max_length: 512
+    description: "Full GSM8K + GSM-SBS interleaved (~9.4K examples)"
+

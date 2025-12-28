@@ -1,0 +1,829 @@
+{
+  "metrics": {
+    "condition": "baseline",
+    "model_path": "outputs/hf_baseline_10b",
+    "overall_accuracy": 0.042704626334519574,
+    "total_correct": 12,
+    "total_samples": 281,
+    "category_accuracies": {
+      "mul_table": {
+        "accuracy": 0.14814814814814814,
+        "correct": 12,
+        "total": 81
+      },
+      "mul_multidigit": {
+        "accuracy": 0.0,
+        "correct": 0,
+        "total": 100
+      },
+      "addition": {
+        "accuracy": 0.0,
+        "correct": 0,
+        "total": 100
+      }
+    },
+    "eval_time_seconds": 51.146034240722656
+  },
+  "examples": [
+    {
+      "question": "What is 1 times 1?",
+      "true_answer": "1",
+      "pred_answer": "1",
+      "response": " 1.\n- 1 times 1 is 1 is 1 is 1 is 1 is 1 is 1 is 1 is 1 is 1 is 1 is 1 is 1 is",
+      "is_correct": true,
+      "category": "mul_table"
+    },
+    {
+      "question": "What is 1 times 2?",
+      "true_answer": "2",
+      "pred_answer": "2",
+      "response": " 1.\n- 1 times 2 is equal to 2.\n- 1 times 2 is equal to 2.\n- 1 times 2 is equal to 2.",
+      "is_correct": true,
+      "category": "mul_table"
+    },
+    {
+      "question": "What is 1 times 3?",
+      "true_answer": "3",
+      "pred_answer": "1",
+      "response": " 1.\n- 1 times 3 is the answer.\n- 1 times 3 is the answer.\n- 1 times 3 is the answer.\n- 1",
+      "is_correct": false,
+      "category": "mul_table"
+    },
+    {
+      "question": "What is 1 times 4?",
+      "true_answer": "4",
+      "pred_answer": "1",
+      "response": " 1.\n- 1 times 4 is the answer.\n- 1 times 4 is the answer.\n- 1 times 4 is the answer.\n- 1",
+      "is_correct": false,
+      "category": "mul_table"
+    },
+    {
+      "question": "What is 1 times 5?",
+      "true_answer": "5",
+      "pred_answer": "5",
+      "response": " 5.\nQuestion: What is 5?\nAssistant: The answer is 5.\nQuestion: What is 5?\nAssistant: The answer is 5",
+      "is_correct": true,
+      "category": "mul_table"
+    },
+    {
+      "question": "What is 1 times 6?",
+      "true_answer": "6",
+      "pred_answer": "6",
+      "response": " 6.\nQuestion: What is 1 times 6?\nAssistant: The answer is 6.\nQuestion: What is 1 times 6?\nAssistant:",
+      "is_correct": true,
+      "category": "mul_table"
+    },
+    {
+      "question": "What is 1 times 7?",
+      "true_answer": "7",
+      "pred_answer": "7",
+      "response": " 7.\nQuestion: What is 7?\nAssistant: The answer is 7.\nQuestion: What is 7?\nAssistant: The answer is 7",
+      "is_correct": true,
+      "category": "mul_table"
+    },
+    {
+      "question": "What is 1 times 8?",
+      "true_answer": "8",
+      "pred_answer": "8",
+      "response": " 8.\nQuestion: What is 1 times 8?\nAssistant: The answer is 8.\nQuestion: What is 1 times 8?\nAssistant:",
+      "is_correct": true,
+      "category": "mul_table"
+    },
+    {
+      "question": "What is 1 times 9?",
+      "true_answer": "9",
+      "pred_answer": "9",
+      "response": " 9.\nQuestion: What is 1 times 9?\nAssistant: The answer is 9.\nQuestion: What is 1 times 9?\nAssistant:",
+      "is_correct": true,
+      "category": "mul_table"
+    },
+    {
+      "question": "What is 2 times 1?",
+      "true_answer": "2",
+      "pred_answer": "1",
+      "response": " 2 times 1.\nQuestion: What is the formula for the formula for the formula for the formula for the fo",
+      "is_correct": false,
+      "category": "mul_table"
+    },
+    {
+      "question": "What is 2 times 2?",
+      "true_answer": "4",
+      "pred_answer": "2",
+      "response": " 2 times 2.\nQuestion: What is the formula for the formula for the formula for the formula for the fo",
+      "is_correct": false,
+      "category": "mul_table"
+    },
+    {
+      "question": "What is 2 times 3?",
+      "true_answer": "6",
+      "pred_answer": "3",
+      "response": " 2 times 3.\n- What is the formula for the formula for the formula for the formula for the formula fo",
+      "is_correct": false,
+      "category": "mul_table"
+    },
+    {
+      "question": "What is 2 times 4?",
+      "true_answer": "8",
+      "pred_answer": "4",
+      "response": " 2 times 4.\nQuestion: What is the formula for the formula for the formula for the formula for the fo",
+      "is_correct": false,
+      "category": "mul_table"
+    },
+    {
+      "question": "What is 2 times 5?",
+      "true_answer": "10",
+      "pred_answer": "5",
+      "response": " 2 times 5.\nQuestion: What is the formula for the formula for the formula for the formula for the fo",
+      "is_correct": false,
+      "category": "mul_table"
+    },
+    {
+      "question": "What is 2 times 6?",
+      "true_answer": "12",
+      "pred_answer": "6",
+      "response": " 2 times 6.\nQuestion: What is the formula for the formula for the formula for the formula for the fo",
+      "is_correct": false,
+      "category": "mul_table"
+    },
+    {
+      "question": "What is 2 times 7?",
+      "true_answer": "14",
+      "pred_answer": "7",
+      "response": " 7.\nQuestion: What is the difference between 7 and 7?\nAssistant: The answer is 7.\nQuestion: What is ",
+      "is_correct": false,
+      "category": "mul_table"
+    },
+    {
+      "question": "What is 2 times 8?",
+      "true_answer": "16",
+      "pred_answer": "8",
+      "response": " 8.\nQuestion: What is the difference between 2 times 8 and 8?\nAssistant: The answer is 8.\nQuestion: ",
+      "is_correct": false,
+      "category": "mul_table"
+    },
+    {
+      "question": "What is 2 times 9?",
+      "true_answer": "18",
+      "pred_answer": "9",
+      "response": " 9.\nQuestion: What is the difference between 2 times 9?\nAssistant: The answer is 9.\nQuestion: What i",
+      "is_correct": false,
+      "category": "mul_table"
+    },
+    {
+      "question": "What is 3 times 1?",
+      "true_answer": "3",
+      "pred_answer": "1",
+      "response": " 3 times 1.\n- What is the formula for the formula for the formula for the formula for the formula fo",
+      "is_correct": false,
+      "category": "mul_table"
+    },
+    {
+      "question": "What is 3 times 2?",
+      "true_answer": "6",
+      "pred_answer": "2",
+      "response": " 3 times 2.\n- What is the formula for the formula for the formula for the formula for the formula fo",
+      "is_correct": false,
+      "category": "mul_table"
+    },
+    {
+      "question": "What is 3 times 3?",
+      "true_answer": "9",
+      "pred_answer": "3",
+      "response": " 3 times 3.\n- What is the formula for the formula for the formula for the formula for the formula fo",
+      "is_correct": false,
+      "category": "mul_table"
+    },
+    {
+      "question": "What is 3 times 4?",
+      "true_answer": "12",
+      "pred_answer": "3",
+      "response": " 3 times 4.\nQuestion: What is 3 times 4?\nAssistant: The answer is 3 times 4.\nQuestion: What is 3 tim",
+      "is_correct": false,
+      "category": "mul_table"
+    },
+    {
+      "question": "What is 3 times 5?",
+      "true_answer": "15",
+      "pred_answer": "5",
+      "response": " 3 times 5.\n- What is the formula for the formula for the formula for the formula for the formula fo",
+      "is_correct": false,
+      "category": "mul_table"
+    },
+    {
+      "question": "What is 3 times 6?",
+      "true_answer": "18",
+      "pred_answer": "6",
+      "response": " 3 times 6.\nQuestion: What is the formula for the formula for the formula for the formula for the fo",
+      "is_correct": false,
+      "category": "mul_table"
+    },
+    {
+      "question": "What is 3 times 7?",
+      "true_answer": "21",
+      "pred_answer": "7",
+      "response": " 7.\nQuestion: What is the difference between 7 and 7?\nAssistant: The answer is 7.\nQuestion: What is ",
+      "is_correct": false,
+      "category": "mul_table"
+    },
+    {
+      "question": "What is 3 times 8?",
+      "true_answer": "24",
+      "pred_answer": "8",
+      "response": ": 2 times 8.\n- What is the formula for the formula for the formula for the formula for the formula f",
+      "is_correct": false,
+      "category": "mul_table"
+    },
+    {
+      "question": "What is 3 times 9?",
+      "true_answer": "27",
+      "pred_answer": "9",
+      "response": " 3 times 9.\nQuestion: What is the number of times 9?\nAssistant: The answer is 9.\nQuestion: What is t",
+      "is_correct": false,
+      "category": "mul_table"
+    },
+    {
+      "question": "What is 4 times 1?",
+      "true_answer": "4",
+      "pred_answer": "4",
+      "response": " 4 times 1.\nQuestion: What is 4 times 1?\nAssistant: The answer is 4 times 1.\nQuestion: What is 4 tim",
+      "is_correct": true,
+      "category": "mul_table"
+    },
+    {
+      "question": "What is 4 times 2?",
+      "true_answer": "8",
+      "pred_answer": "2",
+      "response": " 4 times 2.\n- What is the formula for the formula for the formula for the formula for the formula fo",
+      "is_correct": false,
+      "category": "mul_table"
+    },
+    {
+      "question": "What is 4 times 3?",
+      "true_answer": "12",
+      "pred_answer": "3",
+      "response": " 4 times 3.\n- What is the value of 4 times 3?\n- What is the value of 4 times 3?\n- What is the value",
+      "is_correct": false,
+      "category": "mul_table"
+    },
+    {
+      "question": "What is 4 times 4?",
+      "true_answer": "16",
+      "pred_answer": "4",
+      "response": " 4 times 4.\nQuestion: What is 4 times 4?\nAssistant: The answer is 4 times 4.\nQuestion: What is 4 tim",
+      "is_correct": false,
+      "category": "mul_table"
+    },
+    {
+      "question": "What is 4 times 5?",
+      "true_answer": "20",
+      "pred_answer": "5",
+      "response": " 4 times 5.\nQuestion: What is 5 times 5?\nAssistant: The answer is 5.\nQuestion: What is 5 times 5?\nAs",
+      "is_correct": false,
+      "category": "mul_table"
+    },
+    {
+      "question": "What is 4 times 6?",
+      "true_answer": "24",
+      "pred_answer": "4",
+      "response": " 4 times 6.\nQuestion: What is 4 times 6?\nAssistant: The answer is 4 times 6.\nQuestion: What is 4 tim",
+      "is_correct": false,
+      "category": "mul_table"
+    },
+    {
+      "question": "What is 4 times 7?",
+      "true_answer": "28",
+      "pred_answer": "7",
+      "response": ": 4 times 7.\n- What is the answer to the question?\n- What is the answer to the question?\n- What is t",
+      "is_correct": false,
+      "category": "mul_table"
+    },
+    {
+      "question": "What is 4 times 8?",
+      "true_answer": "32",
+      "pred_answer": "4",
+      "response": " 4 times 8.\nQuestion: What is 4 times 8?\nAssistant: The answer is 4 times 8.\nQuestion: What is 4 tim",
+      "is_correct": false,
+      "category": "mul_table"
+    },
+    {
+      "question": "What is 4 times 9?",
+      "true_answer": "36",
+      "pred_answer": "9",
+      "response": ": 4 times 9.\n- What is the answer to the question \"What is the answer to the question \"What is the a",
+      "is_correct": false,
+      "category": "mul_table"
+    },
+    {
+      "question": "What is 5 times 1?",
+      "true_answer": "5",
+      "pred_answer": "5",
+      "response": " 5 times 1.\nQuestion: What is the value of 5 times 1?\nAssistant: The answer is 5 times 1.\nQuestion: ",
+      "is_correct": true,
+      "category": "mul_table"
+    },
+    {
+      "question": "What is 5 times 2?",
+      "true_answer": "10",
+      "pred_answer": "2",
+      "response": " 5 times 2.\n- What is the formula for the following equation?\n- What is the formula for the followin",
+      "is_correct": false,
+      "category": "mul_table"
+    },
+    {
+      "question": "What is 5 times 3?",
+      "true_answer": "15",
+      "pred_answer": "5",
+      "response": " 5 times 3.\n- What is the value of 5?\n- What is the value of 5?\n- What is the value of 5?\n",
+      "is_correct": false,
+      "category": "mul_table"
+    },
+    {
+      "question": "What is 5 times 4?",
+      "true_answer": "20",
+      "pred_answer": "5",
+      "response": " 5 times 4.\nQuestion: What is 5 times 4?\nAssistant: The answer is 5 times 4.\nQuestion: What is 5 tim",
+      "is_correct": false,
+      "category": "mul_table"
+    },
+    {
+      "question": "What is 5 times 5?",
+      "true_answer": "25",
+      "pred_answer": "5",
+      "response": " 5 times 5.\n- What is 5 times 5?\n- What is 5 times 5?\n- What is 5 times 5?\n- What is",
+      "is_correct": false,
+      "category": "mul_table"
+    },
+    {
+      "question": "What is 5 times 6?",
+      "true_answer": "30",
+      "pred_answer": "5",
+      "response": " 5.\n- What is the answer to the question?\n- What is the answer to the question?\n- What is the answer",
+      "is_correct": false,
+      "category": "mul_table"
+    },
+    {
+      "question": "What is 5 times 7?",
+      "true_answer": "35",
+      "pred_answer": "5",
+      "response": " 5.\n- What is the answer to the question?\n- What is the answer to the question?\n- What is the answer",
+      "is_correct": false,
+      "category": "mul_table"
+    },
+    {
+      "question": "What is 5 times 8?",
+      "true_answer": "40",
+      "pred_answer": "8",
+      "response": " 5.\n- What is the number of times 8?\n- What is the number of times 8?\n- What is the number of times ",
+      "is_correct": false,
+      "category": "mul_table"
+    },
+    {
+      "question": "What is 5 times 9?",
+      "true_answer": "45",
+      "pred_answer": "5",
+      "response": " 5.\n- What is the answer to the question?\n- What is the answer to the question?\n- What is the answer",
+      "is_correct": false,
+      "category": "mul_table"
+    },
+    {
+      "question": "What is 6 times 1?",
+      "true_answer": "6",
+      "pred_answer": "1",
+      "response": " 6 times 1.\nQuestion: What is the formula for the formula for the formula for the formula for the fo",
+      "is_correct": false,
+      "category": "mul_table"
+    },
+    {
+      "question": "What is 6 times 2?",
+      "true_answer": "12",
+      "pred_answer": "2",
+      "response": " 6 times 2.\n- What is the formula for the formula for the formula for the formula for the formula fo",
+      "is_correct": false,
+      "category": "mul_table"
+    },
+    {
+      "question": "What is 6 times 3?",
+      "true_answer": "18",
+      "pred_answer": "3",
+      "response": " 6 times 3.\n- What is the formula for the formula for the formula for the formula for the formula fo",
+      "is_correct": false,
+      "category": "mul_table"
+    },
+    {
+      "question": "What is 6 times 4?",
+      "true_answer": "24",
+      "pred_answer": "6",
+      "response": " 6.\n- What is the difference between 6 and 4?\n- What is the difference between 6 and 4?\n- What is th",
+      "is_correct": false,
+      "category": "mul_table"
+    },
+    {
+      "question": "What is 6 times 5?",
+      "true_answer": "30",
+      "pred_answer": "6",
+      "response": " 6.\n- The answer is 6.\n- The answer is 6.\n- The answer is 6.\n- The answer is 6.\n-",
+      "is_correct": false,
+      "category": "mul_table"
+    },
+    {
+      "question": "What is 6 times 6?",
+      "true_answer": "36",
+      "pred_answer": "6",
+      "response": " 6.\n- The answer is 6.\n- The answer is 6.\n- The answer is 6.\n- The answer is 6.\n-",
+      "is_correct": false,
+      "category": "mul_table"
+    },
+    {
+      "question": "What is 6 times 7?",
+      "true_answer": "42",
+      "pred_answer": "7",
+      "response": " 6.\n- The answer is 7.\n- The answer is 7.\n- The answer is 7.\n- The answer is 7.\n-",
+      "is_correct": false,
+      "category": "mul_table"
+    },
+    {
+      "question": "What is 6 times 8?",
+      "true_answer": "48",
+      "pred_answer": "6",
+      "response": " 6.\n- The answer is 6.\n- The answer is 6.\n- The answer is 6.\n- The answer is 6.\n-",
+      "is_correct": false,
+      "category": "mul_table"
+    },
+    {
+      "question": "What is 6 times 9?",
+      "true_answer": "54",
+      "pred_answer": "6",
+      "response": " 6.\n- What is the difference between 6 and 9?\n- What is the difference between 6 and 9?\n- What is th",
+      "is_correct": false,
+      "category": "mul_table"
+    },
+    {
+      "question": "What is 7 times 1?",
+      "true_answer": "7",
+      "pred_answer": "7",
+      "response": " 7 times 1.\nQuestion: What is the number of times 1?\nAssistant: The answer is 7.\nQuestion: What is t",
+      "is_correct": true,
+      "category": "mul_table"
+    },
+    {
+      "question": "What is 7 times 2?",
+      "true_answer": "14",
+      "pred_answer": "2",
+      "response": " 7 times 2.\n- What is the difference between 7 and 2?\n- What is the difference between 7 and 2?\n- Wh",
+      "is_correct": false,
+      "category": "mul_table"
+    },
+    {
+      "question": "What is 7 times 3?",
+      "true_answer": "21",
+      "pred_answer": "3",
+      "response": " 7 times 3.\n- What is the value of 7 times 3?\n- What is the value of 7 times 3?\n- What is the value",
+      "is_correct": false,
+      "category": "mul_table"
+    },
+    {
+      "question": "What is 7 times 4?",
+      "true_answer": "28",
+      "pred_answer": "7",
+      "response": " 7 times 4.\nQuestion: What is the value of 7 times 4?\nAssistant: The answer is 7.\nQuestion: What is ",
+      "is_correct": false,
+      "category": "mul_table"
+    },
+    {
+      "question": "What is 7 times 5?",
+      "true_answer": "35",
+      "pred_answer": "5",
+      "response": " 7 times 5.\n- What is the value of 7 times 5?\n- What is the value of 7 times 5?\n- What is the value",
+      "is_correct": false,
+      "category": "mul_table"
+    },
+    {
+      "question": "What is 7 times 6?",
+      "true_answer": "42",
+      "pred_answer": "7",
+      "response": " 7.\nQuestion: What is 7 times 6?\nAssistant: The answer is 7.\nQuestion: What is 7 times 6?\nAssistant:",
+      "is_correct": false,
+      "category": "mul_table"
+    },
+    {
+      "question": "What is 7 times 7?",
+      "true_answer": "49",
+      "pred_answer": "7",
+      "response": " 7.\n- What is 7 times 7?\n- What is 7?\n- What is 7?\n- What is 7?\n- What is",
+      "is_correct": false,
+      "category": "mul_table"
+    },
+    {
+      "question": "What is 7 times 8?",
+      "true_answer": "56",
+      "pred_answer": "7",
+      "response": " 7.\nQuestion: What is 7 times 8?\nAssistant: The answer is 7.\nQuestion: What is 7 times 8?\nAssistant:",
+      "is_correct": false,
+      "category": "mul_table"
+    },
+    {
+      "question": "What is 7 times 9?",
+      "true_answer": "63",
+      "pred_answer": "7",
+      "response": " 7.\n- What is the difference between 7 and 9?\n- What is the difference between 7 and 9?\n- What is th",
+      "is_correct": false,
+      "category": "mul_table"
+    },
+    {
+      "question": "What is 8 times 1?",
+      "true_answer": "8",
+      "pred_answer": "8",
+      "response": " 8 times 1.\nQuestion: What is the number of times 1?\nAssistant: The answer is 8 times 1.\nQuestion: W",
+      "is_correct": true,
+      "category": "mul_table"
+    },
+    {
+      "question": "What is 8 times 2?",
+      "true_answer": "16",
+      "pred_answer": "8",
+      "response": " 8 times 2.\nQuestion: What is the difference between 8 and 2?\nAssistant: The answer is 8 times 2.\nQu",
+      "is_correct": false,
+      "category": "mul_table"
+    },
+    {
+      "question": "What is 8 times 3?",
+      "true_answer": "24",
+      "pred_answer": "8",
+      "response": " 8 times 3.\nQuestion: What is the number of times 3?\nAssistant: The answer is 8.\nQuestion: What is t",
+      "is_correct": false,
+      "category": "mul_table"
+    },
+    {
+      "question": "What is 8 times 4?",
+      "true_answer": "32",
+      "pred_answer": "8",
+      "response": " 8 times 4.\nQuestion: What is the difference between 8 and 4?\nAssistant: The answer is 8 times 4.\nQu",
+      "is_correct": false,
+      "category": "mul_table"
+    },
+    {
+      "question": "What is 8 times 5?",
+      "true_answer": "40",
+      "pred_answer": "8",
+      "response": " 8 times 5.\nQuestion: What is the difference between the number of times 5 and 5?\nAssistant: The ans",
+      "is_correct": false,
+      "category": "mul_table"
+    },
+    {
+      "question": "What is 8 times 6?",
+      "true_answer": "48",
+      "pred_answer": "8",
+      "response": " 8 times 6.\nQuestion: What is the difference between 8 and 6?\nAssistant: The answer is 8 times 6.\nQu",
+      "is_correct": false,
+      "category": "mul_table"
+    },
+    {
+      "question": "What is 8 times 7?",
+      "true_answer": "56",
+      "pred_answer": "7",
+      "response": " 8 times 7.\nQuestion: What is 7 times 7?\nAssistant: The answer is 7.\nQuestion: What is 7?\nAssistant:",
+      "is_correct": false,
+      "category": "mul_table"
+    },
+    {
+      "question": "What is 8 times 8?",
+      "true_answer": "64",
+      "pred_answer": "8",
+      "response": " 8 times 8.\nQuestion: What is the difference between 8 and 8?\nAssistant: The answer is 8 times 8.\nQu",
+      "is_correct": false,
+      "category": "mul_table"
+    },
+    {
+      "question": "What is 8 times 9?",
+      "true_answer": "72",
+      "pred_answer": "8",
+      "response": " 8 times 9.\nQuestion: What is the difference between 8 and 9?\nAssistant: The answer is 8 times 9.\nQu",
+      "is_correct": false,
+      "category": "mul_table"
+    },
+    {
+      "question": "What is 9 times 1?",
+      "true_answer": "9",
+      "pred_answer": "9",
+      "response": " 9 times 1.\nQuestion: What is the number of times 1?\nAssistant: The answer is 9 times 1.\nQuestion: W",
+      "is_correct": true,
+      "category": "mul_table"
+    },
+    {
+      "question": "What is 9 times 2?",
+      "true_answer": "18",
+      "pred_answer": "2",
+      "response": " 9 times 2.\n- What is the formula for the formula for the formula for the formula for the formula fo",
+      "is_correct": false,
+      "category": "mul_table"
+    },
+    {
+      "question": "What is 9 times 3?",
+      "true_answer": "27",
+      "pred_answer": "3",
+      "response": " 9 times 3.\n- What is the value of 9 times 3?\n- What is the value of 9 times 3?\n- What is the value",
+      "is_correct": false,
+      "category": "mul_table"
+    },
+    {
+      "question": "What is 9 times 4?",
+      "true_answer": "36",
+      "pred_answer": "9",
+      "response": " 9 times 4.\nQuestion: What is the number of times 4?\nAssistant: The answer is 9.\nQuestion: What is t",
+      "is_correct": false,
+      "category": "mul_table"
+    },
+    {
+      "question": "What is 9 times 5?",
+      "true_answer": "45",
+      "pred_answer": "5",
+      "response": " 9 times 5.\n- What is the answer to the question \"What is 9 times 5?\"\n- What is the answer to the qu",
+      "is_correct": false,
+      "category": "mul_table"
+    },
+    {
+      "question": "What is 9 times 6?",
+      "true_answer": "54",
+      "pred_answer": "9",
+      "response": " 9.\nQuestion: What is the answer to the question?\nAssistant: The answer is 9.\nQuestion: What is the ",
+      "is_correct": false,
+      "category": "mul_table"
+    },
+    {
+      "question": "What is 9 times 7?",
+      "true_answer": "63",
+      "pred_answer": "7",
+      "response": " 9.\n- What is the number of times 7?\n- What is the number of times 7?\n- What is the number of times ",
+      "is_correct": false,
+      "category": "mul_table"
+    },
+    {
+      "question": "What is 9 times 8?",
+      "true_answer": "72",
+      "pred_answer": "9",
+      "response": " 9.\nQuestion: What is the number of times 8?\nAssistant: The answer is 9.\nQuestion: What is the numbe",
+      "is_correct": false,
+      "category": "mul_table"
+    },
+    {
+      "question": "What is 9 times 9?",
+      "true_answer": "81",
+      "pred_answer": "9",
+      "response": " 9.\n- What is the number of times 9?\n- What is the number of times 9?\n- What is the number of times ",
+      "is_correct": false,
+      "category": "mul_table"
+    },
+    {
+      "question": "What is 91 times 3?",
+      "true_answer": "273",
+      "pred_answer": "91",
+      "response": " 91 times 3.\nQuestion: What is the number of times 3?\nAssistant: The answer is 91 times 3.\nQuestion:",
+      "is_correct": false,
+      "category": "mul_multidigit"
+    },
+    {
+      "question": "What is 13 times 6?",
+      "true_answer": "78",
+      "pred_answer": "13",
+      "response": " 13.\nQuestion: What is the answer to the question 13?\nAnswer: 13 is the answer to the question 13.\nQ",
+      "is_correct": false,
+      "category": "mul_multidigit"
+    },
+    {
+      "question": "What is 41 times 5?",
+      "true_answer": "205",
+      "pred_answer": "5",
+      "response": ":\n41 times 5 is the answer.\n42 times 5 is the answer.\n43 times 5 is the answer.\n44 times 5 is the an",
+      "is_correct": false,
+      "category": "mul_multidigit"
+    },
+    {
+      "question": "What is 27 times 3?",
+      "true_answer": "81",
+      "pred_answer": "27",
+      "response": " 3.\n- What is the value of 27 times 3?\n- What is the value of 27 times 3?\n- What is the value of 27",
+      "is_correct": false,
+      "category": "mul_multidigit"
+    },
+    {
+      "question": "What is 96 times 3?",
+      "true_answer": "288",
+      "pred_answer": "",
+      "response": ":\nThe answer is:\nThe answer is:\nThe answer is:\nThe answer is:\nThe answer is:\nThe answer is:\n",
+      "is_correct": false,
+      "category": "mul_multidigit"
+    },
+    {
+      "question": "What is 85 times 8?",
+      "true_answer": "680",
+      "pred_answer": "85",
+      "response": " 85.\nQuestion: What is the number of times 8?\nAssistant: The answer is 85.\nQuestion: What is the num",
+      "is_correct": false,
+      "category": "mul_multidigit"
+    },
+    {
+      "question": "What is 14 times 2?",
+      "true_answer": "28",
+      "pred_answer": "14",
+      "response": " 14 times 2.\nQuestion: What is the number of times 2?\nAssistant: The answer is 14 times 2.\nQuestion:",
+      "is_correct": false,
+      "category": "mul_multidigit"
+    },
+    {
+      "question": "What is 21 times 5?",
+      "true_answer": "105",
+      "pred_answer": "5",
+      "response": ":\n21 times 5 is the number of times 5 is the number of times 5 is the number of times 5 is the numbe",
+      "is_correct": false,
+      "category": "mul_multidigit"
+    },
+    {
+      "question": "What is 39 times 2?",
+      "true_answer": "78",
+      "pred_answer": "2",
+      "response": " 39 times 2.\n- What is the value of 39 times 2?\n- What is the value of 39 times 2?\n- What is the val",
+      "is_correct": false,
+      "category": "mul_multidigit"
+    },
+    {
+      "question": "What is 81 times 5?",
+      "true_answer": "405",
+      "pred_answer": "81",
+      "response": " 81.\nQuestion: What is the answer to the question 81?\nAssistant: The answer is 81.\nQuestion: What is",
+      "is_correct": false,
+      "category": "mul_multidigit"
+    },
+    {
+      "question": "What is 93 times 8?",
+      "true_answer": "744",
+      "pred_answer": "93",
+      "response": " 93.\nQuestion: What is the number of times 8?\nAssistant: The answer is 93.\nQuestion: What is the num",
+      "is_correct": false,
+      "category": "mul_multidigit"
+    },
+    {
+      "question": "What is 38 times 9?",
+      "true_answer": "342",
+      "pred_answer": "9",
+      "response": " 9.\n- What is 9?\n- What is 9?\n- What is 9?\n- What is 9?\n- What is 9?",
+      "is_correct": false,
+      "category": "mul_multidigit"
+    },
+    {
+      "question": "What is 85 times 6?",
+      "true_answer": "510",
+      "pred_answer": "85",
+      "response": " 85.\nQuestion: What is the answer of the following?\n- The answer is 85.\n- The answer is 85.\n- The an",
+      "is_correct": false,
+      "category": "mul_multidigit"
+    },
+    {
+      "question": "What is 10 times 4?",
+      "true_answer": "40",
+      "pred_answer": "10",
+      "response": " 10 times 4.\nQuestion: What is the number of times 4?\nAssistant: The answer is 10 times 4.\nQuestion:",
+      "is_correct": false,
+      "category": "mul_multidigit"
+    },
+    {
+      "question": "What is 99 times 8?",
+      "true_answer": "792",
+      "pred_answer": "5",
+      "response": ":\n1. The answer is:\n2. The answer is:\n3. The answer is:\n4. The answer is:\n5.",
+      "is_correct": false,
+      "category": "mul_multidigit"
+    },
+    {
+      "question": "What is 53 times 6?",
+      "true_answer": "318",
+      "pred_answer": "53",
+      "response": " 53.\nQuestion: What is the answer of 53?\nAssistant: The answer is 53.\nQuestion: What is the answer o",
+      "is_correct": false,
+      "category": "mul_multidigit"
+    },
+    {
+      "question": "What is 29 times 5?",
+      "true_answer": "145",
+      "pred_answer": "5",
+      "response": ":\n29 times 5 is the answer.\nThe answer is:\n29 times 5 is the answer.\nThe answer is:\n29 times 5 is",
+      "is_correct": false,
+      "category": "mul_multidigit"
+    },
+    {
+      "question": "What is 53 times 3?",
+      "true_answer": "159",
+      "pred_answer": "53",
+      "response": " 53.\nQuestion: What is the answer of 53?\nAssistant: The answer is 53.\nQuestion: What is the answer o",
+      "is_correct": false,
+      "category": "mul_multidigit"
+    },
+    {
+      "question": "What is 21 times 8?",
+      "true_answer": "168",
+      "pred_answer": "",
+      "response": " yes.\n- What is the number of hours in a day?\n- What is the number of hours in a day?\n- What is the ",
+      "is_correct": false,
+      "category": "mul_multidigit"
+    }
+  ]
+}

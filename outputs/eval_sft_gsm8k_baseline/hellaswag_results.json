@@ -1,0 +1,12 @@
+{
+  "metrics": {
+    "condition": "baseline",
+    "model_path": "outputs/sft_gsm8k_baseline",
+    "accuracy": 0.328,
+    "accuracy_norm": 0.342,
+    "correct": 164,
+    "correct_norm": 171,
+    "total": 500,
+    "eval_time_seconds": 3.3134031295776367
+  }
+}

@@ -1,0 +1,142 @@
+[
+  {
+    "id": "gsm_sbs_0294",
+    "question": "Four classmates were comparing their ages based on their birth month. They found out that Jolyn is 2 months older than Therese while Therese is 5 months older than Aivo. Then, Leon is 2 months older than Aivo. How much older in months is Jolyn than Leon?",
+    "original_answer": "Jolyn is 2 + 5 = <<2+5=7>>7 months older than Aivo.\nSince Leon is 2 months older than Aivo, then Jolyn is 7 - 2 = 5 months older than Leon.\n#### 5",
+    "sbs_answer": "Jolyn is 2 + 5 = <<2+5=7>>7 months older than Aivo.\nSince Leon is 2 months older than Aivo, then Jolyn is 7 - 2 = 5 months older than Leon.\n#### 5",
+    "final_answer": "5"
+  },
+  {
+    "id": "gsm_sbs_0292",
+    "question": "Bobby needed to make some trips with his truck and had only 12 gallons of gasoline. He drives to a supermarket 5 miles away and then drives back home. Then he headed to his farm which was 6 miles away. Two miles into the journey, he turned around and drove back home to retrieve some farming tools he forgot to take earlier and drove down to the farm. If he now has exactly 2 gallons of gasoline left, at what rate in miles per gallon has his truck been consuming gasoline?",
+    "original_answer": "The trip to the supermarket and back home covers 5+5=<<5+5=10>>10 miles.\nThe round trip of two miles each before he actually went to the farm covers 2+2=<<2+2=4>>4 miles.\nSix miles to the farm and the total mileage is 10+4+6=<<10+4+6=20>>20 miles.\nThe truck consumed 12-2=<<12-2=10>>10 gallons of gasoline for the total journey.\nSo, the rate is 20/10= <<20/10=2>>2 miles per gallon.\n#### 2",
+    "sbs_answer": "The trip to the supermarket and back home covers 5+5=<<5+5=10>>10 miles.\nThe round trip of two miles each before he actually went to the farm covers 2+2=<<2+2=4>>4 miles.\nSix miles to the farm and the total mileage is 10+4+6=<<10+4+6=20>>20 miles.\nThe truck consumed 12-2=<<12-2=10>>10 gallons of gasoline for the total journey.\nSo, the rate is 20/10= <<20/10=2>>2 miles per gallon.\n#### 2",
+    "final_answer": "2"
+  },
+  {
+    "id": "gsm_sbs_0025",
+    "question": "Each bird eats 12 beetles per day, each snake eats 3 birds per day, and each jaguar eats 5 snakes per day. If there are 6 jaguars in a forest, how many beetles are eaten each day?",
+    "original_answer": "First find the total number of snakes eaten: 5 snakes/jaguar * 6 jaguars = <<5*6=30>>30 snakes\nThen find the total number of birds eaten per day: 30 snakes * 3 birds/snake = <<30*3=90>>90 snakes\nThen multiply the number of snakes by the number of beetles per snake to find the total number of beetles eaten per day: 90 snakes * 12 beetles/snake = <<90*12=1080>>1080 beetles\n#### 1080",
+    "sbs_answer": "First find the total number of snakes eaten: 5 snakes/jaguar * 6 jaguars = <<5\u00d76=30=30>>30 snakes\nThen find the total number of birds eaten per day: 30 snakes * 3 birds/snake = <<[3 \u00d7 30 \u2192 = 3 \u00d7 3 \u00d7 10 \u2192 = 9 \u00d7 10 \u2192 = 90]=90>>90 snakes\nThen multiply the number of snakes by the number of beetles per snake to find the total number of beetles eaten per day: 90 snakes * 12 beetles/snake = <<[12 \u00d7 90 \u2192 = (10 + 2) \u00d7 90 \u2192 = 10\u00d790 + 2\u00d790 \u2192 [10\u00d790 = 900] \u2192 [2\u00d790: 2 \u00d7 90 \u2192 = 2 \u00d7 9 \u00d7 10 \u2192 = 18 \u00d7 10 \u2192 = 180] \u2192 = 900 + 180 \u2192 = 1080]=1080>>1080 beetles\n#### 1080",
+    "final_answer": "1080"
+  },
+  {
+    "id": "gsm_sbs_0306",
+    "question": "Terez has 44 cows on his farm.  50 percent of the cows are female, and 50 percent of the females are pregnant.  How many pregnant female cows does Terez have?",
+    "original_answer": "Female:44(.50)=22\nPregnant:22(.50)=11 cows\n#### 11",
+    "sbs_answer": "Female:44(.50)=22\nPregnant:22(.50)=11 cows\n#### 11",
+    "final_answer": "11"
+  },
+  {
+    "id": "gsm_sbs_0287",
+    "question": "Patrick is half the age of his elder brother Robert. If Robert will turn 30 after 2 years, how old is Patrick now?",
+    "original_answer": "The age of Robert now is 30 - 2 = <<30-2=28>>28 years old.\nSo, Patrick is 28 / 2 = <<28/2=14>>14 years old.\n#### 14",
+    "sbs_answer": "The age of Robert now is 30 - 2 = <<30-2=28>>28 years old.\nSo, Patrick is 28 / 2 = <<28/2=14>>14 years old.\n#### 14",
+    "final_answer": "14"
+  },
+  {
+    "id": "gsm_sbs_0032",
+    "question": "Rodney is a door-to-door salesman trying to sell home security systems. He gets a commission of $25 for each system he sells. He is canvassing a neighborhood of four streets with eight houses each. The first street gave him half the sales that the second street did, while every house on the third street turned him away and the fourth street resulted in only one sale. His total commission was $175. How many security systems did he sell on the second street?",
+    "original_answer": "Let S be the number of systems Rodney sold on the first street.\nHe sold 2S systems on the second street.\nBased on his commission, he sold 175 / 25 = <<175/25=7>>7 systems.\nIn all, he sold S + 2S + 0 + 1 = 3S + 1 = 7 systems.\nOn the first and second streets, he sold 3S = 7 - 1 = 6 systems.\nThus, on the first street he sold S = 6 / 3 = <<6/3=2>>2 systems.\nOn the second street, Rodney sold 2 * 2 = <<2*2=4>>4 security systems.\n#### 4",
+    "sbs_answer": "Let S be the number of systems Rodney sold on the first street.\nHe sold 2S systems on the second street.\nBased on his commission, he sold 175 / 25 = <<175/25=7>>7 systems.\nIn all, he sold S + 2S + 0 + 1 = 3S + 1 = 7 systems.\nOn the first and second streets, he sold 3S = 7 - 1 = 6 systems.\nThus, on the first street he sold S = 6 / 3 = <<6/3=2>>2 systems.\nOn the second street, Rodney sold 2\u00d72=4 = <<2\u00d72=4=4>>4 security systems.\n#### 4",
+    "final_answer": "4"
+  },
+  {
+    "id": "gsm_sbs_0009",
+    "question": "The price of a home is $98 per square foot (sq ft).  The house is 2,400 sq ft and the barn out back is 1,000 sq ft.  How much is this property?",
+    "original_answer": "The house is 2,400 sq ft and the barn is 1,000 sq ft so it's 2400+1000 = <<2400+1000=3400>>3,400 sq ft\nThe price is $98 per sq ft and it's 3,400 sq ft big so the property costs 98*3400 = $<<98*3400=333200.00>>333,200.00\n#### 333200",
+    "sbs_answer": "The house is 2,400 sq ft and the barn is 1,000 sq ft so it's 2400+1000 = <<2400+1000=3400>>3,400 sq ft\nThe price is $98 per sq ft and it's 3,400 sq ft big so the property costs [98 \u00d7 3400 \u2192 = (90 + 8) \u00d7 3400 \u2192 = 90\u00d73400 + 8\u00d73400 \u2192 [90\u00d73400 = 9\u00d710\u00d73400 = 9\u00d73400\u00d710 = 30600\u00d710 = 306000] \u2192 [8\u00d73400: 8 \u00d7 3400 \u2192 = 8 \u00d7 340 \u00d7 10 \u2192 = (8 \u00d7 340 \u2192 = 8 \u00d7 34 \u00d7 10 \u2192 = (8 \u00d7 34 \u2192 = 8 \u00d7 (30 + 4) \u2192 = 8\u00d730 + 8\u00d74 \u2192 = 240 + 32 \u2192 = 272) \u00d7 10 \u2192 = 272 \u00d7 10 = 2720) \u00d7 10 \u2192 = 2720 \u00d7 10 = 27200] \u2192 = 306000 + 27200 \u2192 = 333200] = $<<[98 \u00d7 3400 \u2192 = (90 + 8) \u00d7 3400 \u2192 = 90\u00d73400 + 8\u00d73400 \u2192 [90\u00d73400 = 9\u00d710\u00d73400 = 9\u00d73400\u00d710 = 30600\u00d710 = 306000] \u2192 [8\u00d73400: 8 \u00d7 3400 \u2192 = 8 \u00d7 340 \u00d7 10 \u2192 = (8 \u00d7 340 \u2192 = 8 \u00d7 34 \u00d7 10 \u2192 = (8 \u00d7 34 \u2192 = 8 \u00d7 (30 + 4) \u2192 = 8\u00d730 + 8\u00d74 \u2192 = 240 + 32 \u2192 = 272) \u00d7 10 \u2192 = 272 \u00d7 10 = 2720) \u00d7 10 \u2192 = 2720 \u00d7 10 = 27200] \u2192 = 306000 + 27200 \u2192 = 333200]=333200.00>>333,200.00\n#### 333200",
+    "final_answer": "333200"
+  },
+  {
+    "id": "gsm_sbs_0126",
+    "question": "In April, Tank gathered 10 more Easter eggs than Emma in their first round of egg hunt. However, Emma gathered twice as many eggs as Tank in their second round of egg hunt, while Tank's total number of eggs in the second round was 20 less than the number she had gathered in the first round. If the total number of eggs in the pile they were collecting with 6 other people was 400 eggs, and Emma gathered 60 eggs in the second egg hunt round, find the number of eggs that the 6 other egg hunters collected?",
+    "original_answer": "Tank's total number of eggs in the second round was 60/2=<<60/2=30>>30 since Emma gathered twice as many eggs as Tank in their second round of egg hunt.\nThe total number of eggs that Emma and Tank gathered in the second round was 60+30=<<60+30=90>>90\nTank's total number of eggs in the second round was 20 less than the number she had gathered in the first round, meaning she had gathered 30+20=<<30+20=50>>50 eggs in the first round of egg hunt.\nTank gathered 10 more Easter eggs than Emma in their first round of egg hunt, meaning Emma collected 50-10=40 eggs\nThe total number of eggs Emma and Tank collected in the first round was 40+50=<<40+50=90>>90\nIn the two rounds, Emma and Tank gathered 90+90=<<90+90=180>>180 eggs\nIf the total number of eggs in the pile they were collecting with 6 other people was 400 eggs, the six other people gathered 400-180=<<400-180=220>>220 eggs\n#### 220",
+    "sbs_answer": "Tank's total number of eggs in the second round was 60/2=<<60/2=30>>30 since Emma gathered twice as many eggs as Tank in their second round of egg hunt.\nThe total number of eggs that Emma and Tank gathered in the second round was 60+30=<<60+30=90>>90\nTank's total number of eggs in the second round was 20 less than the number she had gathered in the first round, meaning she had gathered 30+20=<<30+20=50>>50 eggs in the first round of egg hunt.\nTank gathered 10 more Easter eggs than Emma in their first round of egg hunt, meaning Emma collected 50-10=40 eggs\nThe total number of eggs Emma and Tank collected in the first round was 40+50=<<40+50=90>>90\nIn the two rounds, Emma and Tank gathered 90+90=<<90+90=180>>180 eggs\nIf the total number of eggs in the pile they were collecting with 6 other people was 400 eggs, the six other people gathered 400-180=<<400-180=220>>220 eggs\n#### 220",
+    "final_answer": "220"
+  },
+  {
+    "id": "synth_mult_0084",
+    "question": "What is 7 times 20?",
+    "original_answer": "7 \u00d7 20 = 140\n#### 140",
+    "sbs_answer": "Let me break this down step by step.\n7 \u00d7 20\n= 7 \u00d7 2 \u00d7 10\n= 14 \u00d7 10\n= 140\nThe answer is 140.\n#### 140",
+    "final_answer": "140"
+  },
+  {
+    "id": "synth_mult_0015",
+    "question": "What is 3 times 19?",
+    "original_answer": "3 \u00d7 19 = 57\n#### 57",
+    "sbs_answer": "Let me break this down step by step.\n3 \u00d7 19\n= 3 \u00d7 (10 + 9)\n= 3\u00d710 + 3\u00d79\n= 30 + 27\n= 57\nThe answer is 57.\n#### 57",
+    "final_answer": "57"
+  },
+  {
+    "id": "gsm_sbs_0474",
+    "question": "A couple with two children, ages 6 and 10 years old, decided to go to an amusement park. The regular ticket costs $109, but children below 12 years old have a $5 discount. If they gave the cashier $500, how much change will they receive?",
+    "original_answer": "The ticket costs 109 - 5 = $<<109-5=104>>104 for each child.\nSo the ticket cost of the two children is 104 x 2 = $<<104*2=208>>208.\nThe couple needs to pay the regular price, so it's 109 x 2 = $<<109*2=218>>218.\nThus, the family needs to pay a total of 208 + 218 = $<<208+218=426>>426.\nTherefore, their change is 500 - 426 = $<<500-426=74>>74.\n#### 74",
+    "sbs_answer": "The ticket costs 109 - 5 = $<<109-5=104>>104 for each child.\nSo the ticket cost of the two children is 104 x 2 = $<<[2 \u00d7 104 \u2192 = 2 \u00d7 (100 + 4) \u2192 = 2\u00d7100 + 2\u00d74 \u2192 = 200 + 8 \u2192 = 208]=208>>208.\nThe couple needs to pay the regular price, so it's 109 x 2 = $<<[2 \u00d7 109 \u2192 = 2 \u00d7 (100 + 9) \u2192 = 2\u00d7100 + 2\u00d79 \u2192 = 200 + 18 \u2192 = 218]=218>>218.\nThus, the family needs to pay a total of 208 + 218 = $<<208+218=426>>426.\nTherefore, their change is 500 - 426 = $<<500-426=74>>74.\n#### 74",
+    "final_answer": "74"
+  },
+  {
+    "id": "gsm_sbs_0121",
+    "question": "Emery and Serena go to their school library, and each borrows a copy of The life of Jack Steve's book to read for their school project. If Emery can read five times as fast as Serena, and the book takes her 20 days to read, what's the average number of days the two take to read the book?",
+    "original_answer": "If Emery took twenty days to read the book, then it took Serena 5*20 = <<20*5=100>>100 days to read the whole book.\nThe total number of days taken by the two to read the book is 100+20 = <<100+20=120>>120 days.\nThe average number of days the two take to read the book is 120/2 = <<120/2=60>>60 days.\n#### 60",
+    "sbs_answer": "If Emery took twenty days to read the book, then it took Serena [5 \u00d7 20 \u2192 = 5 \u00d7 2 \u00d7 10 \u2192 = 10 \u00d7 10 \u2192 = 100] = <<[5 \u00d7 20 \u2192 = 5 \u00d7 2 \u00d7 10 \u2192 = 10 \u00d7 10 \u2192 = 100]=100>>100 days to read the whole book.\nThe total number of days taken by the two to read the book is 100+20 = <<100+20=120>>120 days.\nThe average number of days the two take to read the book is 120/2 = <<120/2=60>>60 days.\n#### 60",
+    "final_answer": "60"
+  },
+  {
+    "id": "gsm_sbs_0081",
+    "question": "Samuel swept the porch and cleared nine-tenths of the dust particles from it. As he walked across the porch afterward, his shoes left 223 dust particles behind. How many dust particles were on the porch before Samuel swept if there were 331 after he walked across it?",
+    "original_answer": "Before Samuel walked across the porch, there were 331 - 223 = <<331-223=108>>108 dust particles.\nThose 108 were 1/10 of the original amount, so there were 108 * 10 = <<108*10=1080>>1080 dust particles on the porch before Samuel swept.\n#### 1080",
+    "sbs_answer": "Before Samuel walked across the porch, there were 331 - 223 = <<331-223=108>>108 dust particles.\nThose 108 were 1/10 of the original amount, so there were 108\u00d710=1080 = <<108\u00d710=1080=1080>>1080 dust particles on the porch before Samuel swept.\n#### 1080",
+    "final_answer": "1080"
+  },
+  {
+    "id": "gsm_sbs_0011",
+    "question": "The American swallow can lift into the air and carry a maximum of 5 pounds of weight, while the European swallow can lift and carry twice the weight as the American swallow.  If there was a flock of 90 swallows, containing twice as many American as European swallows, what is the maximum combined weight the flock can carry?",
+    "original_answer": "If \"x\" is the number of European swallows, then, for every one European swallow, there would be 2x American swallows.\nThus, the total number of swallows would be 2x+x=90 swallows\nThus, the number of European swallows x=<<30=30>>30.\nAnd the number of American swallows is 90-30=<<90-30=60>>60.\nA European swallow can carry twice what an American swallow can carry, or 2*5=<<2*5=10>>10 pounds.\n30 European swallows can carry a maximum of 30*10=<<30*10=300>>300 pounds.\n60 American swallows can carry a maximum of 60*5=<<60*5=300>>300 pounds.\nThus, a flock of 90 birds, with 30 European and 60 American swallows, can carry 300+300=600 pounds\n#### 600",
+    "sbs_answer": "If \"x\" is the number of European swallows, then, for every one European swallow, there would be 2x American swallows.\nThus, the total number of swallows would be 2x+x=90 swallows\nThus, the number of European swallows x=<<30=30>>30.\nAnd the number of American swallows is 90-30=<<90-30=60>>60.\nA European swallow can carry twice what an American swallow can carry, or 2\u00d75=10=<<2\u00d75=10=10>>10 pounds.\n30 European swallows can carry a maximum of 30\u00d710=300=<<30\u00d710=300=300>>300 pounds.\n60 American swallows can carry a maximum of [5 \u00d7 60 \u2192 = 5 \u00d7 6 \u00d7 10 \u2192 = 30 \u00d7 10 \u2192 = 300]=<<[5 \u00d7 60 \u2192 = 5 \u00d7 6 \u00d7 10 \u2192 = 30 \u00d7 10 \u2192 = 300]=300>>300 pounds.\nThus, a flock of 90 birds, with 30 European and 60 American swallows, can carry 300+300=600 pounds\n#### 600",
+    "final_answer": "600"
+  },
+  {
+    "id": "gsm_sbs_0241",
+    "question": "Johnny spent 3 hours working on a job that paid $7 per hour, 2 hours working on a job that paid $10 an hour, and 4 hours working on a job that paid $12 an hour.  Assuming he repeats this process 5 days in a row, how much does Johnny make?",
+    "original_answer": "First, we need to determine how much Johnny makes in one day. To start, we perform 3*7=<<3*7=21>>21 dollars for the first job.\nSecond, we perform 2*10=<<20=20>>20 dollars for the second job.\nThird, we perform 4*12= <<4*12=48>>48 dollars for the third job.\nAltogether, Johnny makes 21+20+48= <<21+20+48=89>>89 dollars in a day.\nWe multiply this amount by the 5 days, performing 5*89= <<445=445>>445 dollars over 5 days\n#### 445",
+    "sbs_answer": "First, we need to determine how much Johnny makes in one day. To start, we perform 3\u00d77=21=<<3\u00d77=21=21>>21 dollars for the first job.\nSecond, we perform 2\u00d710=20=<<20=20>>20 dollars for the second job.\nThird, we perform [4 \u00d7 12 \u2192 = 4 \u00d7 (10 + 2) \u2192 = 4\u00d710 + 4\u00d72 \u2192 = 40 + 8 \u2192 = 48]= <<[4 \u00d7 12 \u2192 = 4 \u00d7 (10 + 2) \u2192 = 4\u00d710 + 4\u00d72 \u2192 = 40 + 8 \u2192 = 48]=48>>48 dollars for the third job.\nAltogether, Johnny makes 21+20+48= <<21+20+48=89>>89 dollars in a day.\nWe multiply this amount by the 5 days, performing [5 \u00d7 89 \u2192 = 5 \u00d7 (80 + 9) \u2192 = 5\u00d780 + 5\u00d79 \u2192 = 400 + 45 \u2192 = 445]= <<445=445>>445 dollars over 5 days\n#### 445",
+    "final_answer": "445"
+  },
+  {
+    "id": "gsm_sbs_0059",
+    "question": "Carl types at a speed of 50 words per minute. If he types continuously for 4 hours per day, how many words can he type in 7 days?",
+    "original_answer": "The number of words that Carl can type per hour is 50 * 60 = <<50*60=3000>>3000 words.\nThe number of words that Carl can type in 4 hours is 3000 * 4 = <<3000*4=12000>>12000 words.\nThe number of words that Carl can type in 7 days is 12000 * 7 = <<12000*7=84000>>84000 words.\n#### 84000",
+    "sbs_answer": "The number of words that Carl can type per hour is [50 \u00d7 60 \u2192 = 5 \u00d7 10 \u00d7 60 \u2192 = 5 \u00d7 60 \u00d7 10 \u2192 [where 5 \u00d7 60 \u2192 = 5 \u00d7 6 \u00d7 10 \u2192 = 30 \u00d7 10 \u2192 = 300] \u2192 = 300 \u00d7 10 \u2192 = 3000] = <<[50 \u00d7 60 \u2192 = 5 \u00d7 10 \u00d7 60 \u2192 = 5 \u00d7 60 \u00d7 10 \u2192 [where 5 \u00d7 60 \u2192 = 5 \u00d7 6 \u00d7 10 \u2192 = 30 \u00d7 10 \u2192 = 300] \u2192 = 300 \u00d7 10 \u2192 = 3000]=3000>>3000 words.\nThe number of words that Carl can type in 4 hours is [4 \u00d7 3000 \u2192 = 4 \u00d7 300 \u00d7 10 \u2192 = (4 \u00d7 300 \u2192 = 4 \u00d7 30 \u00d7 10 \u2192 = (4 \u00d7 30 \u2192 = 4 \u00d7 3 \u00d7 10 \u2192 = 12 \u00d7 10 \u2192 = 120) \u00d7 10 \u2192 = 120 \u00d7 10 = 1200) \u00d7 10 \u2192 = 1200 \u00d7 10 = 12000] = <<[4 \u00d7 3000 \u2192 = 4 \u00d7 300 \u00d7 10 \u2192 = (4 \u00d7 300 \u2192 = 4 \u00d7 30 \u00d7 10 \u2192 = (4 \u00d7 30 \u2192 = 4 \u00d7 3 \u00d7 10 \u2192 = 12 \u00d7 10 \u2192 = 120) \u00d7 10 \u2192 = 120 \u00d7 10 = 1200) \u00d7 10 \u2192 = 1200 \u00d7 10 = 12000]=12000>>12000 words.\nThe number of words that Carl can type in 7 days is [7 \u00d7 12000 \u2192 = 7 \u00d7 1200 \u00d7 10 \u2192 = (7 \u00d7 1200 \u2192 = 7 \u00d7 120 \u00d7 10 \u2192 = (7 \u00d7 120 \u2192 = 7 \u00d7 12 \u00d7 10 \u2192 = (7 \u00d7 12 \u2192 = 7 \u00d7 (10 + 2) \u2192 = 7\u00d710 + 7\u00d72 \u2192 = 70 + 14 \u2192 = 84) \u00d7 10 \u2192 = 84 \u00d7 10 = 840) \u00d7 10 \u2192 = 840 \u00d7 10 = 8400) \u00d7 10 \u2192 = 8400 \u00d7 10 = 84000] = <<[7 \u00d7 12000 \u2192 = 7 \u00d7 1200 \u00d7 10 \u2192 = (7 \u00d7 1200 \u2192 = 7 \u00d7 120 \u00d7 10 \u2192 = (7 \u00d7 120 \u2192 = 7 \u00d7 12 \u00d7 10 \u2192 = (7 \u00d7 12 \u2192 = 7 \u00d7 (10 + 2) \u2192 = 7\u00d710 + 7\u00d72 \u2192 = 70 + 14 \u2192 = 84) \u00d7 10 \u2192 = 84 \u00d7 10 = 840) \u00d7 10 \u2192 = 840 \u00d7 10 = 8400) \u00d7 10 \u2192 = 8400 \u00d7 10 = 84000]=84000>>84000 words.\n#### 84000",
+    "final_answer": "84000"
+  },
+  {
+    "id": "gsm_sbs_0448",
+    "question": "Mary bought 5 boxes of drinks at $6 each box and 10 boxes of pizzas at $14 each box for her pizza party. She paid $200 for all the items. How much change did she get back?",
+    "original_answer": "Mary spent 5 x $6 = $<<5*6=30>>30 on drinks.\nShe spent 10 x $14 = $<<10*14=140>>140 on pizzas.\nShe spent a total amount of $30 + $140 = $<<30+140=170>>170.\nTherefore, Mary got a change of $200 - $170 = $<<200-170=30>>30 after paying all the items for her pizza party.\n#### 30",
+    "sbs_answer": "Mary spent 5 x $6 = $<<5\u00d76=30=30>>30 on drinks.\nShe spent 10 x $14 = $<<10\u00d714=140=140>>140 on pizzas.\nShe spent a total amount of $30 + $140 = $<<30+140=170>>170.\nTherefore, Mary got a change of $200 - $170 = $<<200-170=30>>30 after paying all the items for her pizza party.\n#### 30",
+    "final_answer": "30"
+  },
+  {
+    "id": "gsm_sbs_0146",
+    "question": "Thor is 13 times older than Captain America. Captain America is 7 times older than Peter Parker, and Ironman is 32 years older than Peter Parker. How old is Ironman if Thor is 1456 years old?",
+    "original_answer": "Captain America is 1456/13 = <<1456/13=112>>112 years old\nPeter Parker is 112/ 7 = <<112/7=16>>16 years old\nIronman is 16 + 32 = <<16+32=48>>48 years old\n#### 48",
+    "sbs_answer": "Captain America is 1456/13 = <<1456/13=112>>112 years old\nPeter Parker is 112/ 7 = <<112/7=16>>16 years old\nIronman is 16 + 32 = <<16+32=48>>48 years old\n#### 48",
+    "final_answer": "48"
+  },
+  {
+    "id": "synth_mult_0066",
+    "question": "What is 12 times 14?",
+    "original_answer": "12 \u00d7 14 = 168\n#### 168",
+    "sbs_answer": "Let me break this down step by step.\n12 \u00d7 14\n= (10 + 2) \u00d7 14\n= 10\u00d714 + 2\u00d714\n  [10\u00d714 = 140]\n  [2\u00d714: 2 \u00d7 14\n= 2 \u00d7 (10 + 4)\n= 2\u00d710 + 2\u00d74\n= 20 + 8\n= 28]\n= 140 + 28\n= 168\nThe answer is 168.\n#### 168",
+    "final_answer": "168"
+  },
+  {
+    "id": "gsm_sbs_0187",
+    "question": "John's cow weighs 400 pounds.  It increased its weight to 1.5 times its starting weight.  He is able to sell the cow for $3 per pound.  How much more is it worth after gaining the weight?",
+    "original_answer": "The cow initially weighs 400*1.5=<<400*1.5=600>>600 pounds\nSo it gained 600 - 400 = <<600-400=200>>200 pounds\nSo its value increased by 200*$3 = $<<200*3=600>>600\n#### 600",
+    "sbs_answer": "The cow initially weighs 400\u00d71=400.5=<<400\u00d71=400.5=600>>600 pounds\nSo it gained 600 - 400 = <<600-400=200>>200 pounds\nSo its value increased by 200*$3 = $<<[3 \u00d7 200 \u2192 = 3 \u00d7 20 \u00d7 10 \u2192 = (3 \u00d7 20 \u2192 = 3 \u00d7 2 \u00d7 10 \u2192 = 6 \u00d7 10 \u2192 = 60) \u00d7 10 \u2192 = 60 \u00d7 10 = 600]=600>>600\n#### 600",
+    "final_answer": "600"
+  }
+]

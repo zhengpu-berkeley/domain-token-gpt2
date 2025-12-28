@@ -1,0 +1,142 @@
+[
+  {
+    "id": "gsm_sbs_0388",
+    "question": "An 18-month magazine subscription is normally $34. The magazine is currently running a promotion for $0.25 off each twice-a-month issue when signing up for the 18-month subscription. How many dollars cheaper is the promotional subscription than the normal one?",
+    "original_answer": "The subscription sends twice monthly issues, so there are 2 * 18 = <<2*18=36>>36 issues.\nThus, the promotional offer is 36 * 0.25 = $<<36*0.25=9>>9 cheaper than the normal subscription.\n#### 9",
+    "sbs_answer": "The subscription sends twice monthly issues, so there are [2 \u00d7 18 \u2192 = 2 \u00d7 (10 + 8) \u2192 = 2\u00d710 + 2\u00d78 \u2192 = 20 + 16 \u2192 = 36] = <<[2 \u00d7 18 \u2192 = 2 \u00d7 (10 + 8) \u2192 = 2\u00d710 + 2\u00d78 \u2192 = 20 + 16 \u2192 = 36]=36>>36 issues.\nThus, the promotional offer is 36\u00d70=0.25 = $<<36\u00d70=0.25=9>>9 cheaper than the normal subscription.\n#### 9",
+    "final_answer": "9"
+  },
+  {
+    "id": "gsm_sbs_0266",
+    "question": "Mary and her two friends agreed to evenly pay for the cost of 2 pounds of chicken. Mary's mother went to the grocery and bought the 2-pound chicken, 3 pounds of beef that cost $4 per pound, and a liter of oil that costs $1. If Mary's mother paid a total of $16 for the grocery, how much should Mary and her two friends pay each for the chicken?",
+    "original_answer": "Three pounds of beef cost $4 x 3 = $<<4*3=12>>12.\nMary's mother paid $12 + $1 = $<<12+1=13>>13 for the beef and oil.\nHence, the 2-pound chicken cost $16 - $13 = $<<16-13=3>>3.\nThere are 1 (Mary) + 2 friends = <<1+2=3>>3 people who will split the $3 cost.\nTherefore, each of them will pay $3/3 = $<<3/3=1>>1.\n#### 1",
+    "sbs_answer": "Three pounds of beef cost $4 x 3 = $<<4\u00d73=12=12>>12.\nMary's mother paid $12 + $1 = $<<12+1=13>>13 for the beef and oil.\nHence, the 2-pound chicken cost $16 - $13 = $<<16-13=3>>3.\nThere are 1 (Mary) + 2 friends = <<1+2=3>>3 people who will split the $3 cost.\nTherefore, each of them will pay $3/3 = $<<3/3=1>>1.\n#### 1",
+    "final_answer": "1"
+  },
+  {
+    "id": "gsm_sbs_0051",
+    "question": "Martha is knitting winter clothes for her 3 grandchildren, who are all the same size (identical triplets.) Each set of clothes consists of a woolen hat, a scarf, a sweater, a pair of mittens, and a pair of wooly socks. She can knit a hat in 2 hours. A scarf takes her 3 hours. Each mitten takes her about an hour to knit. A sock takes an hour and a half. Each sweater takes her 6 hours. How long will it take her to knit all the outfits?",
+    "original_answer": "A pair of mittens takes 1 hour per mitten * 2 mittens = <<1*2=2>>2 hours.\nA pair of socks takes 1.5 hours per sock * 2 socks = <<1.5*2=3>>3 hours.\nSo a complete outfit for each child takes 2 hours per hat + 3 hours per scarf + 2 hours per pair of mittens + 3 hours per pair of socks + 6 hours per sweater = <<2+3+2+3+6=16>>16 hours per outfit.\nSo to knit winter outfits for all three of her grandchildren, Martha will take 3 outfits * 16 hours per outfit = <<3*16=48>>48 hours.\n#### 48",
+    "sbs_answer": "A pair of mittens takes 1 hour per mitten * 2 mittens = <<1\u00d72=2=2>>2 hours.\nA pair of socks takes 1.5 hours per sock * 2 socks = <<1.5\u00d72=10=3>>3 hours.\nSo a complete outfit for each child takes 2 hours per hat + 3 hours per scarf + 2 hours per pair of mittens + 3 hours per pair of socks + 6 hours per sweater = <<2+3+2+3+6=16>>16 hours per outfit.\nSo to knit winter outfits for all three of her grandchildren, Martha will take 3 outfits * 16 hours per outfit = <<[3 \u00d7 16 \u2192 = 3 \u00d7 (10 + 6) \u2192 = 3\u00d710 + 3\u00d76 \u2192 = 30 + 18 \u2192 = 48]=48>>48 hours.\n#### 48",
+    "final_answer": "48"
+  },
+  {
+    "id": "gsm_sbs_0186",
+    "question": "Mary used 15 gallons of fuel this week. Last week she used 20% less. How much fuel did she use in total for the two weeks?",
+    "original_answer": "Last week, she used 15 gallons * 0.2 = <<15*0.2=3>>3 gallons less fuel than she used this week.\nThis means that she used 15 gallons \u2013 3 gallons = <<15-3=12>>12 gallons of fuel last week.\nIn total, Mary used 15 gallons + 12 gallons = <<15+12=27>>27 gallons of fuel.\n#### 27",
+    "sbs_answer": "Last week, she used 15 gallons * 0.2 = <<15\u00d70=0.2=3>>3 gallons less fuel than she used this week.\nThis means that she used 15 gallons \u2013 3 gallons = <<15-3=12>>12 gallons of fuel last week.\nIn total, Mary used 15 gallons + 12 gallons = <<15+12=27>>27 gallons of fuel.\n#### 27",
+    "final_answer": "27"
+  },
+  {
+    "id": "gsm_sbs_0472",
+    "question": "Basil gets 1/2 of a  dog cookie in the morning and before bed.  She gets 2 whole cookies during the day.  Basil\u2019s cookies are packaged with 45 cookies per box.  How many boxes will she need to last her for 30 days?",
+    "original_answer": "Basil gets 1/2 in the morning and 1/2 at bedtime so she gets 1/2+1/2 = <<1/2+1/2=1>>1 whole cookie\nBasil also gets 2 whole cookies during the day so all total she gets 2+1 =<<2+1=3>>3 whole cookies\nShe needs cookies for 30 days and eats 3 a day so she needs 30*3 = <<30*3=90>>90 cookies\nHer cookies come 45 per box and she needs 90 cookies so she needs 90/45 = <<90/45=2>>2 boxes of cookies\n#### 2",
+    "sbs_answer": "Basil gets 1/2 in the morning and 1/2 at bedtime so she gets 1/2+1/2 = <<1/2+1/2=1>>1 whole cookie\nBasil also gets 2 whole cookies during the day so all total she gets 2+1 =<<2+1=3>>3 whole cookies\nShe needs cookies for 30 days and eats 3 a day so she needs [3 \u00d7 30 \u2192 = 3 \u00d7 3 \u00d7 10 \u2192 = 9 \u00d7 10 \u2192 = 90] = <<[3 \u00d7 30 \u2192 = 3 \u00d7 3 \u00d7 10 \u2192 = 9 \u00d7 10 \u2192 = 90]=90>>90 cookies\nHer cookies come 45 per box and she needs 90 cookies so she needs 90/45 = <<90/45=2>>2 boxes of cookies\n#### 2",
+    "final_answer": "2"
+  },
+  {
+    "id": "gsm_sbs_0138",
+    "question": "It's Ava's birthday party. Her parents bought a unicorn pi\u00f1ata for $13 and filled it with all of her favorite treats. They bought 4 bags of Reese's for $9 per bag, 3 bags of Snickers for $5 per bag, and 5 bags of Skittles for $7 per bag. How much did the unicorn pi\u00f1ata and the treats cost altogether?",
+    "original_answer": "The four bags of Reese's cost $9 x 4 = $<<9*4=36>>36.\nThe three bags of Snickers cost $5 x 3 = $<<5*3=15>>15.\nThe five bags of Skittles cost $7 x 5 = $<<7*5=35>>35.\nTherefore, the unicorn pi\u00f1ata and the treats cost $13 + $36 + $15 + $35 = $<<13+36+15+35=99>>99.\n#### 99",
+    "sbs_answer": "The four bags of Reese's cost $9 x 4 = $<<9\u00d74=36=36>>36.\nThe three bags of Snickers cost $5 x 3 = $<<5\u00d73=15=15>>15.\nThe five bags of Skittles cost $7 x 5 = $<<7\u00d75=35=35>>35.\nTherefore, the unicorn pi\u00f1ata and the treats cost $13 + $36 + $15 + $35 = $<<13+36+15+35=99>>99.\n#### 99",
+    "final_answer": "99"
+  },
+  {
+    "id": "gsm_sbs_0438",
+    "question": "A Statistics student wants to find out the average daily allowance of the middle school students. According to his survey, 2/3 of the students receive an average of $6 allowance per day while the rest gets an average of $4 a day. If he surveyed 60 students, what is the total amount of money those 60 students get in a day?",
+    "original_answer": "There are 60 students x 2/3 = <<60*2/3=40>>40 students who have a $6 daily allowance.\nWhile there are 60 students - 40 students = <<60-40=20>>20 students who have a $4 daily allowance.\nThe sum of the allowances of the 40 students who received $6 daily is 40 students x $6/day = $<<40*6=240>>240.\nThe sum of the allowances of the 20 students who received $4 daily is 20 students x $4/day = $<<20*4=80>>80.\nThe total daily amount of money of those 60 students is $240 + $80 = $<<240+80=320>>320.\n#### 320",
+    "sbs_answer": "There are 60 students x 2/3 = <<[2 \u00d7 60 \u2192 = 2 \u00d7 6 \u00d7 10 \u2192 = 12 \u00d7 10 \u2192 = 120]/3=40>>40 students who have a $6 daily allowance.\nWhile there are 60 students - 40 students = <<60-40=20>>20 students who have a $4 daily allowance.\nThe sum of the allowances of the 40 students who received $6 daily is 40 students x $6/day = $<<[6 \u00d7 40 \u2192 = 6 \u00d7 4 \u00d7 10 \u2192 = 24 \u00d7 10 \u2192 = 240]=240>>240.\nThe sum of the allowances of the 20 students who received $4 daily is 20 students x $4/day = $<<[4 \u00d7 20 \u2192 = 4 \u00d7 2 \u00d7 10 \u2192 = 8 \u00d7 10 \u2192 = 80]=80>>80.\nThe total daily amount of money of those 60 students is $240 + $80 = $<<240+80=320>>320.\n#### 320",
+    "final_answer": "320"
+  },
+  {
+    "id": "gsm_sbs_0085",
+    "question": "Ali had a collection of seashells. He started with 180 seashells. He then gave away 40 seashells to his friends. He also gave 30 seashells to his brothers. If he sold half of the remaining seashells, how many seashells did he have left?",
+    "original_answer": "When he gave 40 seashells to his friends, Ali had 180-40= <<180-40=140>>140 seashells.\nWhen he gave another 30 seashells to his brothers, he had 140-30 = <<140-30=110>>110 seashells\nHe also sold half of the seashells, a total of 1/2*110 = <<55=55>>55 seashells\nHe was left with 110-55= <<110-55=55>>55 seashells\n#### 55",
+    "sbs_answer": "When he gave 40 seashells to his friends, Ali had 180-40= <<180-40=140>>140 seashells.\nWhen he gave another 30 seashells to his brothers, he had 140-30 = <<140-30=110>>110 seashells\nHe also sold half of the seashells, a total of 1/[2 \u00d7 110 \u2192 = 2 \u00d7 11 \u00d7 10 \u2192 = (2 \u00d7 11 \u2192 = 2 \u00d7 (10 + 1) \u2192 = 2\u00d710 + 2\u00d71 \u2192 = 20 + 2 \u2192 = 22) \u00d7 10 \u2192 = 22 \u00d7 10 = 220] = <<55=55>>55 seashells\nHe was left with 110-55= <<110-55=55>>55 seashells\n#### 55",
+    "final_answer": "55"
+  },
+  {
+    "id": "synth_mult_0079",
+    "question": "What is 2 times 20?",
+    "original_answer": "2 \u00d7 20 = 40\n#### 40",
+    "sbs_answer": "Let me break this down step by step.\n2 \u00d7 20\n= 2 \u00d7 2 \u00d7 10\n= 4 \u00d7 10\n= 40\nThe answer is 40.\n#### 40",
+    "final_answer": "40"
+  },
+  {
+    "id": "synth_mult_0065",
+    "question": "What is 12 times 13?",
+    "original_answer": "12 \u00d7 13 = 156\n#### 156",
+    "sbs_answer": "Let me break this down step by step.\n12 \u00d7 13\n= (10 + 2) \u00d7 13\n= 10\u00d713 + 2\u00d713\n  [10\u00d713 = 130]\n  [2\u00d713: 2 \u00d7 13\n= 2 \u00d7 (10 + 3)\n= 2\u00d710 + 2\u00d73\n= 20 + 6\n= 26]\n= 130 + 26\n= 156\nThe answer is 156.\n#### 156",
+    "final_answer": "156"
+  },
+  {
+    "id": "gsm_sbs_0403",
+    "question": "Natalia sold clips to 48 of her friends in April, and then she sold half as many clips in May. How many clips did Natalia sell altogether in April and May?",
+    "original_answer": "Natalia sold 48/2 = <<48/2=24>>24 clips in May.\nNatalia sold 48+24 = <<48+24=72>>72 clips altogether in April and May.\n#### 72",
+    "sbs_answer": "Natalia sold 48/2 = <<48/2=24>>24 clips in May.\nNatalia sold 48+24 = <<48+24=72>>72 clips altogether in April and May.\n#### 72",
+    "final_answer": "72"
+  },
+  {
+    "id": "gsm_sbs_0027",
+    "question": "Simon wanted to buy flowers that his mom could plant for Mother's Day.  The garden center was offering 10% off all purchases.  He bought 5 pansies at $2.50 each, one hydrangea that cost $12.50 and 5 petunias that cost $1.00 each.  If he paid with a $50 bill, how much change would Simon receive back from his purchase?",
+    "original_answer": "5 pansies at $2.50 each is 5*2.50 = $<<5*2.5=12.50>>12.50\n5 petunias at $1.00 each 5*1 = $<<5*1=5.00>>5.00\nAll total he spends 12.50+12.50+5.00 = $<<12.50+12.50+5.00=30.00>>30.00\nThe sale is 10% off so 30*.10 = $<<30*.10=3.00>>3.00\nThe purchase total now comes to 30-3 = $<<30-3=27.00>>27.00\nHe pays with a $50 bill so 50-27 = $<<50-27=23.00>>23.00\n#### 23",
+    "sbs_answer": "5 pansies at $2.50 each is 5\u00d72=10.50 = $<<5\u00d72=10.5=12.50>>12.50\n5 petunias at $1.00 each 5\u00d71=5 = $<<5\u00d71=5=5.00>>5.00\nAll total he spends 12.50+12.50+5.00 = $<<12.50+12.50+5.00=30.00>>30.00\nThe sale is 10% off so 30*.10 = $<<30*.10=3.00>>3.00\nThe purchase total now comes to 30-3 = $<<30-3=27.00>>27.00\nHe pays with a $50 bill so 50-27 = $<<50-27=23.00>>23.00\n#### 23",
+    "final_answer": "23"
+  },
+  {
+    "id": "synth_mult_0034",
+    "question": "What is 6 times 14?",
+    "original_answer": "6 \u00d7 14 = 84\n#### 84",
+    "sbs_answer": "Let me break this down step by step.\n6 \u00d7 14\n= 6 \u00d7 (10 + 4)\n= 6\u00d710 + 6\u00d74\n= 60 + 24\n= 84\nThe answer is 84.\n#### 84",
+    "final_answer": "84"
+  },
+  {
+    "id": "gsm_sbs_0130",
+    "question": "A church has 120 members. 40% are adults. The rest are children. How many children more children are there than adults?",
+    "original_answer": "There are 48 adults because 120 x .4 = <<120*.4=48>>48\n60% of members are children because 100 - 40 = <<100-40=60>>60\nThere are 72 children because 120 x .6 = <<120*.6=72>>72\nThere are 24 more children than adults because 72 - 48 = <<72-48=24>>24\n#### 24",
+    "sbs_answer": "There are 48 adults because 120 x .4 = <<120*.4=48>>48\n60% of members are children because 100 - 40 = <<100-40=60>>60\nThere are 72 children because 120 x .6 = <<120*.6=72>>72\nThere are 24 more children than adults because 72 - 48 = <<72-48=24>>24\n#### 24",
+    "final_answer": "24"
+  },
+  {
+    "id": "gsm_sbs_0478",
+    "question": "John has five more roommates than twice as many as Bob. If Bob has 10 roommates, how many roommates does John have?",
+    "original_answer": "Twice ten roommates is 2*10 = <<2*10=20>>20\nJohn has 5 more than 20 roommates which is 20+5 = <<5+20=25>>25 roommates\n#### 25",
+    "sbs_answer": "Twice ten roommates is 2\u00d710=20 = <<2\u00d710=20=20>>20\nJohn has 5 more than 20 roommates which is 20+5 = <<5+20=25>>25 roommates\n#### 25",
+    "final_answer": "25"
+  },
+  {
+    "id": "gsm_sbs_0169",
+    "question": "Yesterday, David and William were invited to a party. David broke 2 glasses, while his friend William broke 4 times the number of glasses David broke. How many glasses were broken?",
+    "original_answer": "William broke 4 * 2 = <<4*2=8>>8 glasses.\nSo, David and William broke 8 + 2 = <<8+2=10>>10 glasses.\n#### 10",
+    "sbs_answer": "William broke 4\u00d72=8 = <<4\u00d72=8=8>>8 glasses.\nSo, David and William broke 8 + 2 = <<8+2=10>>10 glasses.\n#### 10",
+    "final_answer": "10"
+  },
+  {
+    "id": "gsm_sbs_0414",
+    "question": "It takes 15 mink skins to make a coat. Andy buys 30 minks and each mink has 6 babies, but half the total minks are set free by activists. How many coats can he make?",
+    "original_answer": "First find the total number of baby minks: 30 minks * 6 babies/mink = <<30*6=180>>180 minks\nAdd this to the number of adult minks: 180 minks + 30 minks = <<180+30=210>>210 minks\nThen divide this number in half to find how many aren't set free: 210 minks / 2 = <<210/2=105>>105 minks\nThen divide the remaining number of minks by the number of minks per coat to find the number of coats: 105 minks / 15 minks/coat = <<105/15=7>>7 coats\n#### 7",
+    "sbs_answer": "First find the total number of baby minks: 30 minks * 6 babies/mink = <<[6 \u00d7 30 \u2192 = 6 \u00d7 3 \u00d7 10 \u2192 = 18 \u00d7 10 \u2192 = 180]=180>>180 minks\nAdd this to the number of adult minks: 180 minks + 30 minks = <<180+30=210>>210 minks\nThen divide this number in half to find how many aren't set free: 210 minks / 2 = <<210/2=105>>105 minks\nThen divide the remaining number of minks by the number of minks per coat to find the number of coats: 105 minks / 15 minks/coat = <<105/15=7>>7 coats\n#### 7",
+    "final_answer": "7"
+  },
+  {
+    "id": "gsm_sbs_0344",
+    "question": "Macy's is selling shirts that have been reduced to $6.  This price is at 25% of the original price.  What was the original price?",
+    "original_answer": "The original price is x.\nThe discount is 100% - 25% remaining = 75% discount.\nThe discount is 75%, so the original price is x - .75x = .25x.\nThe sale price is $6, so $6 = .25x, which is the same as 6/.25 = x.\nX = $<<24=24>>24.\n#### 24",
+    "sbs_answer": "The original price is x.\nThe discount is 100% - 25% remaining = 75% discount.\nThe discount is 75%, so the original price is x - .75x = .25x.\nThe sale price is $6, so $6 = .25x, which is the same as 6/.25 = x.\nX = $<<24=24>>24.\n#### 24",
+    "final_answer": "24"
+  },
+  {
+    "id": "synth_mult_0106",
+    "question": "What is 2 times 25?",
+    "original_answer": "2 \u00d7 25 = 50\n#### 50",
+    "sbs_answer": "Let me break this down step by step.\n2 \u00d7 25\n= 2 \u00d7 (20 + 5)\n= 2\u00d720 + 2\u00d75\n= 40 + 10\n= 50\nThe answer is 50.\n#### 50",
+    "final_answer": "50"
+  },
+  {
+    "id": "gsm_sbs_0029",
+    "question": "Mary has 5 green crayons and 8 blue crayons of different shades. If she gives out 3 green crayons and 1 blue crayon to Becky, how many crayons does she have left?",
+    "original_answer": "She had 5+8 = <<5+8=13>>13 crayons to start with\nShe gave out 3+1 = <<3+1=4>>4 crayons to Becky\nShe will have 13-4 = <<13-4=9>>9 crayons left\n#### 9",
+    "sbs_answer": "She had 5+8 = <<5+8=13>>13 crayons to start with\nShe gave out 3+1 = <<3+1=4>>4 crayons to Becky\nShe will have 13-4 = <<13-4=9>>9 crayons left\n#### 9",
+    "final_answer": "9"
+  }
+]

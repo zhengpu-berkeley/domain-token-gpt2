@@ -1,0 +1,56 @@
+# GRPO Optimized Configuration
+#
+# Aggressive settings for RTX 4090 (24GB) with 124M GPT-2 model.
+# Much better GPU utilization than pilot config.
+#
+# Key changes from pilot:
+# - batch_size: 2 -> 8 (4x increase)
+# - gradient_checkpointing: true -> false (unnecessary for 124M model)
+# - num_generations: 4 -> 8 (more samples per prompt)
+#
+# Expected GPU utilization: ~70-80%
+# Expected VRAM utilization: ~50-60%
+#
+# Usage:
+#   python rl/grpo_train.py \
+#     --model-path outputs/sft_gsm8k_baseline \
+#     --output-dir outputs/grpo_baseline \
+#     --condition baseline \
+#     --config rl/configs/grpo_optimized.yaml
+
+training:
+  # Number of samples to use (null = all ~7.5k GSM8K train samples)
+  max_samples: 1000
+  
+  # Batch size per device (aggressive for 124M model on 24GB GPU)
+  batch_size: 8
+  
+  # Gradient accumulation (effective batch = 8 * 4 = 32 prompts)
+  gradient_accumulation_steps: 4
+  
+  # Number of generations per prompt for GRPO
+  # More generations = better advantage estimation
+  num_generations: 8
+  
+  # Generation parameters
+  max_completion_length: 256
+  temperature: 0.7
+  
+  # Learning rate
+  learning_rate: 1.0e-6
+  
+  # Training epochs
+  num_train_epochs: 1
+  
+  # KL penalty (set to 0 per recent research showing it's not needed)
+  beta: 0.0
+  
+  # Disable gradient checkpointing - not needed for 124M model
+  gradient_checkpointing: false
+  
+  # Logging frequency
+  logging_steps: 10
+  
+  # Checkpoint saving
+  save_steps: 100
+

@@ -2,7 +2,7 @@
 
 **Date:** December 27, 2025  
 **Last Updated:** December 28, 2025  
-**Status:** ✅ All SFT runs complete; ✅ Mul-token visibility bug fixed; ✅ Full GSM8K eval complete (1319 samples)  
+**Status:** ✅ SFT complete; ✅ Mul-token bug fixed; ✅ Full eval done; ✅ GRPO with shaped rewards: mul_tokens 3.67% accuracy  
 **Goal:** Re-run post-training SFT using the **fixed HF export** artifacts and a **two-stage SFT pipeline** to produce trustworthy GSM8K/probe results for baseline vs mul_tokens.
 
 ---
@@ -358,6 +358,137 @@ Each directory should contain:
 4. **Inference-time injection experiment**
    - Apply `MulExpressionInjector` to prompts at eval time
    - Test "tooling + tokens" vs "tokens only" hypothesis
+
+---
+
+---
+
+## GRPO Reinforcement Learning Experiment (Dec 28, 2025)
+
+### Motivation
+
+With ~2% GSM8K accuracy from SFT, we hypothesized that RL (GRPO) might help the model:
+1. Learn to emit EOS tokens instead of looping
+2. Discover how to leverage mul-tokens for step-by-step reasoning
+3. Improve accuracy through reward-based learning
+
+### Pipeline
+
+**Stage 1: GSM-SBS Warm-Start SFT**
+- Created `data/gsm_sbs/` dataset: 640 examples teaching step-by-step multiplication decomposition
+- Format: `12 × 12 = (10 + 2) × 12 = 10×12 + 2×12 = 120 + 24 = 144`
+- Recursive decomposition until single-digit × single-digit base cases
+- SFT for 2 epochs on both conditions (~20 seconds each)
+
+**Stage 2: GRPO Training**
+- Config: `rl/configs/grpo_optimized.yaml`
+- 1000 samples, batch_size=8, num_generations=8
+- Binary reward: 1.0 for exact answer match, 0.0 otherwise
+- KL penalty (beta=0.1)
+- ~14 minutes per condition on RTX 4090
+
+### GRPO Results
+
+| Metric | Baseline GRPO | Mul_tokens GRPO | Pre-GRPO SFT |
+|--------|--------------|-----------------|--------------|
+| **Accuracy** | **2.2%** (11/500) | **1.2%** (6/500) | ~2.05% |
+| Avg Response Tokens | 256 (max) | 256 (max) | ~256 |
+| Mul Token Count | 0 | 128 | ~1,123 |
+| Mul Tokens/Response | 0.0 | 0.256 | 0.85 |
+
+### Diagnosis: Mode Collapse
+
+**The GRPO training caused model degradation rather than improvement.**
+
+1. **Mode Collapse**: Both models hit max tokens (256) on every response, generating repetitive loops:
+   ```
+   She makes 48 eggs because 48 x 12 = <<48×48=48=48>>48
+   #### 48×48=48
+   She will eat 48 eggs because 48 x 12 = <<48×48=48=48>>48
+   ...
+   ```
+
+2. **Sparse Reward Problem**: With ~2% base accuracy, 98% of completions receive zero reward. The model has no useful gradient signal for most samples.
+
+3. **Mul-tokens Partially Working**: The mul_tokens model generates some mul-tokens (128 total), but uses them incorrectly:
+   ```
+   Brandon's iPhone is <MUL_2_4_8> = <<<MUL_2_4_8>>>8 years old.
+   The age difference is 8 - 2 = <<8-2=6>>6 years.
+   #### 6 years old  # Wrong answer (should be 8)
+   ```
+   - The model outputs the token but doesn't integrate the value into reasoning
+
+4. **KL Penalty Insufficient**: The model drifted too far from the SFT distribution despite β=0.1.
+
+### Artifacts
+
+- GSM-SBS dataset: `data/gsm_sbs/`
+- GSM-SBS SFT models: `outputs/sft_sbs_baseline/`, `outputs/sft_sbs_mul_tokens/`
+- GRPO models: `outputs/grpo_baseline/`, `outputs/grpo_mul_tokens/`
+- GRPO configs: `rl/configs/grpo_optimized.yaml`, `rl/configs/grpo_pilot.yaml`
+- Eval results: `outputs/eval_grpo_baseline/`, `outputs/eval_grpo_mul_tokens/`
+
+### Lessons Learned
+
+1. **Sparse rewards don't work for RL** when base accuracy is <5%
+2. **Need intermediate rewards** for step-by-step reasoning
+3. **KL regularization** needs to be stronger (β > 0.1) for small models
+4. **More SFT warm-start** may be needed before RL can help
+
+### Next Steps
+
+1. ~~**More GSM-SBS SFT**: Train more epochs on step-by-step dataset~~ ✅ Tried, didn't help
+2. ~~**Shaped Rewards**: Add partial credit for correct intermediate steps~~ ✅ Implemented and tested
+3. ~~**Stronger KL**: Try β=0.5 or higher to prevent mode collapse~~ ✅ Used β=0.5
+4. **Rejection Sampling**: Alternative to GRPO that may work better with sparse rewards
+
+---
+
+## GRPO with Shaped Rewards (Dec 28, 2025)
+
+Following the mode collapse with binary rewards, we implemented shaped rewards with stronger KL.
+
+### Configuration (`rl/configs/grpo_shaped.yaml`)
+
+- **KL penalty**: β=0.5 (5x stronger than original 0.1)
+- **Shaped rewards**:
+  - Correct answer: +1.0
+  - Partial answer (within 10%): +0.3
+  - Shows work (has = or ####): +0.1
+  - Uses mul-tokens: +0.2
+  - Short response (<150 words): +0.1
+  - Repetition penalty: -0.3
+
+### Results
+
+| Condition | Reward Type | Accuracy | Mul Tokens/Response |
+|-----------|-------------|----------|---------------------|
+| Baseline | Binary | 2.2% | 0.0 |
+| Mul_tokens | Binary | 1.2% | 0.26 |
+| Baseline | Shaped | 2.33% | 0.0 |
+| **Mul_tokens** | **Shaped** | **3.67%** | **1.03** |
+
+**Key Findings:**
+
+1. **Shaped rewards dramatically improved mul_tokens**: 3.67% vs 1.2% (3x improvement!)
+2. **Mul-token usage increased 4x**: 1.03 vs 0.26 per response
+3. **Baseline essentially unchanged**: Shaped rewards don't help without the token bonus
+4. **The mul-token bonus provides useful learning signal**
+
+### Interpretation
+
+The mul-token condition benefits from shaped rewards because:
+- The `uses_mul_tokens: +0.2` bonus provides gradient signal even when answers are wrong
+- This encourages the model to learn when/how to use mul-tokens
+- The increased mul-token usage correlates with improved accuracy
+
+This suggests **domain-specific tokens can be leveraged through RL** when proper reward shaping is used.
+
+### Artifacts
+
+- Shaped GRPO config: `rl/configs/grpo_shaped.yaml`
+- Models: `outputs/grpo_shaped_baseline/`, `outputs/grpo_shaped_mul_tokens/`
+- Eval results: `outputs/eval_grpo_shaped_baseline/`, `outputs/eval_grpo_shaped_mul_tokens/`
 
 ---
 

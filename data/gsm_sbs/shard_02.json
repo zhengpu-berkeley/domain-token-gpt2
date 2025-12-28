@@ -1,0 +1,142 @@
+[
+  {
+    "id": "synth_mult_0058",
+    "question": "What is 9 times 14?",
+    "original_answer": "9 \u00d7 14 = 126\n#### 126",
+    "sbs_answer": "Let me break this down step by step.\n9 \u00d7 14\n= 9 \u00d7 (10 + 4)\n= 9\u00d710 + 9\u00d74\n= 90 + 36\n= 126\nThe answer is 126.\n#### 126",
+    "final_answer": "126"
+  },
+  {
+    "id": "synth_mult_0021",
+    "question": "What is 4 times 17?",
+    "original_answer": "4 \u00d7 17 = 68\n#### 68",
+    "sbs_answer": "Let me break this down step by step.\n4 \u00d7 17\n= 4 \u00d7 (10 + 7)\n= 4\u00d710 + 4\u00d77\n= 40 + 28\n= 68\nThe answer is 68.\n#### 68",
+    "final_answer": "68"
+  },
+  {
+    "id": "synth_mult_0012",
+    "question": "What is 3 times 16?",
+    "original_answer": "3 \u00d7 16 = 48\n#### 48",
+    "sbs_answer": "Let me break this down step by step.\n3 \u00d7 16\n= 3 \u00d7 (10 + 6)\n= 3\u00d710 + 3\u00d76\n= 30 + 18\n= 48\nThe answer is 48.\n#### 48",
+    "final_answer": "48"
+  },
+  {
+    "id": "gsm_sbs_0459",
+    "question": "Peter has four horses. Each one eats 4 pounds of oats, twice a day, and 3 pounds of grain once a day. How many pounds of food does he need to feed his horses for 3 days?",
+    "original_answer": "Peter needs 2 * 4 pounds of oats = <<2*4=8>>8 pounds of oats per horse per day.\nPeter will need 8 pounds oats * 3 days = <<8*3=24>>24 pounds of oats per horse.\nPeter will need 24 pounds of oats * 4 horses = <<24*4=96>>96 pounds of oats total.\nPeter needs 3 pounds of grain * 3 days per horse = <<3*3=9>>9 pounds of grain per horse.\nPeter will need 9 pounds of grain * 4 horses = <<9*4=36>>36 pounds of grain total.\nFor 3 days Peter will need a total of 96 pounds oats + 36 pounds grain = <<96+36=132>>132 pounds total.\n#### 132",
+    "sbs_answer": "Peter needs 2\u00d74=8 pounds of oats = <<2\u00d74=8=8>>8 pounds of oats per horse per day.\nPeter will need 8 pounds oats * 3 days = <<8\u00d73=24=24>>24 pounds of oats per horse.\nPeter will need 24 pounds of oats * 4 horses = <<[4 \u00d7 24 \u2192 = 4 \u00d7 (20 + 4) \u2192 = 4\u00d720 + 4\u00d74 \u2192 = 80 + 16 \u2192 = 96]=96>>96 pounds of oats total.\nPeter needs 3 pounds of grain * 3 days per horse = <<3\u00d73=9=9>>9 pounds of grain per horse.\nPeter will need 9 pounds of grain * 4 horses = <<9\u00d74=36=36>>36 pounds of grain total.\nFor 3 days Peter will need a total of 96 pounds oats + 36 pounds grain = <<96+36=132>>132 pounds total.\n#### 132",
+    "final_answer": "132"
+  },
+  {
+    "id": "gsm_sbs_0158",
+    "question": "Sam works at the Widget Factory, assembling Widgets. He can assemble 1 widget every 10 minutes. Jack from the loading dock can help assemble widgets when he doesn't have anything else to do. When he helps, they put together 2 complete widgets every 15 minutes. Recently the factory hired Tony to help assemble widgets. Being new to the job, he doesn't work as fast as Sam or Jack. Yesterday Sam worked for 6 hours before he had to leave work early for a dentist appointment. Jack was able to help out for 4 hours before he had to go back to the loading dock to unload a new shipment of widget materials. Tony worked the entire 8-hour shift. At the end of the day, they had completed 68 widgets. How long does it take Tony to assemble a Widget, in minutes?",
+    "original_answer": "Sam completes a widget every 10 minutes.\nWhen Jack helps they finish 2 in 15 minutes. Sam has finished 1 widget and has begun working on another one, and Jack finishes the second one at 15 minutes. So it takes Jack 15 minutes to complete a widget.\nSam worked for 6 hours yesterday, so he was able to complete 6 hours * 60 minutes per hour / 10 minutes per widget = <<6*60/10=36>>36 widgets.\nJack worked for 4 hours, so he was able to complete 4 hours * 60 minutes per hour / 15 minutes per widget = <<4*60/15=16>>16 widgets.\nSam, Jack, and Tony were able to complete 68 widgets together. So of those, Tony personally completed 68 widgets - 36 widgets - 16 widgets = <<68-36-16=16>>16 widgets.\nIt took Tony 8 hours to complete those 16 widgets, so he takes 8 hours * 60 minutes per hour / 16 widgets = <<8*60/16=30>>30 minutes per widget.\n#### 30",
+    "sbs_answer": "Sam completes a widget every 10 minutes.\nWhen Jack helps they finish 2 in 15 minutes. Sam has finished 1 widget and has begun working on another one, and Jack finishes the second one at 15 minutes. So it takes Jack 15 minutes to complete a widget.\nSam worked for 6 hours yesterday, so he was able to complete 6 hours * 60 minutes per hour / 10 minutes per widget = <<[6 \u00d7 60 \u2192 = 6 \u00d7 6 \u00d7 10 \u2192 = 36 \u00d7 10 \u2192 = 360]/10=36>>36 widgets.\nJack worked for 4 hours, so he was able to complete 4 hours * 60 minutes per hour / 15 minutes per widget = <<[4 \u00d7 60 \u2192 = 4 \u00d7 6 \u00d7 10 \u2192 = 24 \u00d7 10 \u2192 = 240]/15=16>>16 widgets.\nSam, Jack, and Tony were able to complete 68 widgets together. So of those, Tony personally completed 68 widgets - 36 widgets - 16 widgets = <<68-36-16=16>>16 widgets.\nIt took Tony 8 hours to complete those 16 widgets, so he takes 8 hours * 60 minutes per hour / 16 widgets = <<[8 \u00d7 60 \u2192 = 8 \u00d7 6 \u00d7 10 \u2192 = 48 \u00d7 10 \u2192 = 480]/16=30>>30 minutes per widget.\n#### 30",
+    "final_answer": "30"
+  },
+  {
+    "id": "synth_mult_0116",
+    "question": "What is 9 times 20?",
+    "original_answer": "9 \u00d7 20 = 180\n#### 180",
+    "sbs_answer": "Let me break this down step by step.\n9 \u00d7 20\n= 9 \u00d7 2 \u00d7 10\n= 18 \u00d7 10\n= 180\nThe answer is 180.\n#### 180",
+    "final_answer": "180"
+  },
+  {
+    "id": "synth_mult_0085",
+    "question": "What is 8 times 20?",
+    "original_answer": "8 \u00d7 20 = 160\n#### 160",
+    "sbs_answer": "Let me break this down step by step.\n8 \u00d7 20\n= 8 \u00d7 2 \u00d7 10\n= 16 \u00d7 10\n= 160\nThe answer is 160.\n#### 160",
+    "final_answer": "160"
+  },
+  {
+    "id": "gsm_sbs_0015",
+    "question": "Last year Jessica paid $1000 for rent, $200 for food, and $100 for car insurance each month. This year her rent goes up by 30%, food costs increase by 50%, and the cost of her car insurance triples because she was at fault in an accident. How much more does Jessica pay for her expenses over the whole year compared to last year?",
+    "original_answer": "First find the increase in rent by multiplying last year's rent by 30%: $1000 * .3 = $<<1000*.3=300>>300\nThen find the food cost increase by multiplying last year's costs by 50%: $200 * .5 = $<<200*.5=100>>100\nThen find the new car insurance price by multiplying last year's price by 3: $100 * 3 = $<<100*3=300>>300\nThen subtract the cost of car insurance last year from this year's price to find the increase: $300 - $100 = $<<300-100=200>>200\nNow find how much Jessica's monthly expenses increased by adding the increases in each of the three costs: $300 + $100 + $200 = $<<300+100+200=600>>600\nNow multiply the increase per month by the number of months in a year to find the annual increase: $600/month * 12 months/year = $<<600*12=7200>>7200/year\n#### 7200",
+    "sbs_answer": "First find the increase in rent by multiplying last year's rent by 30%: $1000 * .3 = $<<1000*.3=300>>300\nThen find the food cost increase by multiplying last year's costs by 50%: $200 * .5 = $<<200*.5=100>>100\nThen find the new car insurance price by multiplying last year's price by 3: $[3 \u00d7 100 \u2192 = 3 \u00d7 10 \u00d7 10 \u2192 = 30 \u00d7 10 \u2192 = 300] = $<<[3 \u00d7 100 \u2192 = 3 \u00d7 10 \u00d7 10 \u2192 = 30 \u00d7 10 \u2192 = 300]=300>>300\nThen subtract the cost of car insurance last year from this year's price to find the increase: $300 - $100 = $<<300-100=200>>200\nNow find how much Jessica's monthly expenses increased by adding the increases in each of the three costs: $300 + $100 + $200 = $<<300+100+200=600>>600\nNow multiply the increase per month by the number of months in a year to find the annual increase: $600/month * 12 months/year = $<<[12 \u00d7 600 \u2192 = (10 + 2) \u00d7 600 \u2192 = 10\u00d7600 + 2\u00d7600 \u2192 [10\u00d7600 = 6000] \u2192 [2\u00d7600: 2 \u00d7 600 \u2192 = 2 \u00d7 60 \u00d7 10 \u2192 = (2 \u00d7 60 \u2192 = 2 \u00d7 6 \u00d7 10 \u2192 = 12 \u00d7 10 \u2192 = 120) \u00d7 10 \u2192 = 120 \u00d7 10 = 1200] \u2192 = 6000 + 1200 \u2192 = 7200]=7200>>7200/year\n#### 7200",
+    "final_answer": "7200"
+  },
+  {
+    "id": "gsm_sbs_0415",
+    "question": "A one-year subscription to a newspaper is offered with a 45% discount. How much does the discounted subscription cost if a subscription normally costs $80?",
+    "original_answer": "We calculate first the discount: 80 * 45 / 100 = $<<80*45/100=36>>36\nSo, the discounted subscription amounts to 80 \u2013 36 = $<<80-36=44>>44\n#### 44",
+    "sbs_answer": "We calculate first the discount: [45 \u00d7 80 \u2192 = (40 + 5) \u00d7 80 \u2192 = 40\u00d780 + 5\u00d780 \u2192 [40\u00d780 = 4\u00d710\u00d780 = 4\u00d780\u00d710 = 320\u00d710 = 3200] \u2192 [5\u00d780: 5 \u00d7 80 \u2192 = 5 \u00d7 8 \u00d7 10 \u2192 = 40 \u00d7 10 \u2192 = 400] \u2192 = 3200 + 400 \u2192 = 3600] / 100 = $<<[45 \u00d7 80 \u2192 = (40 + 5) \u00d7 80 \u2192 = 40\u00d780 + 5\u00d780 \u2192 [40\u00d780 = 4\u00d710\u00d780 = 4\u00d780\u00d710 = 320\u00d710 = 3200] \u2192 [5\u00d780: 5 \u00d7 80 \u2192 = 5 \u00d7 8 \u00d7 10 \u2192 = 40 \u00d7 10 \u2192 = 400] \u2192 = 3200 + 400 \u2192 = 3600]/100=36>>36\nSo, the discounted subscription amounts to 80 \u2013 36 = $<<80-36=44>>44\n#### 44",
+    "final_answer": "44"
+  },
+  {
+    "id": "gsm_sbs_0075",
+    "question": "Rene can finish reading 30 pages in 60 minutes. Lulu can read 27 pages in 60 minutes and Cherry can read 25 pages in 60 minutes. If they have been reading for 240 minutes now, how many pages have they finished reading in total?",
+    "original_answer": "Rene finished 30 x 4 = <<30*4=120>>120 pages in 240 minutes.\nLulu finished 27 x 4 = <<27*4=108>>108 pages in 240 minutes.\nCherry finished 25 x 4 = <<25*4=100>>100 pages in 240 minutes.\nTherefore they have finished a total of 120 + 108 + 100 = 328 pages in 240 minutes.\n#### 328",
+    "sbs_answer": "Rene finished 30 x 4 = <<[4 \u00d7 30 \u2192 = 4 \u00d7 3 \u00d7 10 \u2192 = 12 \u00d7 10 \u2192 = 120]=120>>120 pages in 240 minutes.\nLulu finished 27 x 4 = <<[4 \u00d7 27 \u2192 = 4 \u00d7 (20 + 7) \u2192 = 4\u00d720 + 4\u00d77 \u2192 = 80 + 28 \u2192 = 108]=108>>108 pages in 240 minutes.\nCherry finished 25 x 4 = <<[4 \u00d7 25 \u2192 = 4 \u00d7 (20 + 5) \u2192 = 4\u00d720 + 4\u00d75 \u2192 = 80 + 20 \u2192 = 100]=100>>100 pages in 240 minutes.\nTherefore they have finished a total of 120 + 108 + 100 = 328 pages in 240 minutes.\n#### 328",
+    "final_answer": "328"
+  },
+  {
+    "id": "gsm_sbs_0024",
+    "question": "Mark was caught speeding and the judge wants to make an example out of him. The base fine for speeding is $50 but additional penalties apply in this case.  The fine is increased by $2 for every mile per hour Mark was going over the speed limit. He was going 75 miles per hour in a 30 mile per hour zone. The fine is also doubled because he was in a school zone. Finally, the judge makes Mark pay $300 in court costs and he also has to pay his lawyer $80/hour for three hours of work. How much does Mark owe for this speeding ticket?",
+    "original_answer": "First figure out how many miles over the speed limit Mark was going: 75 mph - 30 mph = <<75-30=45>>45 mph\nNow figure out how much the per-mile fine is: $2/mph * 45 mph = $<<2*45=90>>90\nNow add that amount to the base fine: $90 + $50 = $<<90+50=140>>140\nNow double that amount for being in a school zone: $140 * 2 = $<<140*2=280>>280\nNow figure out how much Mark owes his lawyer: $80/hour * 3 hours = $<<80*3=240>>240\nNow add the court costs, lawyer fees and fine: $240 + $300 + $280 = $<<240+300+280=820>>820\n#### 820",
+    "sbs_answer": "First figure out how many miles over the speed limit Mark was going: 75 mph - 30 mph = <<75-30=45>>45 mph\nNow figure out how much the per-mile fine is: $2/mph * 45 mph = $<<[2 \u00d7 45 \u2192 = 2 \u00d7 (40 + 5) \u2192 = 2\u00d740 + 2\u00d75 \u2192 = 80 + 10 \u2192 = 90]=90>>90\nNow add that amount to the base fine: $90 + $50 = $<<90+50=140>>140\nNow double that amount for being in a school zone: $[2 \u00d7 140 \u2192 = 2 \u00d7 14 \u00d7 10 \u2192 = (2 \u00d7 14 \u2192 = 2 \u00d7 (10 + 4) \u2192 = 2\u00d710 + 2\u00d74 \u2192 = 20 + 8 \u2192 = 28) \u00d7 10 \u2192 = 28 \u00d7 10 = 280] = $<<[2 \u00d7 140 \u2192 = 2 \u00d7 14 \u00d7 10 \u2192 = (2 \u00d7 14 \u2192 = 2 \u00d7 (10 + 4) \u2192 = 2\u00d710 + 2\u00d74 \u2192 = 20 + 8 \u2192 = 28) \u00d7 10 \u2192 = 28 \u00d7 10 = 280]=280>>280\nNow figure out how much Mark owes his lawyer: $80/hour * 3 hours = $<<[3 \u00d7 80 \u2192 = 3 \u00d7 8 \u00d7 10 \u2192 = 24 \u00d7 10 \u2192 = 240]=240>>240\nNow add the court costs, lawyer fees and fine: $240 + $300 + $280 = $<<240+300+280=820>>820\n#### 820",
+    "final_answer": "820"
+  },
+  {
+    "id": "gsm_sbs_0393",
+    "question": "A bulk warehouse is offering 48 cans of sparkling water for $12.00 a case.  The local grocery store is offering the same sparkling water for $6.00 and it only has 12 cans.  How much more expensive, per can, in cents, is this deal at the grocery store?",
+    "original_answer": "The bulk warehouse has 48 cans for $12.00 so that's 12/48 = $0.25 a can\nThe local grocery store has 12 cans for $6.00 so that's 6/12 = $0.50 a can\nThe grocery store offer is $0.50 a can and the warehouse is $0.25 a can so the grocery store is .50-.25 = $<<0.50-.25=0.25>>0.25 more expensive per can\n#### 25",
+    "sbs_answer": "The bulk warehouse has 48 cans for $12.00 so that's 12/48 = $0.25 a can\nThe local grocery store has 12 cans for $6.00 so that's 6/12 = $0.50 a can\nThe grocery store offer is $0.50 a can and the warehouse is $0.25 a can so the grocery store is .50-.25 = $<<0.50-.25=0.25>>0.25 more expensive per can\n#### 25",
+    "final_answer": "25"
+  },
+  {
+    "id": "gsm_sbs_0440",
+    "question": "There's a sale at your favorite \"Any item $10\" retailer. If you buy 1 shirt you pay $10. If you buy 2, you get the second one at a 50% discount. If you buy 3, you get the third one at a 60% discount. How much money did you save if you bought 3 shirts?",
+    "original_answer": "The first shirt has no (0%) discount off the regular price ($10), therefore your discount is = 0% * $10 = $<<0*.01*10=0>>0\nThe second shirt has a 50% discount off the regular price ($10), therefore your discount is = 50% * $10 = $<<50*.01*10=5>>5\nThe third shirt has a 60% discount of the regular price ($10), therefore your discount is = 60% * $10 = $<<60*.01*10=6>>6\nTherefore in total, you save $0 on the first shirt, $5 on the second one and $6 on the third one = 0+5+6 = $<<0+5+6=11>>11\n#### 11",
+    "sbs_answer": "The first shirt has no (0%) discount off the regular price ($10), therefore your discount is = 0% * $10 = $<<0*.1\u00d710=10=0>>0\nThe second shirt has a 50% discount off the regular price ($10), therefore your discount is = 50% * $10 = $<<50*.1\u00d710=10=5>>5\nThe third shirt has a 60% discount of the regular price ($10), therefore your discount is = 60% * $10 = $<<60*.1\u00d710=10=6>>6\nTherefore in total, you save $0 on the first shirt, $5 on the second one and $6 on the third one = 0+5+6 = $<<0+5+6=11>>11\n#### 11",
+    "final_answer": "11"
+  },
+  {
+    "id": "gsm_sbs_0100",
+    "question": "Trevor buys several bouquets of carnations. The first included 9 carnations; the second included 14 carnations; the third included 13 carnations. What is the average number of carnations in the bouquets?",
+    "original_answer": "The sum is 9+14+13=<<9+14+13=36>>36.\nThere are 3 bouquets.\nThe average is 36/3=<<36/3=12>>12.\n#### 12",
+    "sbs_answer": "The sum is 9+14+13=<<9+14+13=36>>36.\nThere are 3 bouquets.\nThe average is 36/3=<<36/3=12>>12.\n#### 12",
+    "final_answer": "12"
+  },
+  {
+    "id": "gsm_sbs_0325",
+    "question": "A car uses 20 gallons of gas to travel 400 miles. Mr. Montero's car has 8 gallons in it. How many more gallons of gas does he need to travel 600 miles, back and forth?",
+    "original_answer": "Mr. Montero is traveling a total distance of 600 miles + 600 miles = <<600+600=1200>>1200 miles.\nThere are 1200 miles / 400 miles = <<1200/400=3>>3 sets of 400 miles in 1200 miles.\nSo Mr. Montero needs 20 gallons/set x 3 sets = <<20*3=60>>60 gallons in all.\nSince his car has 8 gallons already, then he needs to add 60 gallons - 8 gallons = <<60-8=52>>52 gallons more.\n#### 52",
+    "sbs_answer": "Mr. Montero is traveling a total distance of 600 miles + 600 miles = <<600+600=1200>>1200 miles.\nThere are 1200 miles / 400 miles = <<1200/400=3>>3 sets of 400 miles in 1200 miles.\nSo Mr. Montero needs 20 gallons/set x 3 sets = <<[3 \u00d7 20 \u2192 = 3 \u00d7 2 \u00d7 10 \u2192 = 6 \u00d7 10 \u2192 = 60]=60>>60 gallons in all.\nSince his car has 8 gallons already, then he needs to add 60 gallons - 8 gallons = <<60-8=52>>52 gallons more.\n#### 52",
+    "final_answer": "52"
+  },
+  {
+    "id": "gsm_sbs_0506",
+    "question": "Ten friends decide to get an end-of-year gift for their teacher. They plan to split the cost of the gift equally. But four of the group drop out. The remaining friends split the cost equally among themselves. If each share is now $8 more, how much does the gift cost, in dollars?",
+    "original_answer": "Let N be the original price each friend was going to pay.\n10N=6(N+8)\n10N=6N+48\n4N=48\nN=<<12=12>>12\nThen the present costs 10*12=<<10*12=120>>120.\n#### 120",
+    "sbs_answer": "Let N be the original price each friend was going to pay.\n10N=6(N+8)\n10N=6N+48\n4N=48\nN=<<12=12>>12\nThen the present costs 10\u00d712=120=<<10\u00d712=120=120>>120.\n#### 120",
+    "final_answer": "120"
+  },
+  {
+    "id": "synth_mult_0114",
+    "question": "What is 9 times 21?",
+    "original_answer": "9 \u00d7 21 = 189\n#### 189",
+    "sbs_answer": "Let me break this down step by step.\n9 \u00d7 21\n= 9 \u00d7 (20 + 1)\n= 9\u00d720 + 9\u00d71\n= 180 + 9\n= 189\nThe answer is 189.\n#### 189",
+    "final_answer": "189"
+  },
+  {
+    "id": "gsm_sbs_0409",
+    "question": "In a section of the forest, there are 100 weasels and 50 rabbits. Three foxes invade this region and hunt the rodents. Each fox catches an average of 4 weasels and 2 rabbits per week. How many rabbits and weasels will be left after 3 weeks?",
+    "original_answer": "3 foxes catch 4 weasels each every week for a total of 3*4 = <<3*4=12>>12 weasels\n12 weasels are caught every week for 3 weeks for a total of 12*3 = <<12*3=36>>36 weasels\n3 foxes catch 2 rabbits each every week for a total of 3*2 = <<3*2=6>>6 rabbits\n6 rabbits are caught every week for 3 weeks for a total of 6*3 = <<6*3=18>>18 rabbits\nThere were originally 100 weasels so now there are 100-36 = <<100-36=64>>64 weasels left\nThere were originally 50 rabbits so now there are 50-18 = <<50-18=32>>32 rabbits left\nThere are 64+32 = <<64+32=96>>96 weasels and rabbits left\n#### 96",
+    "sbs_answer": "3 foxes catch 4 weasels each every week for a total of 3\u00d74=12 = <<3\u00d74=12=12>>12 weasels\n12 weasels are caught every week for 3 weeks for a total of [3 \u00d7 12 \u2192 = 3 \u00d7 (10 + 2) \u2192 = 3\u00d710 + 3\u00d72 \u2192 = 30 + 6 \u2192 = 36] = <<[3 \u00d7 12 \u2192 = 3 \u00d7 (10 + 2) \u2192 = 3\u00d710 + 3\u00d72 \u2192 = 30 + 6 \u2192 = 36]=36>>36 weasels\n3 foxes catch 2 rabbits each every week for a total of 3\u00d72=6 = <<3\u00d72=6=6>>6 rabbits\n6 rabbits are caught every week for 3 weeks for a total of 6\u00d73=18 = <<6\u00d73=18=18>>18 rabbits\nThere were originally 100 weasels so now there are 100-36 = <<100-36=64>>64 weasels left\nThere were originally 50 rabbits so now there are 50-18 = <<50-18=32>>32 rabbits left\nThere are 64+32 = <<64+32=96>>96 weasels and rabbits left\n#### 96",
+    "final_answer": "96"
+  },
+  {
+    "id": "gsm_sbs_0133",
+    "question": "A washing machine uses 20 gallons of water for a heavy wash, 10 gallons of water for a regular wash, and 2 gallons of water for a light wash per load of laundry. If bleach is used, there is an extra light wash cycle added to rinse the laundry thoroughly. There are two heavy washes, three regular washes, and one light wash to do. Two of the loads need to be bleached. How many gallons of water will be needed?",
+    "original_answer": "The two heavy washes will use 20 * 2 = <<20*2=40>>40 gallons of water.\nThe three regular washes will use 10 * 3 = <<10*3=30>>30 gallons of water.\nThe light wash will use 2 * 1 = <<2*1=2>>2 gallons of water.\nThe two bleached loads will use an extra 2 * 2 = <<2*2=4>>4 gallons of water.\nIn all, 40 + 30 + 2 + 4 = <<40+30+2+4=76>>76 gallons of water will be needed.\n#### 76",
+    "sbs_answer": "The two heavy washes will use [2 \u00d7 20 \u2192 = 2 \u00d7 2 \u00d7 10 \u2192 = 4 \u00d7 10 \u2192 = 40] = <<[2 \u00d7 20 \u2192 = 2 \u00d7 2 \u00d7 10 \u2192 = 4 \u00d7 10 \u2192 = 40]=40>>40 gallons of water.\nThe three regular washes will use 10\u00d73=30 = <<10\u00d73=30=30>>30 gallons of water.\nThe light wash will use 2\u00d71=2 = <<2\u00d71=2=2>>2 gallons of water.\nThe two bleached loads will use an extra 2\u00d72=4 = <<2\u00d72=4=4>>4 gallons of water.\nIn all, 40 + 30 + 2 + 4 = <<40+30+2+4=76>>76 gallons of water will be needed.\n#### 76",
+    "final_answer": "76"
+  },
+  {
+    "id": "gsm_sbs_0280",
+    "question": "Jason is mixing a batch of black paint. He needs to add 2 grams of charcoal for every 30 ml of water. If he adds 900 ml of water, how much charcoal does he add?",
+    "original_answer": "First find how many ml of water Jason needs for 1 gram of charcoal: 30 ml / 2 grams = <<30/2=15>>15 ml/g\nThen divide the amount of water Jason uses by the amount of water per gram of charcoal to find how much charcoal he uses: 900 ml / 15 ml/g = <<900/15=60>>60 g\n#### 60",
+    "sbs_answer": "First find how many ml of water Jason needs for 1 gram of charcoal: 30 ml / 2 grams = <<30/2=15>>15 ml/g\nThen divide the amount of water Jason uses by the amount of water per gram of charcoal to find how much charcoal he uses: 900 ml / 15 ml/g = <<900/15=60>>60 g\n#### 60",
+    "final_answer": "60"
+  }
+]

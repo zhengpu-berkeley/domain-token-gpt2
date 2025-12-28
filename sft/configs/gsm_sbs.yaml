@@ -1,0 +1,43 @@
+# GSM-SBS SFT Configuration
+#
+# Step-by-step decomposition warm start training.
+# Short training on 640 examples to teach multiplication decomposition.
+# Runs after GSM8K SFT, before GRPO.
+#
+# Usage:
+#   python sft/sft_gsm_sbs.py \
+#     --model-path outputs/sft_gsm8k_baseline \
+#     --output-dir outputs/sft_sbs_baseline \
+#     --condition baseline \
+#     --config sft/configs/gsm_sbs.yaml
+
+training:
+  # Sequence length
+  max_length: 512
+  
+  # Batch size per device (aggressive for 124M model)
+  batch_size: 16
+  
+  # Gradient accumulation (effective batch = 16 * 2 = 32)
+  gradient_accumulation_steps: 2
+  
+  # Training epochs (10 epochs on 640 samples = ~6400 samples seen)
+  # More epochs to deeply learn step-by-step decomposition patterns
+  num_epochs: 10
+  
+  # Learning rate (lower for fine-tuning already-trained model)
+  learning_rate: 1.0e-5
+  
+  # Warmup
+  warmup_ratio: 0.1
+  
+  # Weight decay
+  weight_decay: 0.01
+  
+  # Validation split
+  val_split: 0.1
+
+data:
+  # Path to GSM-SBS dataset directory
+  data_dir: data/gsm_sbs
+

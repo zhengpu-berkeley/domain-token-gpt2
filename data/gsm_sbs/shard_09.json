@@ -1,0 +1,142 @@
+[
+  {
+    "id": "gsm_sbs_0087",
+    "question": "There are enough provisions in a castle to feed 300 people for 90 days. After 30 days, 100 people leave the castle. How many more days are left until all the food runs out?",
+    "original_answer": "After 30 days, there will be enough food left to sustain 300 people for 90 days \u2013 30 days = 60 days.\nAfter the 100 people leave, there will be 300-100 = <<300-100=200>>200 people left.\nThe 200 people will eat 200/300 = 2/3 as much food as the original group of people in the castle.\nThe 60 days' worth of food will last this smaller group for 60 days / (2/3) = <<60/(2/3)=90>>90 more days.\n#### 90",
+    "sbs_answer": "After 30 days, there will be enough food left to sustain 300 people for 90 days \u2013 30 days = 60 days.\nAfter the 100 people leave, there will be 300-100 = <<300-100=200>>200 people left.\nThe 200 people will eat 200/300 = 2/3 as much food as the original group of people in the castle.\nThe 60 days' worth of food will last this smaller group for 60 days / (2/3) = <<60/(2/3)=90>>90 more days.\n#### 90",
+    "final_answer": "90"
+  },
+  {
+    "id": "gsm_sbs_0195",
+    "question": "Last year Dallas was 3 times the age of his sister Darcy. Darcy is twice as old as Dexter who is 8 right now. How old is Dallas now?",
+    "original_answer": "Darcy = 2*Dexter = 2*8 = 16\nLast year Darcy was 16 - 1 = <<16-1=15>>15\nDallas was 3 times Darcy last year = 3*15 = <<3*15=45>>45\nDallas is a year older now = 45 + 1 = <<45+1=46>>46\nDallas is 46 years old now.\n#### 46",
+    "sbs_answer": "Darcy = 2*Dexter = 2\u00d78=16 = 16\nLast year Darcy was 16 - 1 = <<16-1=15>>15\nDallas was 3 times Darcy last year = [3 \u00d7 15 \u2192 = 3 \u00d7 (10 + 5) \u2192 = 3\u00d710 + 3\u00d75 \u2192 = 30 + 15 \u2192 = 45] = <<[3 \u00d7 15 \u2192 = 3 \u00d7 (10 + 5) \u2192 = 3\u00d710 + 3\u00d75 \u2192 = 30 + 15 \u2192 = 45]=45>>45\nDallas is a year older now = 45 + 1 = <<45+1=46>>46\nDallas is 46 years old now.\n#### 46",
+    "final_answer": "46"
+  },
+  {
+    "id": "synth_mult_0017",
+    "question": "What is 4 times 13?",
+    "original_answer": "4 \u00d7 13 = 52\n#### 52",
+    "sbs_answer": "Let me break this down step by step.\n4 \u00d7 13\n= 4 \u00d7 (10 + 3)\n= 4\u00d710 + 4\u00d73\n= 40 + 12\n= 52\nThe answer is 52.\n#### 52",
+    "final_answer": "52"
+  },
+  {
+    "id": "gsm_sbs_0017",
+    "question": "A craft store makes a third of its sales in the fabric section, a quarter of its sales in the jewelry section, and the rest in the stationery section. They made 36 sales today. How many sales were in the stationery section?",
+    "original_answer": "The craft store made 36 / 3 = <<36/3=12>>12 sales in the fabric section.\nIt made 36 / 4 = <<36/4=9>>9 sales in the jewelry section.\nThus, there were 36 - 12 - 9 = <<36-12-9=15>>15 sales in the stationery section.\n#### 15",
+    "sbs_answer": "The craft store made 36 / 3 = <<36/3=12>>12 sales in the fabric section.\nIt made 36 / 4 = <<36/4=9>>9 sales in the jewelry section.\nThus, there were 36 - 12 - 9 = <<36-12-9=15>>15 sales in the stationery section.\n#### 15",
+    "final_answer": "15"
+  },
+  {
+    "id": "gsm_sbs_0034",
+    "question": "John volunteers at a shelter twice a month for 3 hours at a time.  How many hours does he volunteer per year?",
+    "original_answer": "He volunteers 2*12=<<2*12=24>>24 times a year\nSo he volunteers for 24*3=<<24*3=72>>72 hours\n#### 72",
+    "sbs_answer": "He volunteers [2 \u00d7 12 \u2192 = 2 \u00d7 (10 + 2) \u2192 = 2\u00d710 + 2\u00d72 \u2192 = 20 + 4 \u2192 = 24]=<<[2 \u00d7 12 \u2192 = 2 \u00d7 (10 + 2) \u2192 = 2\u00d710 + 2\u00d72 \u2192 = 20 + 4 \u2192 = 24]=24>>24 times a year\nSo he volunteers for [3 \u00d7 24 \u2192 = 3 \u00d7 (20 + 4) \u2192 = 3\u00d720 + 3\u00d74 \u2192 = 60 + 12 \u2192 = 72]=<<[3 \u00d7 24 \u2192 = 3 \u00d7 (20 + 4) \u2192 = 3\u00d720 + 3\u00d74 \u2192 = 60 + 12 \u2192 = 72]=72>>72 hours\n#### 72",
+    "final_answer": "72"
+  },
+  {
+    "id": "gsm_sbs_0198",
+    "question": "A machine at the soda factory can usually fill a barrel of soda in 3 minutes. However this morning a leak went unnoticed and it took 5 minutes to fill one barrel. If the leak remains undetected, how much longer will it take to fill 12 barrels of soda than on a normal day when the machine works fine?",
+    "original_answer": "On a regular day it would take 3*12=<<3*12=36>>36 minutes\nWith the leak it will take 5*12=<<5*12=60>>60 minutes\nIt will take 60-36=<<60-36=24>>24 more minutes if the leak goes undetected\n#### 24",
+    "sbs_answer": "On a regular day it would take [3 \u00d7 12 \u2192 = 3 \u00d7 (10 + 2) \u2192 = 3\u00d710 + 3\u00d72 \u2192 = 30 + 6 \u2192 = 36]=<<[3 \u00d7 12 \u2192 = 3 \u00d7 (10 + 2) \u2192 = 3\u00d710 + 3\u00d72 \u2192 = 30 + 6 \u2192 = 36]=36>>36 minutes\nWith the leak it will take [5 \u00d7 12 \u2192 = 5 \u00d7 (10 + 2) \u2192 = 5\u00d710 + 5\u00d72 \u2192 = 50 + 10 \u2192 = 60]=<<[5 \u00d7 12 \u2192 = 5 \u00d7 (10 + 2) \u2192 = 5\u00d710 + 5\u00d72 \u2192 = 50 + 10 \u2192 = 60]=60>>60 minutes\nIt will take 60-36=<<60-36=24>>24 more minutes if the leak goes undetected\n#### 24",
+    "final_answer": "24"
+  },
+  {
+    "id": "gsm_sbs_0153",
+    "question": "Marvin and Tina were selling candy bars to help fund their class trip.  The candy bars cost $2 each.  Marvin sold 35 candy bars total.  Tina sold three times the number of candy bars as Marvin.  How much more money did Tina make for the class trip selling candy bars compared to Marvin?",
+    "original_answer": "Marvin sold 35 candy bars at $2 each so 35 * 2 = $<<35*2=70>>70 worth of candy\nTina sold three times the amount of candy so $70 * 3 = $<<70*3=210>>210 worth of candy\nIf Tina sold $210 worth of candy and Marvin sold $70 in candy then 210 - 70 = $<<210-70=140>>140 more sold than Marvin\n#### 140",
+    "sbs_answer": "Marvin sold 35 candy bars at $2 each so [2 \u00d7 35 \u2192 = 2 \u00d7 (30 + 5) \u2192 = 2\u00d730 + 2\u00d75 \u2192 = 60 + 10 \u2192 = 70] = $<<[2 \u00d7 35 \u2192 = 2 \u00d7 (30 + 5) \u2192 = 2\u00d730 + 2\u00d75 \u2192 = 60 + 10 \u2192 = 70]=70>>70 worth of candy\nTina sold three times the amount of candy so $[3 \u00d7 70 \u2192 = 3 \u00d7 7 \u00d7 10 \u2192 = 21 \u00d7 10 \u2192 = 210] = $<<[3 \u00d7 70 \u2192 = 3 \u00d7 7 \u00d7 10 \u2192 = 21 \u00d7 10 \u2192 = 210]=210>>210 worth of candy\nIf Tina sold $210 worth of candy and Marvin sold $70 in candy then 210 - 70 = $<<210-70=140>>140 more sold than Marvin\n#### 140",
+    "final_answer": "140"
+  },
+  {
+    "id": "gsm_sbs_0299",
+    "question": "Ralph is going to practice playing tennis with a tennis ball machine that shoots out tennis balls for Ralph to hit. He loads up the machine with 175 tennis balls to start with. Out of the first 100 balls, he manages to hit 2/5 of them. Of the next 75 tennis balls, he manages to hit 1/3 of them. Out of all the tennis balls, how many did Ralph not hit?",
+    "original_answer": "Out of the first 100 balls, Ralph was able to hit 2/5 of them and not able to hit 3/5 of them, 3/5 x 100 = 60 tennis balls Ralph didn't hit.\nOut of the next 75 balls, Ralph was able to hit 1/3 of them and not able to hit 2/3 of them, 2/3 x 75 = 50 tennis balls that Ralph didn't hit.\nCombined, Ralph was not able to hit 60 + 50 = <<60+50=110>>110 tennis balls Ralph didn't hit.\n#### 110",
+    "sbs_answer": "Out of the first 100 balls, Ralph was able to hit 2/5 of them and not able to hit 3/5 of them, 3/5 x 100 = 60 tennis balls Ralph didn't hit.\nOut of the next 75 balls, Ralph was able to hit 1/3 of them and not able to hit 2/3 of them, 2/3 x 75 = 50 tennis balls that Ralph didn't hit.\nCombined, Ralph was not able to hit 60 + 50 = <<60+50=110>>110 tennis balls Ralph didn't hit.\n#### 110",
+    "final_answer": "110"
+  },
+  {
+    "id": "gsm_sbs_0422",
+    "question": "Ted needs to purchase 5 bananas and 10 oranges.  If bananas cost $2 each and oranges cost $1.50 each.  How much money does Ted need to purchase 5 bananas and 10 oranges?",
+    "original_answer": "Ted needs 5 bananas and they each cost $2. To purchase the bananas, Ted needs 5*2= <<5*2=10>>10 dollars\nBecause Ted needs 10 oranges and they each cost $1.50, Ted needs 10*1.5= <<10*1.5=15>>15 dollars to pay for the oranges.\nAll together Ted needs $10 for the bananas and $15 for the oranges, so combined Ted needs 10+15= <<10+15=25>>25 dollars to purchase all the produce.\n#### 25",
+    "sbs_answer": "Ted needs 5 bananas and they each cost $2. To purchase the bananas, Ted needs 5\u00d72=10= <<5\u00d72=10=10>>10 dollars\nBecause Ted needs 10 oranges and they each cost $1.50, Ted needs 10\u00d71=10.5= <<10\u00d71=10.5=15>>15 dollars to pay for the oranges.\nAll together Ted needs $10 for the bananas and $15 for the oranges, so combined Ted needs 10+15= <<10+15=25>>25 dollars to purchase all the produce.\n#### 25",
+    "final_answer": "25"
+  },
+  {
+    "id": "gsm_sbs_0374",
+    "question": "Billy has four horses. Each one eats 4 pounds of oats, twice a day. How many pounds of oats does he need to feed his horses for 3 days?",
+    "original_answer": "At each feeding Billy serves 4 horses x 4 pounds of oats/horse = <<4*4=16>>16 pounds/feeding\nEach day Billy uses 16 pounds of oats/feeding x 2 feedings/day = <<16*2=32>>32 pounds of oats/day\nTriple that amount to find the amount of oats needed to feed the four horses for three days: 32 pounds of oats/day x 3 days = <<32*3=96>>96 pounds\n#### 96",
+    "sbs_answer": "At each feeding Billy serves 4 horses x 4 pounds of oats/horse = <<4\u00d74=16=16>>16 pounds/feeding\nEach day Billy uses 16 pounds of oats/feeding x 2 feedings/day = <<[2 \u00d7 16 \u2192 = 2 \u00d7 (10 + 6) \u2192 = 2\u00d710 + 2\u00d76 \u2192 = 20 + 12 \u2192 = 32]=32>>32 pounds of oats/day\nTriple that amount to find the amount of oats needed to feed the four horses for three days: 32 pounds of oats/day x 3 days = <<[3 \u00d7 32 \u2192 = 3 \u00d7 (30 + 2) \u2192 = 3\u00d730 + 3\u00d72 \u2192 = 90 + 6 \u2192 = 96]=96>>96 pounds\n#### 96",
+    "final_answer": "96"
+  },
+  {
+    "id": "gsm_sbs_0263",
+    "question": "Alice has 20 quarters. She wants to exchange them for nickels and so she goes to the bank. After getting back from the bank, she discovers that 20% of the nickels are iron nickels worth $3 each. What is the total value of her money now?",
+    "original_answer": "A quarter is worth five nickels because .25 / .05 = <<.25/.05=5>>5\nShe gets 100 nickels from the bank because 20 x 5 = <<20*5=100>>100\n20 of the nickels are iron nickels because 100 x .20 = <<100*.20=20>>20\n80 of the nickels are regular because 100 - 20 = <<100-20=80>>80\nThe iron nickels are worth $60 because 20 x 3 = <<20*3=60>>60\nThe regular nickels are worth $4 because 80 x .05 = <<80*.05=4>>4\nHer money is now worth $64 because 60 + 4 = <<60+4=64>>64\n#### 64",
+    "sbs_answer": "A quarter is worth five nickels because .25 / .05 = <<.25/.05=5>>5\nShe gets 100 nickels from the bank because 20 x 5 = <<[5 \u00d7 20 \u2192 = 5 \u00d7 2 \u00d7 10 \u2192 = 10 \u00d7 10 \u2192 = 100]=100>>100\n20 of the nickels are iron nickels because 100 x .20 = <<100*.20=20>>20\n80 of the nickels are regular because 100 - 20 = <<100-20=80>>80\nThe iron nickels are worth $60 because 20 x 3 = <<[3 \u00d7 20 \u2192 = 3 \u00d7 2 \u00d7 10 \u2192 = 6 \u00d7 10 \u2192 = 60]=60>>60\nThe regular nickels are worth $4 because 80 x .05 = <<80*.05=4>>4\nHer money is now worth $64 because 60 + 4 = <<60+4=64>>64\n#### 64",
+    "final_answer": "64"
+  },
+  {
+    "id": "gsm_sbs_0486",
+    "question": "Susie has $200 in her piggy bank. If she puts 20% more money into her piggy bank, how much money she will have?",
+    "original_answer": "If Susie puts 20% more money into her piggy bank, she'll have 20/100*200 = $<<20/100*200=40>>40 more in her piggy bank.\nThe total amount of money in Susie's piggy bank will increase to $200+$40=$<<200+40=240>>240\n#### 240",
+    "sbs_answer": "If Susie puts 20% more money into her piggy bank, she'll have 20/[100 \u00d7 200 \u2192 = 10 \u00d7 10 \u00d7 200 \u2192 = 10 \u00d7 200 \u00d7 10 \u2192 = 2000 \u00d7 10 \u2192 = 20000] = $<<20/[100 \u00d7 200 \u2192 = 10 \u00d7 10 \u00d7 200 \u2192 = 10 \u00d7 200 \u00d7 10 \u2192 = 2000 \u00d7 10 \u2192 = 20000]=40>>40 more in her piggy bank.\nThe total amount of money in Susie's piggy bank will increase to $200+$40=$<<200+40=240>>240\n#### 240",
+    "final_answer": "240"
+  },
+  {
+    "id": "gsm_sbs_0062",
+    "question": "Archibald eats 1 apple a day for two weeks. Over the next three weeks, he eats the same number of apples as the total of the first two weeks. Over the next two weeks, he eats 3 apples a day. Over these 7 weeks, how many apples does he average a week?",
+    "original_answer": "He ate 14 apples the first two weeks because 14 x 1 = 14\nHe ate 14 apples in the next three weeks because 14 = <<14=14>>14\nHe ate 42 apples in the final two weeks because 14 x 3 = <<14*3=42>>42\nHe ate 70 apples in total.\nHe averaged 10 apples a week because 70 / 7 = <<70/7=10>>10\n#### 10",
+    "sbs_answer": "He ate 14 apples the first two weeks because 14 x 1 = 14\nHe ate 14 apples in the next three weeks because 14 = <<14=14>>14\nHe ate 42 apples in the final two weeks because 14 x 3 = <<[3 \u00d7 14 \u2192 = 3 \u00d7 (10 + 4) \u2192 = 3\u00d710 + 3\u00d74 \u2192 = 30 + 12 \u2192 = 42]=42>>42\nHe ate 70 apples in total.\nHe averaged 10 apples a week because 70 / 7 = <<70/7=10>>10\n#### 10",
+    "final_answer": "10"
+  },
+  {
+    "id": "gsm_sbs_0120",
+    "question": "Andrew bought a big bag of balloons. The bag had 303 blue balloons and 453 purple balloons. If Andrew shares half of his balloons with his brother, how many balloons does he have left?",
+    "original_answer": "There are 303 + 453 = <<303+453=756>>756 balloons in the bag.\nOnce Andrew gives half of his balloons to his brother he has 756/2=<<756/2=378>>378 balloons left.\n#### 378",
+    "sbs_answer": "There are 303 + 453 = <<303+453=756>>756 balloons in the bag.\nOnce Andrew gives half of his balloons to his brother he has 756/2=<<756/2=378>>378 balloons left.\n#### 378",
+    "final_answer": "378"
+  },
+  {
+    "id": "gsm_sbs_0466",
+    "question": "Lilah's family gallery has 400 photos. On a two-day trip to the Grand Canyon, they took half as many photos they have in the family's gallery on the first day and 120 more photos than they took on the first day on the second day. If they added all these photos to the family gallery, calculate the total number of photos in the gallery.",
+    "original_answer": "On their first day to the grand canyon, the family took half as many photos as the ones they have in the gallery, meaning they took 1/2*400 = <<400/2=200>>200 photos.\nThe total number of photos if they add the ones they took on the first day to the family's gallery is 400+200 = <<400+200=600>>600\nOn the second day, they took 120 more photos than they took on the first day, a total of 200+120 = <<200+120=320>>320 photos.\nAfter adding the photos they took on the second day to the galley, the number of photos will be 600+320 = <<600+320=920>>920\n#### 920",
+    "sbs_answer": "On their first day to the grand canyon, the family took half as many photos as the ones they have in the gallery, meaning they took 1/[2 \u00d7 400 \u2192 = 2 \u00d7 40 \u00d7 10 \u2192 = (2 \u00d7 40 \u2192 = 2 \u00d7 4 \u00d7 10 \u2192 = 8 \u00d7 10 \u2192 = 80) \u00d7 10 \u2192 = 80 \u00d7 10 = 800] = <<400/2=200>>200 photos.\nThe total number of photos if they add the ones they took on the first day to the family's gallery is 400+200 = <<400+200=600>>600\nOn the second day, they took 120 more photos than they took on the first day, a total of 200+120 = <<200+120=320>>320 photos.\nAfter adding the photos they took on the second day to the galley, the number of photos will be 600+320 = <<600+320=920>>920\n#### 920",
+    "final_answer": "920"
+  },
+  {
+    "id": "synth_mult_0126",
+    "question": "What is 9 times 12?",
+    "original_answer": "9 \u00d7 12 = 108\n#### 108",
+    "sbs_answer": "Let me break this down step by step.\n9 \u00d7 12\n= 9 \u00d7 (10 + 2)\n= 9\u00d710 + 9\u00d72\n= 90 + 18\n= 108\nThe answer is 108.\n#### 108",
+    "final_answer": "108"
+  },
+  {
+    "id": "gsm_sbs_0069",
+    "question": "Dale and Andrew had breakfast at a cafe. A slice of toast costs \u00a31, and eggs cost \u00a33 each. Dale had 2 slices of toast and 2 eggs. Andrew had 1 slice of toast and 2 eggs. How much did their breakfast cost?",
+    "original_answer": "The cost of Dale's toast is 2 \u00d7 $1 = $<<2*1=2>>2.\nThe cost of Andrew's toast is 1 \u00d7 $1 = $<<1*1=1>>1.\nThe cost of Dale's eggs is 2 \u00d7 $3 = $<<2*3=6>>6.\nThe cost of Andrew's eggs is 2 \u00d7 $3 = $<<2*3=6>>6.\nTheir breakfast cost $2 + $1 + $6 + $6 = $<<2+1+6+6=15>>15.\n#### 15",
+    "sbs_answer": "The cost of Dale's toast is 2 \u00d7 $1 = $<<2\u00d71=2=2>>2.\nThe cost of Andrew's toast is 1 \u00d7 $1 = $<<1\u00d71=1=1>>1.\nThe cost of Dale's eggs is 2 \u00d7 $3 = $<<2\u00d73=6=6>>6.\nThe cost of Andrew's eggs is 2 \u00d7 $3 = $<<2\u00d73=6=6>>6.\nTheir breakfast cost $2 + $1 + $6 + $6 = $<<2+1+6+6=15>>15.\n#### 15",
+    "final_answer": "15"
+  },
+  {
+    "id": "gsm_sbs_0439",
+    "question": "Monika went out for the day and spent some money. She went to the mall and spent $250. Then, she went to the movies and watched 3 movies back to back that each cost $24. Then she stopped by the farmer's market on her way home and got 20 bags of beans at $1.25/bag. How much money did Monika spend throughout her day?",
+    "original_answer": "Monika spent 24*3 = <<24*3=72>>72 dollars at the movies.\nMonika spent 20*1.25 = <<20*1.25=25>>25 dollars at the farmers market.\nThroughout her day, Monika spent 250+72+25 = <<250+72+25=347>>347 dollars.\n#### 347",
+    "sbs_answer": "Monika spent [3 \u00d7 24 \u2192 = 3 \u00d7 (20 + 4) \u2192 = 3\u00d720 + 3\u00d74 \u2192 = 60 + 12 \u2192 = 72] = <<[3 \u00d7 24 \u2192 = 3 \u00d7 (20 + 4) \u2192 = 3\u00d720 + 3\u00d74 \u2192 = 60 + 12 \u2192 = 72]=72>>72 dollars at the movies.\nMonika spent 20\u00d71=20.25 = <<20\u00d71=20.25=25>>25 dollars at the farmers market.\nThroughout her day, Monika spent 250+72+25 = <<250+72+25=347>>347 dollars.\n#### 347",
+    "final_answer": "347"
+  },
+  {
+    "id": "synth_mult_0081",
+    "question": "What is 4 times 20?",
+    "original_answer": "4 \u00d7 20 = 80\n#### 80",
+    "sbs_answer": "Let me break this down step by step.\n4 \u00d7 20\n= 4 \u00d7 2 \u00d7 10\n= 8 \u00d7 10\n= 80\nThe answer is 80.\n#### 80",
+    "final_answer": "80"
+  },
+  {
+    "id": "gsm_sbs_0074",
+    "question": "The selling price of a bicycle that had sold for $220 last year was increased by 15%. What is the new price?",
+    "original_answer": "The price of the bicycle increased by $220 * 15/100 = $<<220*15/100=33>>33.\nAdding the increment price, the new price is $220 + $33 = $<<220+33=253>>253.\n#### 253",
+    "sbs_answer": "The price of the bicycle increased by $[15 \u00d7 220 \u2192 = (10 + 5) \u00d7 220 \u2192 = 10\u00d7220 + 5\u00d7220 \u2192 [10\u00d7220 = 2200] \u2192 [5\u00d7220: 5 \u00d7 220 \u2192 = 5 \u00d7 22 \u00d7 10 \u2192 = (5 \u00d7 22 \u2192 = 5 \u00d7 (20 + 2) \u2192 = 5\u00d720 + 5\u00d72 \u2192 = 100 + 10 \u2192 = 110) \u00d7 10 \u2192 = 110 \u00d7 10 = 1100] \u2192 = 2200 + 1100 \u2192 = 3300]/100 = $<<[15 \u00d7 220 \u2192 = (10 + 5) \u00d7 220 \u2192 = 10\u00d7220 + 5\u00d7220 \u2192 [10\u00d7220 = 2200] \u2192 [5\u00d7220: 5 \u00d7 220 \u2192 = 5 \u00d7 22 \u00d7 10 \u2192 = (5 \u00d7 22 \u2192 = 5 \u00d7 (20 + 2) \u2192 = 5\u00d720 + 5\u00d72 \u2192 = 100 + 10 \u2192 = 110) \u00d7 10 \u2192 = 110 \u00d7 10 = 1100] \u2192 = 2200 + 1100 \u2192 = 3300]/100=33>>33.\nAdding the increment price, the new price is $220 + $33 = $<<220+33=253>>253.\n#### 253",
+    "final_answer": "253"
+  }
+]

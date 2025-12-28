@@ -1,0 +1,142 @@
+[
+  {
+    "id": "gsm_sbs_0140",
+    "question": "Jerry\u2019s two daughters play softball on different teams. They each have 8 games this season. Each team practices 4 hours for every game they play. If each game lasts for 2 hours, how many hours will Jerry spend at the field watching his daughters play and practice altogether?",
+    "original_answer": "Jerry will spend 8 games x 2 hours per game = <<8*2=16>>16 hours watching one daughter play her games.\nHe will spend 16 x 2 = <<16*2=32>>32 hours watching both daughters play their games.\nHe will spend 8 games x 4 hours of practice = <<8*4=32>>32 hours watching one daughter practice.\nHe will spend 32 x 2 = <<32*2=64>>64 hours watching both daughters practice.\nHe will spend a total of 32 hours watching games + 64 hours watching practice = <<32+64=96>>96 hours.\n#### 96",
+    "sbs_answer": "Jerry will spend 8 games x 2 hours per game = <<8\u00d72=16=16>>16 hours watching one daughter play her games.\nHe will spend 16 x 2 = <<[2 \u00d7 16 \u2192 = 2 \u00d7 (10 + 6) \u2192 = 2\u00d710 + 2\u00d76 \u2192 = 20 + 12 \u2192 = 32]=32>>32 hours watching both daughters play their games.\nHe will spend 8 games x 4 hours of practice = <<8\u00d74=32=32>>32 hours watching one daughter practice.\nHe will spend 32 x 2 = <<[2 \u00d7 32 \u2192 = 2 \u00d7 (30 + 2) \u2192 = 2\u00d730 + 2\u00d72 \u2192 = 60 + 4 \u2192 = 64]=64>>64 hours watching both daughters practice.\nHe will spend a total of 32 hours watching games + 64 hours watching practice = <<32+64=96>>96 hours.\n#### 96",
+    "final_answer": "96"
+  },
+  {
+    "id": "gsm_sbs_0064",
+    "question": "Nancy is crafting clay pots to sell. She creates 12 clay pots on Monday, twice as many on Tuesday, a few more on Wednesday, then ends the week with 50 clay pots. How many did she create on Wednesday?",
+    "original_answer": "On Tuesday, Nancy creates 12 clay pots * 2 = <<12*2=24>>24 clay plots.\nSo she created a combined total of 12 + 24 = <<12+24=36>>36 clay pots on Monday and Tuesday.\nSubtracting this from the number of clay pots she ended the week with means she must have created 50 \u2013 36 = <<50-36=14>>14 clay pots on Wednesday.\n#### 14",
+    "sbs_answer": "On Tuesday, Nancy creates 12 clay pots * 2 = <<[2 \u00d7 12 \u2192 = 2 \u00d7 (10 + 2) \u2192 = 2\u00d710 + 2\u00d72 \u2192 = 20 + 4 \u2192 = 24]=24>>24 clay plots.\nSo she created a combined total of 12 + 24 = <<12+24=36>>36 clay pots on Monday and Tuesday.\nSubtracting this from the number of clay pots she ended the week with means she must have created 50 \u2013 36 = <<50-36=14>>14 clay pots on Wednesday.\n#### 14",
+    "final_answer": "14"
+  },
+  {
+    "id": "gsm_sbs_0273",
+    "question": "Roselyn gives Mara three times as many books as she gives Rebecca and remains with 60 books. If Rebecca received 40 books, how many books did Roselyn have before?",
+    "original_answer": "If Roselyn gave Rebecca 40 books, and Mara was given three times as many books, Mara has 3*40 = 120 books.\nRebecca and Mara's total number of books is 120+40 = <<120+40=160>>160 books.\nIf Roselyn gave Mara and Rebecca her books, which is 160, then she initially had 60+160 = <<60+160=220>>220 books.\n#### 220",
+    "sbs_answer": "If Roselyn gave Rebecca 40 books, and Mara was given three times as many books, Mara has [3 \u00d7 40 \u2192 = 3 \u00d7 4 \u00d7 10 \u2192 = 12 \u00d7 10 \u2192 = 120] = 120 books.\nRebecca and Mara's total number of books is 120+40 = <<120+40=160>>160 books.\nIf Roselyn gave Mara and Rebecca her books, which is 160, then she initially had 60+160 = <<60+160=220>>220 books.\n#### 220",
+    "final_answer": "220"
+  },
+  {
+    "id": "gsm_sbs_0362",
+    "question": "A laboratory has 22 beakers of liquid in a fume hood, and 8 of the beakers have copper ions in them. Adding three drops of a solution will turn the liquid in a beaker blue if there are copper ions present. If the beakers are tested one by one for copper ions and 45 drops are used before all 8 beakers with copper ions are found, how many beakers without copper ions were tested?",
+    "original_answer": "There were 45 / 3 = <<45/3=15>>15 beakers tested to find all the beakers with copper ions.\nThus, 15 - 8 = <<15-8=7>>7 beakers without copper ions were tested.\n#### 7",
+    "sbs_answer": "There were 45 / 3 = <<45/3=15>>15 beakers tested to find all the beakers with copper ions.\nThus, 15 - 8 = <<15-8=7>>7 beakers without copper ions were tested.\n#### 7",
+    "final_answer": "7"
+  },
+  {
+    "id": "gsm_sbs_0007",
+    "question": "Five coaster vans are used to transport students for their field trip. Each van carries 28 students, 60 of which are boys. How many are girls?",
+    "original_answer": "There are a total of 5 vans x 28 students = <<5*28=140>>140 students.\nIf 60 are boys, then 140 - 60 = <<140-60=80>>80 of these students are girls.\n#### 80",
+    "sbs_answer": "There are a total of 5 vans x 28 students = <<[5 \u00d7 28 \u2192 = 5 \u00d7 (20 + 8) \u2192 = 5\u00d720 + 5\u00d78 \u2192 = 100 + 40 \u2192 = 140]=140>>140 students.\nIf 60 are boys, then 140 - 60 = <<140-60=80>>80 of these students are girls.\n#### 80",
+    "final_answer": "80"
+  },
+  {
+    "id": "synth_mult_0121",
+    "question": "What is 6 times 23?",
+    "original_answer": "6 \u00d7 23 = 138\n#### 138",
+    "sbs_answer": "Let me break this down step by step.\n6 \u00d7 23\n= 6 \u00d7 (20 + 3)\n= 6\u00d720 + 6\u00d73\n= 120 + 18\n= 138\nThe answer is 138.\n#### 138",
+    "final_answer": "138"
+  },
+  {
+    "id": "gsm_sbs_0091",
+    "question": "Holly needs to take 2 insulin pills per day, 3 blood pressure pills per day, and twice as many anticonvulsants as blood pressure pills each day. How many pills does Holly take in a week?",
+    "original_answer": "First find the number of anticonvulsant pills Holly takes: 3 pills * 2 = <<3*2=6>>6 pills\nThen find the total number of pills Holly takes each day: 6 pills + 2 pills + 3 pills = <<6+2+3=11>>11 pills\nThen multiply that number by the number of days in a week to find the number of pills Holly takes each week: 11 pills/day * 7 days/week = <<11*7=77>>77 pills/week\n#### 77",
+    "sbs_answer": "First find the number of anticonvulsant pills Holly takes: 3 pills * 2 = <<3\u00d72=6=6>>6 pills\nThen find the total number of pills Holly takes each day: 6 pills + 2 pills + 3 pills = <<6+2+3=11>>11 pills\nThen multiply that number by the number of days in a week to find the number of pills Holly takes each week: 11 pills/day * 7 days/week = <<[7 \u00d7 11 \u2192 = 7 \u00d7 (10 + 1) \u2192 = 7\u00d710 + 7\u00d71 \u2192 = 70 + 7 \u2192 = 77]=77>>77 pills/week\n#### 77",
+    "final_answer": "77"
+  },
+  {
+    "id": "gsm_sbs_0184",
+    "question": "Daniel has a collection of 346 video games. 80 of them, Daniel bought for $12 each. Of the rest, 50% were bought for $7. All others had a price of $3 each. How much did Daniel spend on all the games in his collection?",
+    "original_answer": "On 80 games, Daniel spend 80 games * $12/game = $<<80*12=960>>960.\nThe rest of the collection is 346 games - 80 games = <<346-80=266>>266 games.\n50% of these games means 50/100 * 266 games = <<50/100*266=133>>133 games.\nDaniel bought them for $7 each, so he had to spend 133 games * $7/game = $<<133*7=931>>931 on them.\nThe other 133 games were bought for $3 each, so they've cost him 133 games * $3/game = $<<133*3=399>>399.\nOn all games in total Daniel spent $960 + $931 + $399 = $<<960+931+399=2290>>2290.\n#### 2290",
+    "sbs_answer": "On 80 games, Daniel spend 80 games * $12/game = $<<[12 \u00d7 80 \u2192 = (10 + 2) \u00d7 80 \u2192 = 10\u00d780 + 2\u00d780 \u2192 [10\u00d780 = 800] \u2192 [2\u00d780: 2 \u00d7 80 \u2192 = 2 \u00d7 8 \u00d7 10 \u2192 = 16 \u00d7 10 \u2192 = 160] \u2192 = 800 + 160 \u2192 = 960]=960>>960.\nThe rest of the collection is 346 games - 80 games = <<346-80=266>>266 games.\n50% of these games means 50/[100 \u00d7 266 \u2192 = 10 \u00d7 10 \u00d7 266 \u2192 = 10 \u00d7 266 \u00d7 10 \u2192 = 2660 \u00d7 10 \u2192 = 26600] games = <<50/[100 \u00d7 266 \u2192 = 10 \u00d7 10 \u00d7 266 \u2192 = 10 \u00d7 266 \u00d7 10 \u2192 = 2660 \u00d7 10 \u2192 = 26600]=133>>133 games.\nDaniel bought them for $7 each, so he had to spend 133 games * $7/game = $<<[7 \u00d7 133 \u2192 = 7 \u00d7 (130 + 3) \u2192 = 7\u00d7130 + 7\u00d73 \u2192 = 910 + 21 \u2192 = 931]=931>>931 on them.\nThe other 133 games were bought for $3 each, so they've cost him 133 games * $3/game = $<<[3 \u00d7 133 \u2192 = 3 \u00d7 (130 + 3) \u2192 = 3\u00d7130 + 3\u00d73 \u2192 = 390 + 9 \u2192 = 399]=399>>399.\nOn all games in total Daniel spent $960 + $931 + $399 = $<<960+931+399=2290>>2290.\n#### 2290",
+    "final_answer": "2290"
+  },
+  {
+    "id": "gsm_sbs_0116",
+    "question": "Kate bought 7 packs of red bouncy balls and 6 packs of yellow bouncy balls. Each pack contained 18 bouncy balls. How many more red bouncy balls than yellow bouncy balls did Kate buy?",
+    "original_answer": "Kate bought 7 packs \u00d7 18 balls/pack = <<7*18=126>>126 red bouncy balls.\nShe also bought 6 packs \u00d7 18 balls/pack = <<6*18=108>>108 yellow bouncy balls.\nKate bought 126 balls - 108 balls= <<126-108=18>>18 more red bouncy balls than yellow bouncy balls.\n#### 18",
+    "sbs_answer": "Kate bought 7 packs \u00d7 18 balls/pack = <<[7 \u00d7 18 \u2192 = 7 \u00d7 (10 + 8) \u2192 = 7\u00d710 + 7\u00d78 \u2192 = 70 + 56 \u2192 = 126]=126>>126 red bouncy balls.\nShe also bought 6 packs \u00d7 18 balls/pack = <<[6 \u00d7 18 \u2192 = 6 \u00d7 (10 + 8) \u2192 = 6\u00d710 + 6\u00d78 \u2192 = 60 + 48 \u2192 = 108]=108>>108 yellow bouncy balls.\nKate bought 126 balls - 108 balls= <<126-108=18>>18 more red bouncy balls than yellow bouncy balls.\n#### 18",
+    "final_answer": "18"
+  },
+  {
+    "id": "gsm_sbs_0151",
+    "question": "Students at Highridge High earn 2 points for each correct answer during a quiz bowl If a student correctly answers all the questions in a round, the student is awarded an additional 4 point bonus. They played a total of five rounds each consisting of five questions. If James only missed one question, how many points did he get?",
+    "original_answer": "If James only missed one question in all five rounds of five questions, he correctly answered 5 * 5 - 1 = <<5*5-1=24>>24 questions\nBefore the bonus, James earned 24 correct answers * 2 points/answer = <<24*2=48>>48 points.\nSince missing one question would only disqualify him from receiving a bonus in one round, he would earn a bonus for 5-1=<<5-1=4>>4 rounds.\nHe should expect a bonus of 4 rounds* 4 points/round= <<4*4=16>>16 points.\nIncluding his bonus, James scored a total of 48 + 16 = <<48+16=64>>64 points.\n#### 66",
+    "sbs_answer": "If James only missed one question in all five rounds of five questions, he correctly answered 5\u00d75=25 - 1 = <<5\u00d75=25-1=24>>24 questions\nBefore the bonus, James earned 24 correct answers * 2 points/answer = <<[2 \u00d7 24 \u2192 = 2 \u00d7 (20 + 4) \u2192 = 2\u00d720 + 2\u00d74 \u2192 = 40 + 8 \u2192 = 48]=48>>48 points.\nSince missing one question would only disqualify him from receiving a bonus in one round, he would earn a bonus for 5-1=<<5-1=4>>4 rounds.\nHe should expect a bonus of 4 rounds* 4 points/round= <<4\u00d74=16=16>>16 points.\nIncluding his bonus, James scored a total of 48 + 16 = <<48+16=64>>64 points.\n#### 66",
+    "final_answer": "66"
+  },
+  {
+    "id": "gsm_sbs_0099",
+    "question": "Peter goes to the store to buy a soda. The soda costs $.25 an ounce. He brought $2 with him and leaves with $.50. How many ounces of soda did he buy?",
+    "original_answer": "He spend $1.5 on soda because 2 - .5 = <<2-.5=1.5>>1.5\nHe bought 6 ounces of soda because 1.5 / .25 = <<6=6>>6\n#### 6",
+    "sbs_answer": "He spend $1.5 on soda because 2 - .5 = <<2-.5=1.5>>1.5\nHe bought 6 ounces of soda because 1.5 / .25 = <<6=6>>6\n#### 6",
+    "final_answer": "6"
+  },
+  {
+    "id": "synth_mult_0070",
+    "question": "What is 13 times 15?",
+    "original_answer": "13 \u00d7 15 = 195\n#### 195",
+    "sbs_answer": "Let me break this down step by step.\n13 \u00d7 15\n= (10 + 3) \u00d7 15\n= 10\u00d715 + 3\u00d715\n  [10\u00d715 = 150]\n  [3\u00d715: 3 \u00d7 15\n= 3 \u00d7 (10 + 5)\n= 3\u00d710 + 3\u00d75\n= 30 + 15\n= 45]\n= 150 + 45\n= 195\nThe answer is 195.\n#### 195",
+    "final_answer": "195"
+  },
+  {
+    "id": "gsm_sbs_0144",
+    "question": "Sansa is a famous artist, she can draw a portrait and sell it according to its size. She sells an 8-inch portrait for $5, and a 16-inch portrait for twice the price of the 8-inch portrait. If she sells three 8-inch portraits and five 16-inch portraits per day, how many does she earns every 3 days?",
+    "original_answer": "Sansa earns $5 x 3 = $<<5*3=15>>15 every day by selling three 8-inch portraits.\nThe price of the 16-inch portrait is $5 x 2 = $<<5*2=10>>10 each.\nSo, she earns $10 x 5 = $<<10*5=50>>50 every day by selling five 16-inch portraits.\nHer total earnings is $50 + $15 = $<<50+15=65>>65 every day.\nTherefore, the total amount she earns after 3 days is $65 x 3 = $<<65*3=195>>195.\n#### 195",
+    "sbs_answer": "Sansa earns $5 x 3 = $<<5\u00d73=15=15>>15 every day by selling three 8-inch portraits.\nThe price of the 16-inch portrait is $5 x 2 = $<<5\u00d72=10=10>>10 each.\nSo, she earns $10 x 5 = $<<10\u00d75=50=50>>50 every day by selling five 16-inch portraits.\nHer total earnings is $50 + $15 = $<<50+15=65>>65 every day.\nTherefore, the total amount she earns after 3 days is $65 x 3 = $<<[3 \u00d7 65 \u2192 = 3 \u00d7 (60 + 5) \u2192 = 3\u00d760 + 3\u00d75 \u2192 = 180 + 15 \u2192 = 195]=195>>195.\n#### 195",
+    "final_answer": "195"
+  },
+  {
+    "id": "synth_mult_0057",
+    "question": "What is 9 times 13?",
+    "original_answer": "9 \u00d7 13 = 117\n#### 117",
+    "sbs_answer": "Let me break this down step by step.\n9 \u00d7 13\n= 9 \u00d7 (10 + 3)\n= 9\u00d710 + 9\u00d73\n= 90 + 27\n= 117\nThe answer is 117.\n#### 117",
+    "final_answer": "117"
+  },
+  {
+    "id": "gsm_sbs_0268",
+    "question": "Hannah sold 40 pieces of cookies for $0.8 each and 30 cupcakes for $2 each. She used the money to buy 2 sets of measuring spoons for $6.5 each. How much money does she have left?",
+    "original_answer": "Hannah's earnings from the cookies is 40 x $0.8 = $<<40*0.8=32>>32.\nHer earnings from the cupcakes is 30 x $2 = $<<30*2=60>>60.\nHer total earnings for the cupcakes and cookies is $32 + $60 = $<<32+60=92>>92.\nThe cost of 2 sets of measuring spoons is 2 x $6.5 = $<<2*6.5=13>>13.\nSo, Hannah has $92 - $13 = $<<92-13=79>>79.\n#### 79",
+    "sbs_answer": "Hannah's earnings from the cookies is 40 x $0.8 = $<<40\u00d70=0.8=32>>32.\nHer earnings from the cupcakes is 30 x $2 = $<<[2 \u00d7 30 \u2192 = 2 \u00d7 3 \u00d7 10 \u2192 = 6 \u00d7 10 \u2192 = 60]=60>>60.\nHer total earnings for the cupcakes and cookies is $32 + $60 = $<<32+60=92>>92.\nThe cost of 2 sets of measuring spoons is 2 x $6.5 = $<<2\u00d76=12.5=13>>13.\nSo, Hannah has $92 - $13 = $<<92-13=79>>79.\n#### 79",
+    "final_answer": "79"
+  },
+  {
+    "id": "synth_mult_0102",
+    "question": "What is 9 times 21?",
+    "original_answer": "9 \u00d7 21 = 189\n#### 189",
+    "sbs_answer": "Let me break this down step by step.\n9 \u00d7 21\n= 9 \u00d7 (20 + 1)\n= 9\u00d720 + 9\u00d71\n= 180 + 9\n= 189\nThe answer is 189.\n#### 189",
+    "final_answer": "189"
+  },
+  {
+    "id": "gsm_sbs_0301",
+    "question": "Jenny wants to sell some girl scout cookies and has the choice of two neighborhoods to visit.  Neighborhood A has 10 homes which each will buy 2 boxes of cookies.  Neighborhood B has 5 homes, each of which will buy 5 boxes of cookies.  Assuming each box of cookies costs $2, how much will Jenny make at the better choice of the two neighborhoods?",
+    "original_answer": "First, we need to determine which neighborhood is the better choice by comparing the number of boxes sold. A has 10 houses which will buy 2 boxes each, meaning A will give Jenny 10*2=<<10*2=20>>20 box sales\nNeighborhood B has 5 homes which will each buy 5 boxes, meaning she will sell 5*5=<<5*5=25>>25 boxes by going to that neighborhood.\nSince 25>20, this means Jenny should choose neighborhood B.\nSince Jenny earns $2 per box sold, this means she will earn 25*2=<<25*2=50>>50 dollars by choosing neighborhood B.\n#### 50",
+    "sbs_answer": "First, we need to determine which neighborhood is the better choice by comparing the number of boxes sold. A has 10 houses which will buy 2 boxes each, meaning A will give Jenny 10\u00d72=20=<<10\u00d72=20=20>>20 box sales\nNeighborhood B has 5 homes which will each buy 5 boxes, meaning she will sell 5\u00d75=25=<<5\u00d75=25=25>>25 boxes by going to that neighborhood.\nSince 25>20, this means Jenny should choose neighborhood B.\nSince Jenny earns $2 per box sold, this means she will earn [2 \u00d7 25 \u2192 = 2 \u00d7 (20 + 5) \u2192 = 2\u00d720 + 2\u00d75 \u2192 = 40 + 10 \u2192 = 50]=<<[2 \u00d7 25 \u2192 = 2 \u00d7 (20 + 5) \u2192 = 2\u00d720 + 2\u00d75 \u2192 = 40 + 10 \u2192 = 50]=50>>50 dollars by choosing neighborhood B.\n#### 50",
+    "final_answer": "50"
+  },
+  {
+    "id": "synth_mult_0009",
+    "question": "What is 3 times 13?",
+    "original_answer": "3 \u00d7 13 = 39\n#### 39",
+    "sbs_answer": "Let me break this down step by step.\n3 \u00d7 13\n= 3 \u00d7 (10 + 3)\n= 3\u00d710 + 3\u00d73\n= 30 + 9\n= 39\nThe answer is 39.\n#### 39",
+    "final_answer": "39"
+  },
+  {
+    "id": "gsm_sbs_0507",
+    "question": "Josh built his little brother a rectangular sandbox.  The perimeter of the sandbox is 30 feet and the length is twice the width. What is the width of the sandbox?",
+    "original_answer": "There are four sides to a rectangle, the width is W and so the length is 2W, and we can put that in this equation: W + W + 2W + 2W = 30 feet.\nIf we add the sides together, we get 6W = 30 feet.\nTo find W, we divide both sides by 6, like this: 6W / 6 = 30 feet / 6, so W = 5 feet.\n#### 5",
+    "sbs_answer": "There are four sides to a rectangle, the width is W and so the length is 2W, and we can put that in this equation: W + W + 2W + 2W = 30 feet.\nIf we add the sides together, we get 6W = 30 feet.\nTo find W, we divide both sides by 6, like this: 6W / 6 = 30 feet / 6, so W = 5 feet.\n#### 5",
+    "final_answer": "5"
+  },
+  {
+    "id": "gsm_sbs_0247",
+    "question": "Tara has been planning to buy a laptop which costs $1000. A computer shop accepts payment in installments of $65 per month provided that a 20% down payment is made. If Tara wants to pay an additional $20 for the down payment, how much will her balance be after paying for 4 months?",
+    "original_answer": "Tara has to make a $1000 x 20/100 = $<<1000*20/100=200>>200 down payment.\nSince Tara wants to pay $20 more for the down payment, her total down payment will be $200 + $20 = $<<200+20=220>>220.\nSo her remaining balance payable over a year is $1000 - $220 = $<<1000-220=780>>780.\nTara has to make a monthly payment of $780/year / 12 months/year = $<<780/12=65>>65/month.\nThe total cost of her payments for 4 months is $65/month x 4 months = $<<65*4=260>>260.\nTherefore, Tara's balance after 4 months is $780 - $260 = $<<780-260=520>>520.\n#### 520",
+    "sbs_answer": "Tara has to make a $1000 x 20/100 = $<<[20 \u00d7 1000 \u2192 = 2 \u00d7 10 \u00d7 1000 \u2192 = 2 \u00d7 1000 \u00d7 10 \u2192 [where 2 \u00d7 1000 \u2192 = 2 \u00d7 100 \u00d7 10 \u2192 = (2 \u00d7 100 \u2192 = 2 \u00d7 10 \u00d7 10 \u2192 = 20 \u00d7 10 \u2192 = 200) \u00d7 10 \u2192 = 200 \u00d7 10 = 2000] \u2192 = 2000 \u00d7 10 \u2192 = 20000]/100=200>>200 down payment.\nSince Tara wants to pay $20 more for the down payment, her total down payment will be $200 + $20 = $<<200+20=220>>220.\nSo her remaining balance payable over a year is $1000 - $220 = $<<1000-220=780>>780.\nTara has to make a monthly payment of $780/year / 12 months/year = $<<780/12=65>>65/month.\nThe total cost of her payments for 4 months is $65/month x 4 months = $<<[4 \u00d7 65 \u2192 = 4 \u00d7 (60 + 5) \u2192 = 4\u00d760 + 4\u00d75 \u2192 = 240 + 20 \u2192 = 260]=260>>260.\nTherefore, Tara's balance after 4 months is $780 - $260 = $<<780-260=520>>520.\n#### 520",
+    "final_answer": "520"
+  }
+]

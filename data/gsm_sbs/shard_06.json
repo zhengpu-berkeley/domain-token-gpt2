@@ -1,0 +1,142 @@
+[
+  {
+    "id": "gsm_sbs_0332",
+    "question": "Ann is baking cookies. She bakes three dozen oatmeal raisin cookies, two dozen sugar cookies, and four dozen chocolate chip cookies. Ann gives away two dozen oatmeal raisin cookies, 1.5 dozen sugar cookies, and 2.5 dozen chocolate chip cookies. How many total cookies does she keep?",
+    "original_answer": "Ann had 3 dozen oatmeal cookies - 2 dozen = <<3-2=1>>1 dozen oatmeal cookies left.\nAnn had 2 dozen sugar cookies - 1.5 dozen = <<2-1.5=.5>>.5 dozen sugar cookies left.\nAnn had 4 dozen chocolate chip cookies - 2.5 dozen = 1.5 dozen chocolate chip cookies left.\nAnn has a total of 1 + .5 + 1.5 dozen cookies = <<1+.5+1.5=3>>3 dozen cookies.\n3 dozen cookies is 3 *12 cookies = <<3*12=36>>36 cookies remaining.\n#### 36",
+    "sbs_answer": "Ann had 3 dozen oatmeal cookies - 2 dozen = <<3-2=1>>1 dozen oatmeal cookies left.\nAnn had 2 dozen sugar cookies - 1.5 dozen = <<2-1.5=.5>>.5 dozen sugar cookies left.\nAnn had 4 dozen chocolate chip cookies - 2.5 dozen = 1.5 dozen chocolate chip cookies left.\nAnn has a total of 1 + .5 + 1.5 dozen cookies = <<1+.5+1.5=3>>3 dozen cookies.\n3 dozen cookies is [3 \u00d7 12 \u2192 = 3 \u00d7 (10 + 2) \u2192 = 3\u00d710 + 3\u00d72 \u2192 = 30 + 6 \u2192 = 36] cookies = <<[3 \u00d7 12 \u2192 = 3 \u00d7 (10 + 2) \u2192 = 3\u00d710 + 3\u00d72 \u2192 = 30 + 6 \u2192 = 36]=36>>36 cookies remaining.\n#### 36",
+    "final_answer": "36"
+  },
+  {
+    "id": "gsm_sbs_0214",
+    "question": "Jackson\u2019s mom packs him a peanut butter and jelly sandwich for his school lunch on Wednesdays and Fridays. There are 36 weeks of school and Jackson has only missed 1 Wednesday and 2 Fridays. How many peanut butter and jelly sandwiches did he eat for lunch this school year?",
+    "original_answer": "36 weeks of school x 2 days of the week = <<36*2=72>>72 days of school\n1 Wednesday + 2 Fridays = <<1+2=3>>3 days of school missed\n72 days of school \u2013 3 days of school missed = <<72-3=69>>69 peanut butter and jelly sandwiches eaten\n#### 69",
+    "sbs_answer": "36 weeks of school x 2 days of the week = <<[2 \u00d7 36 \u2192 = 2 \u00d7 (30 + 6) \u2192 = 2\u00d730 + 2\u00d76 \u2192 = 60 + 12 \u2192 = 72]=72>>72 days of school\n1 Wednesday + 2 Fridays = <<1+2=3>>3 days of school missed\n72 days of school \u2013 3 days of school missed = <<72-3=69>>69 peanut butter and jelly sandwiches eaten\n#### 69",
+    "final_answer": "69"
+  },
+  {
+    "id": "synth_mult_0120",
+    "question": "What is 9 times 18?",
+    "original_answer": "9 \u00d7 18 = 162\n#### 162",
+    "sbs_answer": "Let me break this down step by step.\n9 \u00d7 18\n= 9 \u00d7 (10 + 8)\n= 9\u00d710 + 9\u00d78\n= 90 + 72\n= 162\nThe answer is 162.\n#### 162",
+    "final_answer": "162"
+  },
+  {
+    "id": "gsm_sbs_0426",
+    "question": "Jolene and Phil have four children, each with the same birthday.  They gave birth to their first child exactly 15 years ago.  They gave birth to their second child exactly one year after the birth of their first child.  They gave birth to their third child on the fourth birthday of their second child. Two years after the birth of their third child, they gave birth to their fourth child.  How old, in years, is their fourth child?",
+    "original_answer": "Their 1st child was born 15 years ago, and therefore is <<15=15>>15 years old.\nTheir 2nd child was born 1 year after their 15-year-old child, and therefore is 15-1=<<15-1=14>>14 years old.\nTheir 3rd child was born 4 years after their 14-year-old child, and therefore is 14-4=10 years old.\nTheir 4th child was born 2 years after their 10-year-old child, and therefore is 10-2=8 years old.\n#### 8",
+    "sbs_answer": "Their 1st child was born 15 years ago, and therefore is <<15=15>>15 years old.\nTheir 2nd child was born 1 year after their 15-year-old child, and therefore is 15-1=<<15-1=14>>14 years old.\nTheir 3rd child was born 4 years after their 14-year-old child, and therefore is 14-4=10 years old.\nTheir 4th child was born 2 years after their 10-year-old child, and therefore is 10-2=8 years old.\n#### 8",
+    "final_answer": "8"
+  },
+  {
+    "id": "gsm_sbs_0261",
+    "question": "Adam earns $40 daily in his job. 10% of his money is deducted as taxes. How much money will Adam have earned after taxes after 30 days of work?",
+    "original_answer": "The amount of money deducted from Adam's daily pay is $40 / 10 = $<<40/10=4>>4.\nSo after deducting 10%, Adam\u2019s daily pay is $40 \u2013 $4 = $<<40-4=36>>36.\nThis means that in 30 days he earns $36 * 30 = $<<36*30=1080>>1080.\n#### 1,080",
+    "sbs_answer": "The amount of money deducted from Adam's daily pay is $40 / 10 = $<<40/10=4>>4.\nSo after deducting 10%, Adam\u2019s daily pay is $40 \u2013 $4 = $<<40-4=36>>36.\nThis means that in 30 days he earns $[30 \u00d7 36 \u2192 = 3 \u00d7 10 \u00d7 36 \u2192 = 3 \u00d7 36 \u00d7 10 \u2192 [where 3 \u00d7 36 \u2192 = 3 \u00d7 (30 + 6) \u2192 = 3\u00d730 + 3\u00d76 \u2192 = 90 + 18 \u2192 = 108] \u2192 = 108 \u00d7 10 \u2192 = 1080] = $<<[30 \u00d7 36 \u2192 = 3 \u00d7 10 \u00d7 36 \u2192 = 3 \u00d7 36 \u00d7 10 \u2192 [where 3 \u00d7 36 \u2192 = 3 \u00d7 (30 + 6) \u2192 = 3\u00d730 + 3\u00d76 \u2192 = 90 + 18 \u2192 = 108] \u2192 = 108 \u00d7 10 \u2192 = 1080]=1080>>1080.\n#### 1,080",
+    "final_answer": "1,080"
+  },
+  {
+    "id": "gsm_sbs_0185",
+    "question": "Conner has a dune buggy that he rides in the desert.  On flat sand, it can ride at a speed of 60 miles per hour.  When traveling on downhill slopes, it can race at 12 miles per hour faster than it can when it is on flat sand.  And when riding on an uphill inclined slow, it travels at a speed 18 miles per hour slower than when it is riding on flat sand.  If Conner rides his dune buggy one-third of the time on flat sand, one-third of the time on uphill slopes, and one-third of the time on downhill slopes, what is his average speed in miles per hour?",
+    "original_answer": "12 mph faster than 60mph is 60+12=<<60+12=72>>72 mph.\n18 mph slower than 60 mph is 60-18=<<60-18=42>>42 mph.\nIf he spends 1/3 of the time at each of these three speeds, then he averages (60+72+42)/3 = <<(60+72+42)/3=58>>58 mph.\n#### 58",
+    "sbs_answer": "12 mph faster than 60mph is 60+12=<<60+12=72>>72 mph.\n18 mph slower than 60 mph is 60-18=<<60-18=42>>42 mph.\nIf he spends 1/3 of the time at each of these three speeds, then he averages (60+72+42)/3 = <<(60+72+42)/3=58>>58 mph.\n#### 58",
+    "final_answer": "58"
+  },
+  {
+    "id": "gsm_sbs_0109",
+    "question": "Ann is cutting fabric to make curtains. She cuts a 4 foot by 6 foot rectangle for the living room, and a 2 foot by 4 foot rectangle for the bedroom. If the bolt of fabric is 16 feet by 12 feet, how much fabric is left in square feet?",
+    "original_answer": "First figure out how many square feet the original bolt of fabric was: 16 feet * 12 feet = <<16*12=192>>192 square feet\nThen figure out how much fabric Ann took for the living room curtains: 4 feet * 6 feet = <<4*6=24>>24 square feet\nThen figure out how much fabric Ann took for the bathroom curtains: 2 feet * 4 feet = <<2*4=8>>8 square feet\nFinally, subtract the square footage of both sets of curtains from the total square footage: 192 - 24 - 8 = <<192-24-8=160>>160 square feet\n#### 160",
+    "sbs_answer": "First figure out how many square feet the original bolt of fabric was: 16 feet * 12 feet = <<[12 \u00d7 16 \u2192 = (10 + 2) \u00d7 16 \u2192 = 10\u00d716 + 2\u00d716 \u2192 [10\u00d716 = 160] \u2192 [2\u00d716: 2 \u00d7 16 \u2192 = 2 \u00d7 (10 + 6) \u2192 = 2\u00d710 + 2\u00d76 \u2192 = 20 + 12 \u2192 = 32] \u2192 = 160 + 32 \u2192 = 192]=192>>192 square feet\nThen figure out how much fabric Ann took for the living room curtains: 4 feet * 6 feet = <<4\u00d76=24=24>>24 square feet\nThen figure out how much fabric Ann took for the bathroom curtains: 2 feet * 4 feet = <<2\u00d74=8=8>>8 square feet\nFinally, subtract the square footage of both sets of curtains from the total square footage: 192 - 24 - 8 = <<192-24-8=160>>160 square feet\n#### 160",
+    "final_answer": "160"
+  },
+  {
+    "id": "gsm_sbs_0483",
+    "question": "Samuel bought 2 dozen doughnuts and Cathy bought 3 dozen doughnuts. They planned to share the doughnuts evenly with their 8 other friends. How many doughnuts will each of them receive?",
+    "original_answer": "Since 1 dozen is equal to 12, then Samuel has 2 x 12 = <<24=24>>24 doughnuts.\nWhile Cathy has 3 x 12 = <<3*12=36>>36.\nThey both have 24 + 36 = <<24+36=60>>60 doughnuts together.\nThere are 8 friends + 1 (Samuel) + 1 (Cathy) = <<8+1+1=10>>10 that will share the doughnuts.\nThus, each of them will get 60/10 = <<60/10=6>>6 doughnuts.\n#### 6",
+    "sbs_answer": "Since 1 dozen is equal to 12, then Samuel has 2 x 12 = <<24=24>>24 doughnuts.\nWhile Cathy has 3 x 12 = <<[3 \u00d7 12 \u2192 = 3 \u00d7 (10 + 2) \u2192 = 3\u00d710 + 3\u00d72 \u2192 = 30 + 6 \u2192 = 36]=36>>36.\nThey both have 24 + 36 = <<24+36=60>>60 doughnuts together.\nThere are 8 friends + 1 (Samuel) + 1 (Cathy) = <<8+1+1=10>>10 that will share the doughnuts.\nThus, each of them will get 60/10 = <<60/10=6>>6 doughnuts.\n#### 6",
+    "final_answer": "6"
+  },
+  {
+    "id": "gsm_sbs_0441",
+    "question": "Mark has a garden with flowers. He planted plants of three different colors in it. Ten of them are yellow, and there are 80% more of those in purple. There are only 25% as many green flowers as there are yellow and purple flowers. How many flowers does Mark have in his garden?",
+    "original_answer": "There are 80/100 * 10 = <<80/100*10=8>>8 more purple flowers than yellow flowers.\nSo in Mark's garden, there are 10 + 8 = <<10+8=18>>18 purple flowers.\nPurple and yellow flowers sum up to 10 + 18 = <<10+18=28>>28 flowers.\nThat means in Mark's garden there are 25/100 * 28 = <<25/100*28=7>>7 green flowers.\nSo in total Mark has 28 + 7 = <<28+7=35>>35 plants in his garden.\n#### 35",
+    "sbs_answer": "There are 80/100\u00d710=1000 = <<80/100\u00d710=1000=8>>8 more purple flowers than yellow flowers.\nSo in Mark's garden, there are 10 + 8 = <<10+8=18>>18 purple flowers.\nPurple and yellow flowers sum up to 10 + 18 = <<10+18=28>>28 flowers.\nThat means in Mark's garden there are 25/[28 \u00d7 100 \u2192 = (20 + 8) \u00d7 100 \u2192 = 20\u00d7100 + 8\u00d7100 \u2192 [20\u00d7100 = 2\u00d710\u00d7100 = 2\u00d7100\u00d710 = 200\u00d710 = 2000] \u2192 [8\u00d7100: 8 \u00d7 100 \u2192 = 8 \u00d7 10 \u00d7 10 \u2192 = 80 \u00d7 10 \u2192 = 800] \u2192 = 2000 + 800 \u2192 = 2800] = <<25/[28 \u00d7 100 \u2192 = (20 + 8) \u00d7 100 \u2192 = 20\u00d7100 + 8\u00d7100 \u2192 [20\u00d7100 = 2\u00d710\u00d7100 = 2\u00d7100\u00d710 = 200\u00d710 = 2000] \u2192 [8\u00d7100: 8 \u00d7 100 \u2192 = 8 \u00d7 10 \u00d7 10 \u2192 = 80 \u00d7 10 \u2192 = 800] \u2192 = 2000 + 800 \u2192 = 2800]=7>>7 green flowers.\nSo in total Mark has 28 + 7 = <<28+7=35>>35 plants in his garden.\n#### 35",
+    "final_answer": "35"
+  },
+  {
+    "id": "synth_mult_0053",
+    "question": "What is 8 times 17?",
+    "original_answer": "8 \u00d7 17 = 136\n#### 136",
+    "sbs_answer": "Let me break this down step by step.\n8 \u00d7 17\n= 8 \u00d7 (10 + 7)\n= 8\u00d710 + 8\u00d77\n= 80 + 56\n= 136\nThe answer is 136.\n#### 136",
+    "final_answer": "136"
+  },
+  {
+    "id": "gsm_sbs_0086",
+    "question": "Janice can type 6 sentences per minute. Today at work, Janice continued working on a paper she started typing yesterday. She typed for 20 minutes, took a break, and typed 15 minutes longer. She then had to erase 40 sentences she had typed incorrectly. After a meeting, she typed for 18 minutes more. In all, the paper had 536 sentences by the end of today. How many sentences did she start with today?",
+    "original_answer": "Janice had X sentences from yesterday already typed to start with today.\nJanice typed 6 * 20 = <<6*20=120>>120 sentences before her break.\nShe typed 6 * 15 = <<6*15=90>>90 sentences after her break.\nShe typed 6 * 18 = <<6*18=108>>108 sentences after her meeting.\nTherefore, she typed 120 + 90 + 108 = <<120+90+108=318>>318 sentences today in all.\nShe had to erase 40 sentences, so she had 318 - 40 = <<318-40=278>>278 sentences that she typed today left.\nThe paper had X + 278 = 536 sentences at the end of today.\nThus, she had X = 536 - 278 = <<536-278=258>>258 sentences typed on the paper to start with today.\n#### 258",
+    "sbs_answer": "Janice had X sentences from yesterday already typed to start with today.\nJanice typed [6 \u00d7 20 \u2192 = 6 \u00d7 2 \u00d7 10 \u2192 = 12 \u00d7 10 \u2192 = 120] = <<[6 \u00d7 20 \u2192 = 6 \u00d7 2 \u00d7 10 \u2192 = 12 \u00d7 10 \u2192 = 120]=120>>120 sentences before her break.\nShe typed [6 \u00d7 15 \u2192 = 6 \u00d7 (10 + 5) \u2192 = 6\u00d710 + 6\u00d75 \u2192 = 60 + 30 \u2192 = 90] = <<[6 \u00d7 15 \u2192 = 6 \u00d7 (10 + 5) \u2192 = 6\u00d710 + 6\u00d75 \u2192 = 60 + 30 \u2192 = 90]=90>>90 sentences after her break.\nShe typed [6 \u00d7 18 \u2192 = 6 \u00d7 (10 + 8) \u2192 = 6\u00d710 + 6\u00d78 \u2192 = 60 + 48 \u2192 = 108] = <<[6 \u00d7 18 \u2192 = 6 \u00d7 (10 + 8) \u2192 = 6\u00d710 + 6\u00d78 \u2192 = 60 + 48 \u2192 = 108]=108>>108 sentences after her meeting.\nTherefore, she typed 120 + 90 + 108 = <<120+90+108=318>>318 sentences today in all.\nShe had to erase 40 sentences, so she had 318 - 40 = <<318-40=278>>278 sentences that she typed today left.\nThe paper had X + 278 = 536 sentences at the end of today.\nThus, she had X = 536 - 278 = <<536-278=258>>258 sentences typed on the paper to start with today.\n#### 258",
+    "final_answer": "258"
+  },
+  {
+    "id": "gsm_sbs_0067",
+    "question": "For football season, Zachary wants to buy a new football, a pair of shorts, and a pair of football shoes. The ball costs $3.75, the shorts cost $2.40, and the shoes cost $11.85. Zachary has $10. How much more money does Zachary need?",
+    "original_answer": "The total cost of the ball, the shorts, and the shoes is $3.75 + $2.40 + $11.85 = $<<3.75+2.4+11.85=18>>18.\nZachary needs $18 \u2212 $10 = $8 more.\n#### 8",
+    "sbs_answer": "The total cost of the ball, the shorts, and the shoes is $3.75 + $2.40 + $11.85 = $<<3.75+2.4+11.85=18>>18.\nZachary needs $18 \u2212 $10 = $8 more.\n#### 8",
+    "final_answer": "8"
+  },
+  {
+    "id": "gsm_sbs_0235",
+    "question": "Lucille is painting her room. Two of her walls are 3 meters wide and 2 meters tall. The third wall is 5 meters wide and 2 meters tall. The final wall is 4 meters wide and 2 meters tall. If each can of paint covers 2 square meters, how many cans of paint does Lucille need?",
+    "original_answer": "For the first set of walls, each wall covers 3 meters wide * 2 meters tall = <<3*2=6>>6 square meters.\nThere are two of these walls, so this becomes a total of 6 meters * 2 walls = <<6*2=12>>12 square meters.\nThe third wall covers 5 meters wide * 2 meters tall = <<5*2=10>>10 square meters.\nThe final wall covers 4 meters wide * 2 meters tall = <<4*2=8>>8 square meters.\nSo in total, the paint needs to cover 12 + 10 + 8 = <<12+10+8=30>>30 metres.\nSince each can covers 2 meters, Lucille needs 30 meters / 2 = <<30/2=15>>15 cans of paint.\n#### 15",
+    "sbs_answer": "For the first set of walls, each wall covers 3 meters wide * 2 meters tall = <<3\u00d72=6=6>>6 square meters.\nThere are two of these walls, so this becomes a total of 6 meters * 2 walls = <<6\u00d72=12=12>>12 square meters.\nThe third wall covers 5 meters wide * 2 meters tall = <<5\u00d72=10=10>>10 square meters.\nThe final wall covers 4 meters wide * 2 meters tall = <<4\u00d72=8=8>>8 square meters.\nSo in total, the paint needs to cover 12 + 10 + 8 = <<12+10+8=30>>30 metres.\nSince each can covers 2 meters, Lucille needs 30 meters / 2 = <<30/2=15>>15 cans of paint.\n#### 15",
+    "final_answer": "15"
+  },
+  {
+    "id": "synth_mult_0056",
+    "question": "What is 9 times 12?",
+    "original_answer": "9 \u00d7 12 = 108\n#### 108",
+    "sbs_answer": "Let me break this down step by step.\n9 \u00d7 12\n= 9 \u00d7 (10 + 2)\n= 9\u00d710 + 9\u00d72\n= 90 + 18\n= 108\nThe answer is 108.\n#### 108",
+    "final_answer": "108"
+  },
+  {
+    "id": "gsm_sbs_0202",
+    "question": "Chris\u2019s internet bill is $45 per month for 100 GB and $0.25 for every 1 GB over. His bill for this month is $65. How many GB over was Chris charged for on this bill?",
+    "original_answer": "Let G stand for the number of GB billed, so the total bill is $0.25G + $45 flat rate charge = $65 total bill.\nNow we will solve for G. $0.25G + $45 flat rate - $45 = $65 -$45. This simplifies to $0.25G = $20\n$0.25G/$0.25 = $20/$0.25\nG = 80 GB were charged on this bill.\n#### 80",
+    "sbs_answer": "Let G stand for the number of GB billed, so the total bill is $0.25G + $45 flat rate charge = $65 total bill.\nNow we will solve for G. $0.25G + $45 flat rate - $45 = $65 -$45. This simplifies to $0.25G = $20\n$0.25G/$0.25 = $20/$0.25\nG = 80 GB were charged on this bill.\n#### 80",
+    "final_answer": "80"
+  },
+  {
+    "id": "gsm_sbs_0269",
+    "question": "A fox can run at the maximum speed of 50 kilometers per hour. Considering the fox would run at a constant speed, what distance would he make during 120 minutes?",
+    "original_answer": "1 hour is 60 minutes, so 120 minutes is 120 / 60 = <<120/60=2>>2 hours.\nDuring one hour a fox can make 50 kilometers, so during two hours, he would be able to run 50 * 2 = <<50*2=100>>100 kilometers.\n#### 100",
+    "sbs_answer": "1 hour is 60 minutes, so 120 minutes is 120 / 60 = <<120/60=2>>2 hours.\nDuring one hour a fox can make 50 kilometers, so during two hours, he would be able to run [2 \u00d7 50 \u2192 = 2 \u00d7 5 \u00d7 10 \u2192 = 10 \u00d7 10 \u2192 = 100] = <<[2 \u00d7 50 \u2192 = 2 \u00d7 5 \u00d7 10 \u2192 = 10 \u00d7 10 \u2192 = 100]=100>>100 kilometers.\n#### 100",
+    "final_answer": "100"
+  },
+  {
+    "id": "synth_mult_0023",
+    "question": "What is 4 times 19?",
+    "original_answer": "4 \u00d7 19 = 76\n#### 76",
+    "sbs_answer": "Let me break this down step by step.\n4 \u00d7 19\n= 4 \u00d7 (10 + 9)\n= 4\u00d710 + 4\u00d79\n= 40 + 36\n= 76\nThe answer is 76.\n#### 76",
+    "final_answer": "76"
+  },
+  {
+    "id": "gsm_sbs_0419",
+    "question": "John works a job that offers performance bonuses.  He makes $80 a day and works for 8 hours.  He has the option of working hard to earn the performance bonus of an extra $20 a day, but the extra effort results in a 2-hour longer workday.  How much does John make per hour if he decides to earn the bonus?",
+    "original_answer": "First, we need to determine the length of John's workday if he decides to earn the bonus. We do this by performing 8+2= <<8+2=10>>10 hours for his workday.\nNext, we need to determine his overall pay. We do this by performing 80+20=<<80+20=100>>100 dollars a day.\nWe then determine John's hourly rate by dividing his pay by the number of hours worked, performing 100/10= <<100/10=10>>10 dollars an hour.\n#### 10",
+    "sbs_answer": "First, we need to determine the length of John's workday if he decides to earn the bonus. We do this by performing 8+2= <<8+2=10>>10 hours for his workday.\nNext, we need to determine his overall pay. We do this by performing 80+20=<<80+20=100>>100 dollars a day.\nWe then determine John's hourly rate by dividing his pay by the number of hours worked, performing 100/10= <<100/10=10>>10 dollars an hour.\n#### 10",
+    "final_answer": "10"
+  },
+  {
+    "id": "gsm_sbs_0350",
+    "question": "Julie is reading a 120-page book. Yesterday, she was able to read 12 pages and today, she read twice as many pages as yesterday. If she wants to read half of the remaining pages tomorrow, how many pages should she read?",
+    "original_answer": "Maila read 12 x 2 = <<12*2=24>>24 pages today.\nSo she was able to read a total of 12 + 24 = <<12+24=36>>36 pages since yesterday.\nThere are 120 - 36 = <<120-36=84>>84 pages left to be read.\nSince she wants to read half of the remaining pages tomorrow, then she should read 84/2 = <<84/2=42>>42 pages.\n#### 42",
+    "sbs_answer": "Maila read 12 x 2 = <<[2 \u00d7 12 \u2192 = 2 \u00d7 (10 + 2) \u2192 = 2\u00d710 + 2\u00d72 \u2192 = 20 + 4 \u2192 = 24]=24>>24 pages today.\nSo she was able to read a total of 12 + 24 = <<12+24=36>>36 pages since yesterday.\nThere are 120 - 36 = <<120-36=84>>84 pages left to be read.\nSince she wants to read half of the remaining pages tomorrow, then she should read 84/2 = <<84/2=42>>42 pages.\n#### 42",
+    "final_answer": "42"
+  },
+  {
+    "id": "gsm_sbs_0134",
+    "question": "Kyle bought 2 glass bottles that can hold 15 origami stars each. He then bought another 3 identical glass bottles. How many stars must Kyle make to fill all the glass bottles he bought?",
+    "original_answer": "Kyle has 2 + 3 = <<2+3=5>>5 glass bottles.\nHe needs to make 15 x 5 = <<15*5=75>>75 origami stars\n#### 75",
+    "sbs_answer": "Kyle has 2 + 3 = <<2+3=5>>5 glass bottles.\nHe needs to make 15 x 5 = <<[5 \u00d7 15 \u2192 = 5 \u00d7 (10 + 5) \u2192 = 5\u00d710 + 5\u00d75 \u2192 = 50 + 25 \u2192 = 75]=75>>75 origami stars\n#### 75",
+    "final_answer": "75"
+  }
+]

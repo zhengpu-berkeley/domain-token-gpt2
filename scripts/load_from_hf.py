@@ -27,6 +27,15 @@ from typing import Dict, List, Optional
 from huggingface_hub import snapshot_download, HfApi
 
 
+# By default, we only need the final model artifacts for inference/evaluation.
+# Training checkpoints can be very large (multiple GB) and are not required for
+# downstream scripts in this repo, so we skip them unless explicitly requested.
+DEFAULT_IGNORE_PATTERNS = [
+    "checkpoint-*",
+    "checkpoint-*/*",
+]
+
+
 # Registry of known models and their HuggingFace repos
 # Format: {local_name: repo_id}
 MODEL_REGISTRY: Dict[str, str] = {
@@ -86,6 +95,7 @@ def download_model(
     output_root: Path,
     force: bool = False,
     token: Optional[str] = None,
+    include_checkpoints: bool = False,
 ) -> Optional[Path]:
     """
     Download a single model from HuggingFace Hub.
@@ -125,13 +135,15 @@ def download_model(
     print(f"     To:   {local_path}")
     
     try:
-        # Download the entire repo
+        ignore_patterns = None if include_checkpoints else DEFAULT_IGNORE_PATTERNS
+
+        # Download repo snapshot into the desired local directory.
         snapshot_download(
             repo_id=repo_id,
             repo_type="model",
             local_dir=str(local_path),
-            local_dir_use_symlinks=False,
             token=token,
+            ignore_patterns=ignore_patterns,
         )
         print(f"  ✅ {local_name} downloaded successfully")
         return local_path
@@ -146,6 +158,7 @@ def download_models(
     output_root: Path,
     force: bool = False,
     token: Optional[str] = None,
+    include_checkpoints: bool = False,
 ) -> Dict[str, Optional[Path]]:
     """
     Download multiple models from HuggingFace Hub.
@@ -170,6 +183,7 @@ def download_models(
             output_root=output_root,
             force=force,
             token=token,
+            include_checkpoints=include_checkpoints,
         )
         print()
     
@@ -277,6 +291,11 @@ Model Groups:
         default=None,
         help="HuggingFace token for private repos",
     )
+    parser.add_argument(
+        "--include-checkpoints",
+        action="store_true",
+        help="Also download Trainer checkpoint-* directories (large; not needed for eval/sampling)",
+    )
     
     args = parser.parse_args()
     
@@ -312,6 +331,7 @@ Model Groups:
         output_root=args.output_root,
         force=args.force,
         token=args.token,
+        include_checkpoints=args.include_checkpoints,
     )
     
     # Exit with error if any downloads failed

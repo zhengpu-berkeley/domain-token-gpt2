@@ -1,0 +1,12 @@
+{
+  "metrics": {
+    "condition": "mul_tokens",
+    "model_path": "outputs/sft_tulu_mul_tokens",
+    "accuracy": 0.356,
+    "accuracy_norm": 0.376,
+    "correct": 178,
+    "correct_norm": 188,
+    "total": 500,
+    "eval_time_seconds": 3.3538262844085693
+  }
+}

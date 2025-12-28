@@ -72,14 +72,11 @@ def build_hf_tokenizer(
     mul_token_strs = mul_tokens.all_token_strings
     print(f"  Adding {len(mul_token_strs)} mul-fact tokens")
     
-    # For mul_tokens condition, add as special tokens so they're treated atomically
-    # For baseline, still add them (for identical vocab size) but they won't be used
-    if condition == "mul_tokens":
-        # Add as special tokens for atomic tokenization
-        num_added = tokenizer.add_special_tokens({"additional_special_tokens": mul_token_strs})
-    else:
-        # Add as regular tokens (they won't appear in baseline data)
-        num_added = tokenizer.add_tokens(mul_token_strs)
+    # Add as regular tokens for both conditions (identical vocab size).
+    # Using add_tokens() instead of add_special_tokens() ensures mul-tokens
+    # are NOT stripped when decoding with skip_special_tokens=True.
+    # Tokens added via add_tokens() are still tokenized atomically.
+    num_added = tokenizer.add_tokens(mul_token_strs)
     
     print(f"  Added {num_added} mul-fact tokens")
     print(f"  Final vocab size: {len(tokenizer)}")

@@ -2,7 +2,7 @@
 
 **Date:** December 27, 2025  
 **Last Updated:** December 28, 2025  
-**Status:** ✅ All SFT runs complete (baseline + mul_tokens); ✅ evals complete (subset); ⚠️ mul-token visibility issue in decoding (see below)  
+**Status:** ✅ All SFT runs complete; ✅ Mul-token visibility bug fixed; ✅ Full GSM8K eval complete (1319 samples)  
 **Goal:** Re-run post-training SFT using the **fixed HF export** artifacts and a **two-stage SFT pipeline** to produce trustworthy GSM8K/probe results for baseline vs mul_tokens.
 
 ---
@@ -15,8 +15,10 @@
 | Tulu-3 SFT | ✅ Complete | ✅ Complete |
 | GSM8K SFT | ✅ Complete | ✅ Complete |
 | HellaSwag Eval | ✅ Complete (500 val samples) | ✅ Complete (500 val samples) |
-| GSM8K Eval | ✅ Complete (200 test samples) | ✅ Complete (200 test samples) |
+| GSM8K Eval (subset) | ✅ Complete (200 test samples) | ✅ Complete (200 test samples) |
+| GSM8K Eval (full) | ✅ Complete (1319 test samples) | ✅ Complete (1319 test samples) |
 | Probes Eval | ✅ Complete (281 probes) | ✅ Complete (281 probes) |
+| Mul-token visibility fix | ✅ Applied | ✅ Applied |
 
 ### SFT Results (Loss)
 
@@ -83,9 +85,10 @@ uv run python scripts/load_from_hf.py --models mul_tokens --include-checkpoints
 
 ---
 
-## Evaluation Results (Subset Runs)
+## Evaluation Results
 
-**Important:** These are *subset* evaluations for quick iteration:
+### Subset Runs (Quick Iteration)
+
 - HellaSwag: **500** validation examples
 - GSM8K: **200** test examples
 - Probes: **281** synthetic probes (full suite)
@@ -99,35 +102,87 @@ uv run python scripts/load_from_hf.py --models mul_tokens --include-checkpoints
 | mul_tokens | tulu_sft | 0.3760 | 0.0150 | 0.0463 | 0.1605 | 0.0000 | 0.0000 |
 | mul_tokens | gsm8k_sft | 0.3500 | 0.0400 | 0.1566 | 0.3704 | 0.1200 | 0.0200 |
 
-Artifacts:
-- Baseline eval outputs:
+### Full GSM8K Evaluation (1319 Test Samples) — Post Bug-Fix
+
+**Date:** December 28, 2025  
+**Bug fix applied:** Mul-tokens now visible in decoded output; counting from raw token IDs.
+
+| Metric | Baseline | Mul_Tokens |
+|--------|----------|------------|
+| **Accuracy** | **2.50%** (33/1319) | **2.05%** (27/1319) |
+| Avg response tokens | 256.0 | 256.0 |
+| Total mul-tokens used | 0 | **1,123** |
+| Mul-tokens per response | 0 | **0.85** |
+| Eval time (seconds) | 1,960 | 1,998 |
+
+**Key Observations:**
+
+1. **Bug fix verified:** Mul-tokens now appear in decoded output (e.g., `<MUL_2_3_6>=<<<MUL_2_3_6>>>6`) and are counted correctly from raw generated token IDs.
+
+2. **Both conditions have ~2% GSM8K accuracy.** This is a training/model quality issue, not a measurement bug.
+
+3. **All responses hit max_new_tokens=256.** Models enter repetitive loops and don't emit EOS tokens naturally.
+
+4. **Mul-token usage is sparse:** Only 0.85 mul-tokens per response on average. Some responses use many (28-34), but most use none.
+
+5. **Output quality issues:**
+   - Repetitive calculations (same operation repeated)
+   - Corrupted calculator annotations (<<expr=result>> format breaks down)
+   - Circular reasoning without convergence to final answer
+
+**Example mul-token usage (mul_tokens condition):**
+```
+He drives for <MUL_2_3_6>=<<<MUL_2_3_6>>>6 hours at 60 mph
+He drives for <MUL_3_8_24>=<<<MUL_3_8_24>>>24 hours at 80 mph
+```
+
+### Artifacts
+
+- Subset eval outputs:
   - `outputs/eval_hf_baseline_10b/`
   - `outputs/eval_sft_tulu_baseline/`
   - `outputs/eval_sft_gsm8k_baseline/`
-- Mul-tokens eval outputs:
   - `outputs/eval_hf_mul_tokens_10b/`
   - `outputs/eval_sft_tulu_mul_tokens/`
   - `outputs/eval_sft_gsm8k_mul_tokens/`
+- Full GSM8K eval outputs (post bug-fix):
+  - `outputs/eval_sft_gsm8k_baseline_full/`
+  - `outputs/eval_sft_gsm8k_mul_tokens_full/`
 
 ---
 
-## Mul-Token “Internal Usage” Check (Tokenization vs Emission)
+## Mul-Token Visibility Bug — RESOLVED ✅
 
-### What we verified
-- **Tokenization:** The tokenizer encodes the literal string `<MUL_6_9_54>` as **one token** (ID 50342) in *all* models.
-- **No automatic conversion:** Raw text like `6*9=54` does **not** tokenize into `<MUL_...>`; it stays normal GPT-2 tokens. The **injector** must rewrite text.
-- **Emission (generation IDs):** On several direct prompts (e.g., “What is 6 times 9?”) we saw **0 generated token IDs** in the mul-token ID range (50304–50348) for both baseline and mul_tokens models.
+### Original Issue (Dec 27)
+The mul_tokens condition tokenizer marked `<MUL_...>` as *special tokens* via `add_special_tokens()`. This caused:
+- `tokenizer.decode(..., skip_special_tokens=True)` to **drop** them
+- Eval scripts couldn't see or count mul-tokens in decoded output
 
-### ⚠️ Critical gotcha: mul_tokens tokenizer marks `<MUL_...>` as *special tokens*
-In the exported HF tokenizer for **mul_tokens** models, the 45 mul tokens are stored under `additional_special_tokens` (see `outputs/sft_gsm8k_mul_tokens/special_tokens_map.json`). That means:
-- `tokenizer.decode(..., skip_special_tokens=True)` will **drop** them.
-- Our eval scripts currently decode with `skip_special_tokens=True`, so **mul-token string visibility and mul-token counting-from-decoded-text are unreliable**.
+### Fix Applied (Dec 28)
 
-Root cause in `tokenizer/hf_gpt2_with_mul.py`:
-- baseline: `tokenizer.add_tokens(mul_token_strs)`
-- mul_tokens: `tokenizer.add_special_tokens({'additional_special_tokens': mul_token_strs})`
+**Belt-and-suspenders approach:**
 
-**Tomorrow fix idea (recommended):** treat mul tokens as *regular tokens* in both conditions (or, alternatively, change eval scripts to decode with `skip_special_tokens=False` and count mul-token IDs directly from generated IDs).
+1. **Tokenizer builder fix** (`tokenizer/hf_gpt2_with_mul.py`):
+   - Changed mul-tokens from `add_special_tokens()` to `add_tokens()` for both conditions
+   - Mul-tokens are now **regular tokens**, not special tokens
+
+2. **Eval scripts fix** (`eval/run_gsm8k.py`, `eval/run_arithmetic_probes.py`):
+   - Changed `skip_special_tokens=True` → `skip_special_tokens=False`
+   - Count mul-tokens directly from raw generated token IDs (not re-encoded text)
+
+3. **Existing model fix** (`scripts/fix_tokenizers.py`):
+   - Created script to regenerate tokenizer files in existing model directories
+   - Applied to: `hf_mul_tokens_10b`, `sft_tulu_mul_tokens`, `sft_gsm8k_mul_tokens`
+
+4. **HuggingFace Hub sync**:
+   - Re-uploaded corrected tokenizers to all 3 affected repos
+
+### Verification
+After fix, mul-tokens appear correctly in decoded output:
+```
+He drives for <MUL_2_3_6>=<<<MUL_2_3_6>>>6 hours at 60 mph
+```
+And counting works: 1,123 total mul-tokens across 1,319 responses (0.85 per response).
 
 ---
 
@@ -257,26 +312,52 @@ Each directory should contain:
 
 ---
 
+## Completed Tasks (Dec 28, 2025)
+
+| Task | Status |
+|------|--------|
+| Fix mul-token visibility (tokenizer builder) | ✅ Done |
+| Fix mul-token visibility (eval scripts) | ✅ Done |
+| Create `scripts/fix_tokenizers.py` for existing models | ✅ Done |
+| Apply fix to 3 mul_tokens model directories | ✅ Done |
+| Re-upload corrected tokenizers to HuggingFace | ✅ Done |
+| Run full GSM8K eval (1319 samples, both conditions) | ✅ Done |
+
+---
+
 ## Next Steps
 
-## Tomorrow Handoff Checklist (Dec 29, 2025)
+### Immediate Analysis Questions
 
-1. **Fix mul-token visibility + counting**
-   - Decide one of:
-     - **Preferred:** modify `tokenizer/hf_gpt2_with_mul.py` so mul tokens are added via `add_tokens()` for both conditions; then re-save tokenizer files into the model dirs and re-upload tokenizer-only changes to HF.
-     - **Alternative:** modify eval scripts to decode with `skip_special_tokens=False` and count mul-token IDs from generated token IDs (not from decoded text).
+1. **Why is GSM8K accuracy so low (~2%)?**
+   - Both conditions degenerate into repetitive loops
+   - All responses hit max_new_tokens=256 (no natural EOS)
+   - SFT training may need hyperparameter tuning (lr, epochs, batch size)
+   - The base model (124M params) may be too small for GSM8K without RL
 
-2. **Rerun evals with corrected mul-token visibility**
-   - At least on the **mul_tokens** models to measure whether they *ever* emit `<MUL_...>` once decoding doesn’t hide them.
+2. **Is the mul-token condition learning to use the tokens?**
+   - Yes, but sparsely: 0.85 mul-tokens per response on average
+   - Some responses use many (28-34 tokens), but most use none
+   - The model may need stronger supervision to prefer mul-tokens
 
-3. **Run full GSM8K eval**
-   - Replace `--max-samples 200` with `--max-samples 1319` for both GSM8K-SFT models (baseline + mul_tokens).
+### Potential Next Steps
 
-4. **Generate a proper comparison report**
-   - Run `scripts/compare_runs.py` (and/or add a small report script) to emit a single markdown table for the writeup.
+1. **RL Stage (GRPO)**
+   - Use reward signal to correct looping behavior
+   - Encourage EOS emission and correct final answers
+   - May help mul_tokens condition learn to prefer mul-tokens for arithmetic
 
-5. **Optional: inference-time injector experiment**
-   - Apply `MulExpressionInjector` to evaluation prompts for mul_tokens condition (and keep baseline untouched) to test “tooling + tokens” vs “tokens only”.
+2. **Ablation: Increase max_new_tokens**
+   - Try 512 or 1024 to see if models eventually terminate
+   - Useful for debugging but won't fix root cause
+
+3. **Training diagnostics**
+   - Check SFT training loss curves for signs of underfitting
+   - Consider longer training or different learning rate
+
+4. **Inference-time injection experiment**
+   - Apply `MulExpressionInjector` to prompts at eval time
+   - Test "tooling + tokens" vs "tokens only" hypothesis
 
 ---
 

@@ -17,7 +17,7 @@ import json
 import sys
 import time
 from pathlib import Path
-from typing import Dict, List, Optional
+from typing import Dict, List, Optional, Tuple
 
 import torch
 from datasets import load_dataset
@@ -30,15 +30,28 @@ sys.path.insert(0, str(Path(__file__).parent.parent))
 from rl.rewards import extract_answer, normalize_answer
 
 
+# Mul-token ID range (IDs 50304-50348)
+MUL_TOKEN_ID_START = 50304
+MUL_TOKEN_ID_END = 50348
+
+
+def count_mul_tokens(token_ids: List[int]) -> int:
+    """Count mul-tokens (IDs 50304-50348) in a list of token IDs."""
+    return sum(1 for tid in token_ids if MUL_TOKEN_ID_START <= tid <= MUL_TOKEN_ID_END)
+
+
 def generate_answer(
     model,
     tokenizer,
     prompt: str,
     max_new_tokens: int = 256,
     device: str = "cuda",
-) -> str:
+) -> Tuple[str, List[int]]:
     """
     Generate an answer using greedy decoding.
+    
+    Returns:
+        Tuple of (response_text, generated_token_ids)
     """
     inputs = tokenizer(prompt, return_tensors="pt").to(device)
     
@@ -51,11 +64,11 @@ def generate_answer(
             eos_token_id=tokenizer.eos_token_id,
         )
     
-    # Decode only the generated part
-    generated = outputs[0][inputs["input_ids"].shape[1]:]
-    response = tokenizer.decode(generated, skip_special_tokens=True)
+    # Extract only the generated part (excluding prompt)
+    generated_ids = outputs[0][inputs["input_ids"].shape[1]:].tolist()
+    response = tokenizer.decode(generated_ids, skip_special_tokens=False)
     
-    return response
+    return response, generated_ids
 
 
 def evaluate_gsm8k(
@@ -101,6 +114,8 @@ def evaluate_gsm8k(
     results = []
     correct = 0
     total = 0
+    total_response_tokens = 0
+    mul_token_count = 0
     
     start_time = time.time()
     
@@ -111,12 +126,16 @@ def evaluate_gsm8k(
         # Format prompt (matches Tulu-3 / GSM8K SFT format)
         prompt = f"User: {question}\nAssistant:"
         
-        # Generate
-        response = generate_answer(
+        # Generate (now returns both text and raw token IDs)
+        response, generated_ids = generate_answer(
             model, tokenizer, prompt,
             max_new_tokens=max_new_tokens,
             device=device,
         )
+        
+        # Count tokens from raw IDs (more reliable than re-encoding decoded text)
+        total_response_tokens += len(generated_ids)
+        mul_token_count += count_mul_tokens(generated_ids)
         
         # Extract answers
         pred_answer = extract_answer(response)
@@ -137,26 +156,14 @@ def evaluate_gsm8k(
             "pred_answer": pred_normalized,
             "response": response[:500],  # Truncate for storage
             "is_correct": is_correct,
+            "num_tokens": len(generated_ids),
+            "mul_tokens": count_mul_tokens(generated_ids),
         })
     
     end_time = time.time()
     
     # Calculate metrics
     accuracy = correct / total if total > 0 else 0.0
-    
-    # Count response lengths and mul-token usage
-    total_response_tokens = 0
-    mul_token_count = 0
-    
-    for result in results:
-        response_tokens = tokenizer.encode(result["response"])
-        total_response_tokens += len(response_tokens)
-        
-        # Count mul tokens (IDs 50304-50348)
-        for token_id in response_tokens:
-            if 50304 <= token_id <= 50348:
-                mul_token_count += 1
-    
     avg_response_tokens = total_response_tokens / len(results) if results else 0
     
     metrics = {

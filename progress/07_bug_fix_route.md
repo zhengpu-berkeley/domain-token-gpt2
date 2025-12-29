@@ -1,8 +1,16 @@
 # Next Iteration Research Options
 
 **Date:** December 27, 2024  
-**Last Updated:** December 27, 2024  
-**Context:** 10B-token pretraining complete; post-training (SFT/GSM8K) needs rerun after HF-export bug fix
+**Last Updated:** December 29, 2025  
+**Context:** 10B-token pretraining + checkpoint eval complete; post-training rerun complete; current focus is (a) increasing math competence and (b) testing mul-token differential under compute-matched regimes.
+
+---
+
+## Current reality check (Dec 29, 2025)
+
+- **10B pipeline**: we have trustworthy post-training + eval results (see `progress/08_sft_rerun_two_mixtures.md`).
+- **TinyGSM scaling (100K)**: we now have a working 10-shard workflow + fixed EOS/label handling; models stop properly at eval-time, but absolute GSM8K accuracy is still low at 100K scale (see `progress/11_tinygsm_distillation.md`).
+- **Transition SFT stage**: added to bridge instruction style → TinyGSM style before large TinyGSM SFT.
 
 ---
 
@@ -30,8 +38,9 @@ Artifacts live at `outputs/checkpoint_evals/{baseline,mul_tokens}/`.
 | Metric | Baseline | Mul_Tokens | Note |
 |--------|----------|------------|------|
 | **Pretrain HellaSwag acc_norm (step 19072)** | **0.3034** | **0.3077** | From `outputs/checkpoint_evals/*` (post-fix) |
-| GSM8K / arithmetic probes | — | — | Must be re-run after export fix (old numbers are not trusted) |
-| Mul-token usage in generations | — | — | Must be re-run after post-training rerun |
+| GSM8K / arithmetic probes | ✅ | ✅ | See `progress/08_sft_rerun_two_mixtures.md` (10B pipeline) |
+| TinyGSM 100K results | ✅ | ✅ | See `progress/11_tinygsm_distillation.md` (TinyGSM pipeline) |
+| Mul-token usage in generations | ✅ | ✅ | Counted from generated token IDs in eval scripts |
 
 ---
 

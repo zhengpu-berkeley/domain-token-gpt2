@@ -1,0 +1,72 @@
+# Transition SFT Configuration
+#
+# Bridges Tulu SFT and TinyGSM SFT with a gradual gradient.
+# Prevents loss of EOS generation while introducing math reasoning format.
+#
+# Schedule (20K total):
+#   Phase 1 (10K): 70% Tulu + 30% TinyGSM - maintain instruction behavior
+#   Phase 2 (10K): 30% Tulu + 70% TinyGSM - shift to math focus
+#
+# Usage:
+#   python sft/sft_transition.py \
+#     --model-path outputs/sft_tulu_baseline \
+#     --output-dir outputs/transition_baseline \
+#     --condition baseline \
+#     --config sft/configs/transition.yaml
+
+training:
+  # Sequence length (match Tulu's 1024 to handle both formats)
+  max_length: 1024
+  
+  # Batch size per device
+  batch_size: 8
+  
+  # Gradient accumulation
+  gradient_accumulation_steps: 4
+  
+  # Learning rate (slightly lower for fine-tuning)
+  learning_rate: 1.0e-5
+  
+  # Warmup ratio
+  warmup_ratio: 0.1
+  
+  # Weight decay
+  weight_decay: 0.01
+  
+  # Logging
+  logging_steps: 50
+  
+  # Save only at end
+  save_strategy: "no"
+  
+  # Precision
+  fp16: false
+  bf16: true
+  
+  # Dataloader
+  dataloader_num_workers: 4
+
+phases:
+  # Phase 1: Maintain instruction-following, introduce math format
+  - name: "phase1_tulu_heavy"
+    total_samples: 10000
+    tulu_ratio: 0.7   # 7000 Tulu samples
+    tinygsm_ratio: 0.3  # 3000 TinyGSM samples
+    epochs: 1
+    
+  # Phase 2: Shift focus to math, retain core behaviors
+  - name: "phase2_tinygsm_heavy"
+    total_samples: 10000
+    tulu_ratio: 0.3   # 3000 Tulu samples
+    tinygsm_ratio: 0.7  # 7000 TinyGSM samples
+    epochs: 1
+
+data:
+  # TinyGSM data paths (relative to data/tinygsm/converted/)
+  baseline_file: "combined_100k_baseline.jsonl"
+  mul_tokens_file: "combined_100k_mul_tokens.jsonl"
+  
+  # TinyGSM format
+  question_key: "question"
+  answer_key: "answer"
+

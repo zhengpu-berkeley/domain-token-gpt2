@@ -404,17 +404,20 @@ Stronger success:
 
 ---
 
-# Run Commands (Two Commands Only)
+# Run Commands (Automation)
 
-## 1) Baseline run
+## Current runner (recommended)
 ```bash
-uv run python scripts/run_all.sh --config configs/exp_baseline.yaml
+The repo currently uses `scripts/run_10b.sh` as the primary “end-to-end” runner for the 10B-token experiment (data prep → pretrain → export → SFT → eval). The earlier idea of a single `run_all.sh` with config overlays is aspirational and not the current source-of-truth.
 
-2) Mul-fact tokenizer run
+Example:
 
-uv run python scripts/run_all.sh --config configs/exp_mul_tokens.yaml
+```bash
+cd /workspace/domain-token-gpt2
+bash scripts/run_10b.sh
+```
 
-Where run_all.sh performs, in order:
+Where `scripts/run_10b.sh` performs, in order:
 	1.	build/download datasets
 	2.	preprocess datasets according to config (baseline vs mul token injection)
 	3.	pretrain for fixed steps

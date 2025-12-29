@@ -1,8 +1,12 @@
 # Phase 5: Curriculum SFT with Interleaved GSM-SBS + GSM8K
 
 **Date:** December 28, 2025  
-**Status:** ✅ COMPLETE — Experiment Run, Results Below  
+**Status:** ✅ COMPLETE (historical) — experiment run; superseded by TinyGSM scaling work for next iteration  
 **Goal:** Improve GSM8K accuracy from ~2-3% to 10-15% by teaching foundational arithmetic skills before multi-step reasoning
+
+**Last Updated:** 2025-12-29
+
+**Note:** This curriculum work is retained for provenance, but it is no longer the primary path. Current best bet for absolute accuracy is **TinyGSM scaling/distillation** (see `progress/11_tinygsm_distillation.md`).
 
 ---
 

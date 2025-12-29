@@ -4,7 +4,7 @@ This document describes how to connect to and work with the Runpod GPU cluster f
 
 ---
 
-## Current Pod Information (Updated Dec 27, 2024)
+## Current Pod Information (Last updated Dec 29, 2025)
 
 | Field | Value |
 |-------|-------|
@@ -17,7 +17,7 @@ This document describes how to connect to and work with the Runpod GPU cluster f
 | **Cost** | $14.36/hr |
 | **Network Volume** | `zhengpu-storage` (200 GB) |
 | **Data Center** | US-NC-1 (North Carolina) |
-| **Status** | Running ✅ |
+| **Status** | Verify in Runpod console (treat this section as a template; pods/ports can change) |
 
 ### Previous Pod (Stopped)
 | Field | Value |

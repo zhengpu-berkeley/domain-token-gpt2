@@ -1,39 +1,39 @@
 # Status & Handoff Document
 
 **Project:** Domain-Token GPT-2 Experiment  
-**Status:** Phase 1 Complete — Ready for Cluster Operationalization  
-**Last Updated:** 2024-12-26  
+**Status:** Active — pretraining complete (10B tokens, both conditions); post-training + evaluation in progress; TinyGSM distillation scaling underway  
+**Last Updated:** 2025-12-29  
 
 ---
 
 ## Executive Summary
 
-We have successfully built and validated the local development infrastructure for testing whether **multiplication-fact tokens** (e.g., `<MUL_6_9_54>`) improve math reasoning under compute-matched training. The tokenizer, injection pipeline, data processing, and training loop are all working locally. The next phase is scaling up on rented GPU clusters.
+We have an end-to-end, compute-matched A/B pipeline (baseline vs `mul_tokens`) for a GPT‑2‑class model with a fixed vocab (`50349`), plus multiple post-training routes:
 
-### What's Done
-- ✅ Tokenizer with 45 mul-fact tokens (canonicalized 1-9 table)
-- ✅ Text injection pipeline (detects `6*9`, `6 × 9`, `6x9` → `<MUL_6_9_54>`)
-- ✅ Data preparation + tokenization to binary format
-- ✅ Simplified nanoGPT-style training loop (CPU/MPS/CUDA compatible)
-- ✅ 43 unit tests passing
-- ✅ Smoke test verified: loss decreases for both conditions
+- **10B-token pretraining** on FineWeb‑Edu (both conditions) is complete, with checkpoint evaluation working after fixing the nanoGPT → HF export path.
+- **Instruction SFT** (Tulu) and **math SFT** (GSM8K) have been rerun post-export-fix (see `progress/08_sft_rerun_two_mixtures.md`).
+- **TinyGSM distillation** tooling exists and is being scaled (conversion + 10‑shard / 100K workflow), including a transition stage to bridge instruction style → TinyGSM style (see `progress/11_tinygsm_distillation.md`).
 
-### What's Next
-- ⏳ Scale to 124M parameter model on GPU cluster
-- ⏳ Full pretraining on FineWeb or math-heavy corpus
-- ⏳ SFT on GSM8K training set
-- ⏳ GRPO RL fine-tuning
-- ⏳ Evaluation on GSM8K test set + arithmetic probes
+### What’s Done (high-confidence / current)
+- ✅ **Tokenizer + injection**: `<MUL_a_b_c>` tokens + `MulExpressionInjector` for `mul_tokens` condition; **same vocab size across conditions**.
+- ✅ **10B pretraining (both conditions)**: raw checkpoints + checkpoint HellaSwag evals are source-of-truth.
+- ✅ **HF export**: exporter fixed; downstream HF-based evaluations are now meaningful when derived from post-fix exports.
+- ✅ **SFT + eval harness**: Tulu SFT, GSM8K SFT, GSM8K eval, arithmetic probes.
+- ✅ **TinyGSM data pipeline**: sharding + conversion pipeline + SFT script; transition-stage script for bridging instruction → TinyGSM.
+
+### What’s Next (practical)
+- ⏳ **TinyGSM scaling**: push beyond 100K examples (toward 500K–1M) to match TinyGSM paper regime.
+- ⏳ **Post-training rigor**: paired seeds (≥3) for the 10B pipeline, plus better stopping/repetition controls during eval.
+- ⏳ **RL (GRPO)**: only after the base model has sufficient math competence (avoid sparse-reward failure mode); prefer shaped rewards + strong KL.
 
 ---
 
-## Repository Structure
+## Repository Structure (high level; see repo for details)
 
 ```
 domain-token-gpt2/
 │
-├── research_spec.md              # Full experimental design document
-├── status_handoff.md             # This document
+├── progress/                     # Experiment notes (this series of docs)
 ├── README.md                     # Quick start guide
 ├── pyproject.toml                # Dependencies (use `uv sync`)
 │
@@ -72,7 +72,7 @@ domain-token-gpt2/
 │   ├── test_tokenizer.py         # 22 tokenizer tests
 │   └── test_inject_mul.py        # 21 injector tests
 │
-├── scripts/                      # Utility scripts
+├── scripts/                      # Utilities (export, upload, eval helpers, etc.)
 │   ├── run_10b.sh                # Full 10B-token run automation
 │   ├── eval_checkpoints.py       # Checkpoint HellaSwag eval runner
 │   └── plot_checkpoint_curve.py  # Plot checkpoint learning curves
@@ -85,7 +85,7 @@ domain-token-gpt2/
 │       ├── README_UPSTREAM.md
 │       └── UPSTREAM.md           # Provenance: commit 6104ab1b
 │
-└── outputs/                      # Training outputs
+└── outputs/                      # Training outputs / artifacts
     ├── pretrain_baseline/
     │   ├── model_*.pt
     │   ├── log.txt

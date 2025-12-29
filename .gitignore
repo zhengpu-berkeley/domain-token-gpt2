@@ -25,6 +25,7 @@ wheels/
 venv/
 ENV/
 env/
+.env
 
 # uv
 .uv/
@@ -46,17 +47,16 @@ data/raw/*.txt
 data/raw/*.jsonl
 data/processed/
 data/fineweb_pilot/
+data/tinygsm/converted/
+data/tinygsm/sample_*.jsonl
+data/tinygsm/smoke_test_results/
+data/arithmetic_drills/*.json
+data/arithmetic_drills/*.jsonl
+data/simple_word/*.json
+data/simple_word/*.jsonl
 
-# Training outputs (large model files)
-# Ignore everything in outputs/ except eval result directories
-outputs/*
-# Un-ignore all eval directories
-!outputs/eval_*/
-# Keep only JSON files in eval directories (ignore model weights, etc.)
-outputs/eval_*/*.pt
-outputs/eval_*/*.pth
-outputs/eval_*/*.safetensors
-outputs/eval_*/*.bin
+# Training outputs (large, regenerate locally)
+outputs/
 
 # Also ignore these file types globally
 *.pt

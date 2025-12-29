@@ -2,6 +2,8 @@
 
 **Status:** ✅ Resolved — HF export bug fixed; checkpoint HellaSwag improves over training
 
+**Last Updated:** 2025-12-29
+
 ---
 
 ## Executive Summary

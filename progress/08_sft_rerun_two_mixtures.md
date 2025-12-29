@@ -1,9 +1,11 @@
 # Phase 4 (Step 8): SFT Rerun — Two Data Mixtures (Tulu-3 → GSM8K)
 
 **Date:** December 27, 2025  
-**Last Updated:** December 28, 2025  
+**Last Updated:** December 29, 2025  
 **Status:** ✅ SFT complete; ✅ Mul-token bug fixed; ✅ Full eval done; ✅ GRPO with shaped rewards: mul_tokens 3.67% accuracy  
 **Goal:** Re-run post-training SFT using the **fixed HF export** artifacts and a **two-stage SFT pipeline** to produce trustworthy GSM8K/probe results for baseline vs mul_tokens.
+
+**Scope note:** This doc is about the **10B FineWeb pretrain → (Tulu → GSM8K) SFT** pipeline. TinyGSM scaling/distillation is tracked separately in `progress/11_tinygsm_distillation.md`.
 
 ---
 

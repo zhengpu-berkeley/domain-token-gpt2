@@ -1,17 +1,19 @@
 # Phase 3: 10B Token Full Experiment — Execution Status
 
 **Date:** December 27, 2024  
-**Last Updated:** December 27, 2025  
-**Status:** ✅ Pretraining complete; ✅ checkpoint eval complete; ⚠️ post-training/evals need rerun after export fix  
+**Last Updated:** December 29, 2025  
+**Status:** ✅ Pretraining complete; ✅ checkpoint eval complete; ✅ HF export fixed; ✅ post-training rerun complete; ✅ task evals complete (see Phase 4 doc)  
 **Hardware:** 4× NVIDIA H200 GPUs (143GB VRAM each)
 
 ---
 
-## Update (Dec 27, 2025)
+## Update (Dec 29, 2025)
 
 - Fixed nanoGPT → HuggingFace export bug (`pretrain/export_hf.py`). Prior HF/SFT/GSM8K eval artifacts derived from broken exports should be treated as **invalid**.
 - Validated learning signal via checkpoint HellaSwag evals in `outputs/checkpoint_evals/{baseline,mul_tokens}/`.
 - Latest checkpoint (step **19072**, ~10B tokens): baseline acc_norm **0.3034**, mul_tokens acc_norm **0.3077**.
+
+- Post-training rerun (Tulu → GSM8K) and full task evals are documented in `progress/08_sft_rerun_two_mixtures.md`.
 
 ## Current Status
 
@@ -22,8 +24,8 @@
 | Data Preparation | ✅ Complete | 12 shards, ~10B tokens |
 | Pretraining | ✅ Complete | 19,072 steps, final loss: 3.01 (train) / 3.12 (val) |
 | Checkpoint HellaSwag Eval | ✅ Complete | Saved to `outputs/checkpoint_evals/baseline/` |
-| HF Export + Post-training (SFT/RL) | ⚠️ Needs rerun | Prior exports were broken; rerun with fixed exporter |
-| Task Eval (GSM8K / probes) | ⚠️ Needs rerun | Prior task metrics were derived from broken exports |
+| HF Export + Post-training (SFT/RL) | ✅ Complete | See `progress/08_sft_rerun_two_mixtures.md` |
+| Task Eval (GSM8K / probes) | ✅ Complete | See `progress/08_sft_rerun_two_mixtures.md` |
 
 **Baseline (checkpoint HellaSwag, acc_norm):**
 - Step 2000: 0.2604 → Step 19072: **0.3034**
@@ -35,8 +37,8 @@
 | Data Preparation | ✅ Complete | 12 shards, ~10B tokens with mul-token injection |
 | Pretraining | ✅ Complete | 19,072 steps, final loss: 3.01 (train) / 3.12 (val) |
 | Checkpoint HellaSwag Eval | ✅ Complete | Saved to `outputs/checkpoint_evals/mul_tokens/` |
-| HF Export + Post-training (SFT/RL) | ⚠️ Needs rerun | Prior exports were broken; rerun with fixed exporter |
-| Task Eval (GSM8K / probes) | ⚠️ Needs rerun | Prior task metrics were derived from broken exports |
+| HF Export + Post-training (SFT/RL) | ✅ Complete | See `progress/08_sft_rerun_two_mixtures.md` |
+| Task Eval (GSM8K / probes) | ✅ Complete | See `progress/08_sft_rerun_two_mixtures.md` |
 
 **Mul_tokens (checkpoint HellaSwag, acc_norm):**
 - Step 2000: 0.2618 → Step 19072: **0.3077**

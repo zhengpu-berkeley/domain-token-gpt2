@@ -1,7 +1,7 @@
 # Phase 2: Cluster Pilot Smoketest — Completion Report
 
 **Date:** December 27, 2024  
-**Status:** ✅ Complete  
+**Status:** ✅ Complete (historical)  
 **Hardware:** Runpod A40 (48GB VRAM, single GPU)
 
 ---
@@ -9,6 +9,8 @@
 ## Executive Summary
 
 We successfully implemented and executed a complete end-to-end pilot experiment comparing **baseline** vs **mul_tokens** conditions. The pilot used a reduced compute budget (50M tokens pretrain, 3 epochs SFT) to validate the full pipeline before scaling up.
+
+**Important (staleness note):** later we discovered a nanoGPT → HuggingFace export bug (fixed in late 2025). Any pilot metrics that depended on the older export path should be treated as **directional/historical**, not source-of-truth. The main value of this doc is: “pipeline executed end-to-end on real hardware.”
 
 **Key finding:** Even with minimal compute, the mul_tokens condition showed **6.17% accuracy on multiplication table probes** vs **0% for baseline** — a small but encouraging signal that domain-specific tokenization may help with arithmetic.
 

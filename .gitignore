@@ -42,65 +42,54 @@ uv.lock
 # Jupyter
 .ipynb_checkpoints/
 
-# Data files (large, regenerate locally)
-data/raw/*.txt
-data/raw/*.jsonl
-data/processed/
-data/fineweb_pilot/
+# =============================================================================
+# PROJECT-SPECIFIC: Large files (download from HuggingFace Hub instead)
+# =============================================================================
+
+# Training outputs (checkpoints, models, logs)
+outputs/
+
+# Data artifacts (regenerate locally or download)
+data/fineweb_*/
 data/tinygsm/converted/
 data/tinygsm/sample_*.jsonl
 data/tinygsm/smoke_test_results/
-data/arithmetic_drills/*.json
-data/arithmetic_drills/*.jsonl
-data/simple_word/*.json
-data/simple_word/*.jsonl
 
-# Training outputs (large, regenerate locally)
-outputs/
-
-# Also ignore these file types globally
+# Binary files
 *.pt
 *.pth
 *.safetensors
 *.bin
+*.npy
+
+# Checkpoint directories
 checkpoints/
-logs/
-wandb/
+checkpoint-*/
+
+# =============================================================================
+# CACHES AND LOGS
+# =============================================================================
 
 # HuggingFace cache
 .cache/
 ~/.cache/huggingface/
 
-# Model files
-model.safetensors
-pytorch_model.bin
-optimizer.pt
-scheduler.pt
-
-# Keep structure files
-!data/raw/.gitkeep
-!data/processed/.gitkeep
-!data/processed/baseline/.gitkeep
-!data/processed/mul_tokens/.gitkeep
-
-# Misc
+# Logging
+logs/
+wandb/
 *.log
+nohup.out
+
+# Testing
 .coverage
 htmlcov/
 .pytest_cache/
 .mypy_cache/
 .ruff_cache/
 
-# Nohup output
-nohup.out
+# Dataset streaming cache
+datasets_cache/
 
 # Temporary files
 *.tmp
 *.temp
-
-# Dataset streaming cache
-datasets_cache/
-
-# Large numpy shards
-*.npy
-

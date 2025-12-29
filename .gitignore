@@ -25,6 +25,7 @@ wheels/
 venv/
 ENV/
 env/
+.env
 
 # uv
 .uv/
@@ -41,67 +42,54 @@ uv.lock
 # Jupyter
 .ipynb_checkpoints/
 
-# Data files (large, regenerate locally)
-data/raw/*.txt
-data/raw/*.jsonl
-data/processed/
-data/fineweb_pilot/
+# =============================================================================
+# PROJECT-SPECIFIC: Large files (download from HuggingFace Hub instead)
+# =============================================================================
 
-# Training outputs (large model files)
-# Ignore everything in outputs/ except eval result directories
-outputs/*
-# Un-ignore eval directories
-!outputs/eval_baseline_10b/
-!outputs/eval_mul_tokens_10b/
-# Ignore everything in eval directories except JSON files
-outputs/eval_baseline_10b/*
-!outputs/eval_baseline_10b/*.json
-outputs/eval_mul_tokens_10b/*
-!outputs/eval_mul_tokens_10b/*.json
+# Training outputs (checkpoints, models, logs)
+outputs/
 
-# Also ignore these file types globally
+# Data artifacts (regenerate locally or download)
+data/fineweb_*/
+data/tinygsm/converted/
+data/tinygsm/sample_*.jsonl
+data/tinygsm/smoke_test_results/
+
+# Binary files
 *.pt
 *.pth
 *.safetensors
 *.bin
+*.npy
+
+# Checkpoint directories
 checkpoints/
-logs/
-wandb/
+checkpoint-*/
+
+# =============================================================================
+# CACHES AND LOGS
+# =============================================================================
 
 # HuggingFace cache
 .cache/
 ~/.cache/huggingface/
 
-# Model files
-model.safetensors
-pytorch_model.bin
-optimizer.pt
-scheduler.pt
-
-# Keep structure files
-!data/raw/.gitkeep
-!data/processed/.gitkeep
-!data/processed/baseline/.gitkeep
-!data/processed/mul_tokens/.gitkeep
-
-# Misc
+# Logging
+logs/
+wandb/
 *.log
+nohup.out
+
+# Testing
 .coverage
 htmlcov/
 .pytest_cache/
 .mypy_cache/
 .ruff_cache/
 
-# Nohup output
-nohup.out
+# Dataset streaming cache
+datasets_cache/
 
 # Temporary files
 *.tmp
 *.temp
-
-# Dataset streaming cache
-datasets_cache/
-
-# Large numpy shards
-*.npy
-

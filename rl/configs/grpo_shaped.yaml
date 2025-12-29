@@ -1,0 +1,64 @@
+# GRPO Configuration with Shaped Rewards
+#
+# Key changes from grpo_optimized.yaml:
+# - Stronger KL penalty (beta=0.5 vs 0.1) to prevent mode collapse
+# - Shaped reward function with partial credit
+# - Lower learning rate for stability
+#
+# Usage:
+#   python rl/grpo_train.py \
+#     --model-path outputs/sft_gsm8k_baseline \
+#     --output-dir outputs/grpo_shaped_baseline \
+#     --condition baseline \
+#     --config rl/configs/grpo_shaped.yaml
+
+training:
+  # Dataset size
+  max_samples: 1000
+  
+  # Batch size per device (aggressive for 124M model on 24GB GPU)
+  batch_size: 4
+  
+  # Gradient accumulation (effective batch = 4 * 8 = 32)
+  gradient_accumulation_steps: 8
+  
+  # Number of generations per prompt for GRPO
+  num_generations: 4
+  
+  # Max completion length
+  max_completion_length: 256
+  
+  # Sampling temperature
+  temperature: 0.7
+  
+  # Learning rate (lower for stability)
+  learning_rate: 5.0e-7
+  
+  # Number of epochs
+  num_train_epochs: 1
+  
+  # KL penalty coefficient (STRONGER to prevent mode collapse)
+  beta: 0.5
+  
+  # Gradient checkpointing (enabled for stability)
+  gradient_checkpointing: false
+  
+  # Logging
+  logging_steps: 10
+  save_steps: 100
+  eval_steps: 100
+
+reward:
+  # Use shaped rewards
+  shaped: true
+  
+  # Reward components
+  correct_answer: 1.0      # Full credit for exact match
+  partial_answer: 0.3      # Partial credit for close answer
+  has_steps: 0.1           # Credit for showing work (has #### or =)
+  uses_mul_tokens: 0.2     # Bonus for using mul-tokens (mul_tokens condition)
+  short_response: 0.1      # Bonus for not hitting max length
+  
+  # Penalty for degenerate behavior
+  repetition_penalty: -0.3  # Penalty for repetitive patterns
+

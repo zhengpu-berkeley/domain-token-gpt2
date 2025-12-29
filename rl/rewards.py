@@ -60,11 +60,14 @@ def normalize_answer(answer: str) -> str:
     # Try to normalize to float then back to string
     try:
         num = float(answer)
+        # Handle infinity and very large floats
+        if not (-1e15 < num < 1e15):
+            return answer  # Return original for out-of-range values
         # If it's an integer, format without decimal
         if num == int(num):
             return str(int(num))
         return str(num)
-    except ValueError:
+    except (ValueError, OverflowError):
         return answer
 
 

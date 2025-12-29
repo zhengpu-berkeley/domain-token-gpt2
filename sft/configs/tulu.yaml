@@ -1,0 +1,41 @@
+# Tulu-3 SFT Configuration
+#
+# General instruction-tuning on Tulu-3 mixture before GSM8K specialization.
+# Optimized for RTX 4090 (24GB VRAM) with GPT-2 124M model.
+#
+# Usage:
+#   python sft/sft_tulu.py \
+#     --model-path outputs/hf_baseline_10b \
+#     --output-dir outputs/sft_tulu_baseline \
+#     --condition baseline \
+#     --config sft/configs/tulu.yaml
+
+training:
+  # Sequence length (Tulu-3 has longer multi-turn conversations)
+  max_length: 1024
+  
+  # Batch size per device (RTX 4090 24GB)
+  batch_size: 4
+  
+  # Gradient accumulation for effective batch size of 32
+  gradient_accumulation_steps: 8
+  
+  # Training epochs
+  num_epochs: 1
+  
+  # Learning rate (standard SFT rate)
+  learning_rate: 2.0e-5
+  
+  # Warmup ratio (5% of training)
+  warmup_ratio: 0.05
+  
+  # Weight decay
+  weight_decay: 0.01
+  
+  # Dataset subset size
+  # 200K samples for thorough instruction-tuning (~70 min on RTX 4090)
+  max_train_samples: 200000
+  
+  # Validation samples
+  max_val_samples: 1000
+

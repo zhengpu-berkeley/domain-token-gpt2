@@ -1,0 +1,61 @@
+# TinyGSM SFT Configuration
+#
+# Fine-tuning on TinyGSM converted CoT data after curriculum SFT.
+# Compute-matched across conditions: identical hyperparameters for both.
+# Optimized for RTX 4090 (24GB VRAM).
+#
+# Usage:
+#   python sft/sft_tinygsm.py \
+#     --model-path outputs/curriculum_baseline/stage_gsm8k_mixed \
+#     --output-dir outputs/tinygsm_10k_baseline \
+#     --condition baseline \
+#     --config sft/configs/tinygsm.yaml
+
+training:
+  # Sequence length (TinyGSM CoT answers can be long)
+  max_length: 512
+  
+  # Batch size per device (RTX 4090, 124M model with 512 seq len)
+  batch_size: 16
+  
+  # Gradient accumulation for larger effective batch
+  gradient_accumulation_steps: 4
+  
+  # Training epochs (3 for ~60K data)
+  num_epochs: 3
+  
+  # Learning rate - slightly higher with larger batch
+  learning_rate: 2.0e-5
+  
+  # Warmup
+  warmup_ratio: 0.1
+  
+  # Weight decay
+  weight_decay: 0.01
+  
+  # Logging - less frequent for faster training
+  logging_steps: 100
+  
+  # Save strategy - only at end to avoid I/O overhead
+  save_strategy: "no"
+  save_total_limit: 1
+  
+  # Precision (use bf16 to avoid gradient scaling issues)
+  fp16: false
+  bf16: true
+  
+  # Dataloader - more workers for faster loading
+  dataloader_num_workers: 8
+  
+  # Disable torch.compile to save memory
+  torch_compile: false
+
+data:
+  # Data paths (relative to data/tinygsm/converted/)
+  baseline_file: "combined_100k_baseline.jsonl"
+  mul_tokens_file: "combined_100k_mul_tokens.jsonl"
+  
+  # Format
+  question_key: "question"
+  answer_key: "answer"
+

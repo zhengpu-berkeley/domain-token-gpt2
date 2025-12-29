@@ -1,0 +1,41 @@
+# GSM8K SFT Configuration
+#
+# Math-specific fine-tuning on GSM8K after Tulu-3 instruction-tuning.
+# Compute-matched across conditions: identical hyperparameters for both.
+# Optimized for RTX 4090 (24GB VRAM).
+#
+# Usage:
+#   python sft/sft_gsm8k.py \
+#     --model-path outputs/sft_tulu_baseline \
+#     --output-dir outputs/sft_gsm8k_baseline \
+#     --condition baseline \
+#     --config sft/configs/gsm8k.yaml
+
+training:
+  # Sequence length (GSM8K answers can be long with CoT)
+  max_length: 512
+  
+  # Batch size per device (RTX 4090)
+  batch_size: 8
+  
+  # Gradient accumulation (effective batch = 8 * 4 = 32)
+  gradient_accumulation_steps: 4
+  
+  # Training epochs
+  num_epochs: 3
+  
+  # Learning rate (lower than pretraining for fine-tuning)
+  learning_rate: 2.0e-5
+  
+  # Warmup
+  warmup_ratio: 0.1
+  
+  # Weight decay
+  weight_decay: 0.01
+  
+  # Use all GSM8K training samples (7,473 samples)
+  max_train_samples: null
+  
+  # Validation samples
+  max_val_samples: 500
+

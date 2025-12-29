@@ -32,6 +32,16 @@ sys.path.insert(0, str(Path(__file__).parent.parent))
 from rl.rewards import extract_answer, normalize_answer
 
 
+# Mul-token ID range (IDs 50304-50348)
+MUL_TOKEN_ID_START = 50304
+MUL_TOKEN_ID_END = 50348
+
+
+def count_mul_tokens(token_ids: List[int]) -> int:
+    """Count mul-tokens (IDs 50304-50348) in a list of token IDs."""
+    return sum(1 for tid in token_ids if MUL_TOKEN_ID_START <= tid <= MUL_TOKEN_ID_END)
+
+
 def generate_multiplication_probes(seed: int = 42) -> List[Dict]:
     """Generate multiplication table probes (1-9 x 1-9)."""
     probes = []
@@ -106,8 +116,13 @@ def generate_answer(
     prompt: str,
     max_new_tokens: int = 32,
     device: str = "cuda",
-) -> str:
-    """Generate an answer using greedy decoding."""
+) -> Tuple[str, List[int]]:
+    """
+    Generate an answer using greedy decoding.
+    
+    Returns:
+        Tuple of (response_text, generated_token_ids)
+    """
     inputs = tokenizer(prompt, return_tensors="pt").to(device)
     
     with torch.no_grad():
@@ -119,10 +134,11 @@ def generate_answer(
             eos_token_id=tokenizer.eos_token_id,
         )
     
-    generated = outputs[0][inputs["input_ids"].shape[1]:]
-    response = tokenizer.decode(generated, skip_special_tokens=True)
+    # Extract only the generated part (excluding prompt)
+    generated_ids = outputs[0][inputs["input_ids"].shape[1]:].tolist()
+    response = tokenizer.decode(generated_ids, skip_special_tokens=False)
     
-    return response
+    return response, generated_ids
 
 
 def evaluate_probes(
@@ -158,17 +174,26 @@ def evaluate_probes(
     # Evaluate
     results = []
     category_stats = {}
+    total_mul_tokens = 0
+    total_response_tokens = 0
     
     start_time = time.time()
     
     for probe in tqdm(probes, desc="Evaluating probes"):
-        prompt = f"Question: {probe['question']}\nAnswer: The answer is"
+        # Format prompt (matches Tulu-3 / GSM8K SFT format)
+        prompt = f"User: {probe['question']}\nAssistant: The answer is"
         
-        response = generate_answer(
+        # Generate (now returns both text and raw token IDs)
+        response, generated_ids = generate_answer(
             model, tokenizer, prompt,
             max_new_tokens=32,
             device=device,
         )
+        
+        # Count tokens from raw IDs
+        total_response_tokens += len(generated_ids)
+        probe_mul_tokens = count_mul_tokens(generated_ids)
+        total_mul_tokens += probe_mul_tokens
         
         # Extract answer
         pred_answer = extract_answer(response)
@@ -180,9 +205,10 @@ def evaluate_probes(
         # Track category stats
         category = probe["category"]
         if category not in category_stats:
-            category_stats[category] = {"correct": 0, "total": 0}
+            category_stats[category] = {"correct": 0, "total": 0, "mul_tokens": 0}
         
         category_stats[category]["total"] += 1
+        category_stats[category]["mul_tokens"] += probe_mul_tokens
         if is_correct:
             category_stats[category]["correct"] += 1
         
@@ -193,6 +219,8 @@ def evaluate_probes(
             "response": response[:100],
             "is_correct": is_correct,
             "category": category,
+            "num_tokens": len(generated_ids),
+            "mul_tokens": probe_mul_tokens,
         })
     
     end_time = time.time()
@@ -209,6 +237,7 @@ def evaluate_probes(
             "accuracy": acc,
             "correct": stats["correct"],
             "total": stats["total"],
+            "mul_tokens": stats["mul_tokens"],
         }
     
     metrics = {
@@ -218,6 +247,9 @@ def evaluate_probes(
         "total_correct": total_correct,
         "total_samples": total_samples,
         "category_accuracies": category_accuracies,
+        "total_mul_tokens": total_mul_tokens,
+        "mul_tokens_per_probe": total_mul_tokens / total_samples if total_samples > 0 else 0,
+        "avg_response_tokens": total_response_tokens / total_samples if total_samples > 0 else 0,
         "eval_time_seconds": end_time - start_time,
     }
     
@@ -233,7 +265,10 @@ def evaluate_probes(
     print(f"  Overall accuracy: {overall_accuracy:.2%} ({total_correct}/{total_samples})")
     print(f"\n  By category:")
     for cat, stats in category_accuracies.items():
-        print(f"    {cat}: {stats['accuracy']:.2%} ({stats['correct']}/{stats['total']})")
+        mul_info = f", mul_tokens: {stats['mul_tokens']}" if condition == "mul_tokens" else ""
+        print(f"    {cat}: {stats['accuracy']:.2%} ({stats['correct']}/{stats['total']}){mul_info}")
+    if condition == "mul_tokens":
+        print(f"\n  Total mul-tokens used: {total_mul_tokens} ({metrics['mul_tokens_per_probe']:.2f} per probe)")
     print(f"\n  Results saved to: {results_path}")
     
     return metrics
